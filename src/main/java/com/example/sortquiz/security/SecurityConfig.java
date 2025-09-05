@@ -1,4 +1,4 @@
-package com.example.sortquiz.Security;
+package com.example.sortquiz.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

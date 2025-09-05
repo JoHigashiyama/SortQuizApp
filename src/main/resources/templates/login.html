@@ -7,7 +7,7 @@
 <body>
 <h3>ログイン</h3>
 <div th:if="${param.error}" style="color:red">メールアドレス、またはパスワードが違います</div>
-<form action="post">
+<form action="post" th:action="/login">
   <div>
     <label for="email">メールアドレス</label>
     <input type="email" name="email" id="email">
