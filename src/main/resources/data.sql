@@ -1,9 +1,9 @@
 INSERT INTO users (username, email, password, best_score, total_score) VALUES
-                                                                           ('taro', 'taro@example.com', 'pass123', 80, 200),
-                                                                           ('hanako', 'hanako@example.com', 'pass123', 95, 400),
-                                                                           ('jiro', 'jiro@example.com', 'pass123', 70, 150),
-                                                                           ('yuki', 'yuki@example.com', 'pass123', 60, 120),
-                                                                           ('satoshi', 'satoshi@example.com', 'pass123', 100, 500);
+                                                                           ('taro', 'taro@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 80, 200),
+                                                                           ('hanako', 'hanako@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 95, 400),
+                                                                           ('jiro', 'jiro@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 70, 150),
+                                                                           ('yuki', 'yuki@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 60, 120),
+                                                                           ('satoshi', 'satoshi@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 100, 500);
 
 INSERT INTO scores (user_id, score) VALUES
                                         (1, 80),
@@ -12,7 +12,7 @@ INSERT INTO scores (user_id, score) VALUES
                                         (4, 50),
                                         (5, 100);
 
-INSERT INTO quizes (content, year, description) VALUES
+INSERT INTO quizzes (content, happen_year, description) VALUES
                                                     ('聖徳太子が摂政に就任', 593, '推古天皇のもとで政治を行った'),
                                                     ('大化の改新', 645, '中大兄皇子と中臣鎌足が蘇我氏を倒して始めた改革'),
                                                     ('壬申の乱', 672, '大海人皇子と大友皇子の皇位継承争い'),
@@ -52,4 +52,4 @@ INSERT INTO quizes (content, year, description) VALUES
                                                     ('日中戦争', 1937, '盧溝橋事件をきっかけに全面戦争'),
                                                     ('太平洋戦争開戦', 1941, '真珠湾攻撃で米国との戦争が始まる'),
                                                     ('広島に原爆投下', 1945, '8月6日に広島へ原爆投下'),
-                                                    ('日本国憲法施行', 1947, '民主的な憲法が施行された');
+                        kasut                            ('日本国憲法施行', 1947, '民主的な憲法が施行された');
