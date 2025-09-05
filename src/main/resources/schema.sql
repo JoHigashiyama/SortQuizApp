@@ -25,7 +25,7 @@ CREATE TABLE scores (
 CREATE TABLE quizzes (
                          quiz_id INTEGER AUTO_INCREMENT PRIMARY KEY,
                          content VARCHAR(255) NOT NULL,   -- 選択肢（出来事名など）
-                         happen_year INT NOT NULL,               -- 年代
+                         happen_year INTEGER NOT NULL,               -- 年代
                          description VARCHAR(1000),       -- 解説
                          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
