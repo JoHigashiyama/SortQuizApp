@@ -19,6 +19,7 @@ public class SecurityConfig {
                 .formLogin(login->login
                         .loginProcessingUrl("/login")
                         .loginPage("/login")
+                        .usernameParameter("email")
                         .defaultSuccessUrl("/quiz", true)
                         .failureUrl("/login?error")
                         .permitAll()
