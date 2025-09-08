@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
     @Select("SELECT user_id, email, username, password, created_at, updated_at FROM users WHERE email = #{email}")
@@ -17,4 +19,7 @@ public interface UserMapper {
     @Insert("INSERT INTO users (username, email, password) VALUES (#{username}, #{email}, #{password})")
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     void insertUser(User user);
+
+    @Select("SELECT * FROM users WHERE user_id = #{userId}")
+    User getUserInformation(long userId);
 }

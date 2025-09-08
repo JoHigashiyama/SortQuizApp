@@ -9,6 +9,8 @@ import com.example.sortquiz.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -43,5 +45,9 @@ public class UserService {
         String hashedPassword = passwordEncoder.encode(userForm.getPassword());
         user.setPassword(hashedPassword);
         userRepository.insertUser(user);
+    }
+
+    public User getUserInformation(long userId){
+        return userRepository.getUserInformation(userId);
     }
 }
