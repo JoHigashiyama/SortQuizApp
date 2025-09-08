@@ -23,7 +23,12 @@ public class UserRepository {
         return userMapper.selectUserByUsername(username);
     }
 
-    public List<UserViewModel> getUserInformation(){
+    public List<UserViewModel> getUserInformation() {
         return userMapper.getUserInformation();
+    }
+
+    public void insertUser(User user) {
+        userMapper.insertUser(user);
+
     }
 }

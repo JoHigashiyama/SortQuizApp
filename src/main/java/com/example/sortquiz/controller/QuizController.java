@@ -22,6 +22,11 @@ public class QuizController {
     }
 
     @GetMapping
+    public String top(Model model) {
+        return "quiz/quiz-top";
+    }
+
+    @GetMapping("/game")
     public String quizzes(Model model) {
         List<Quiz> quizzes = quizService.getQuizlist();
 
