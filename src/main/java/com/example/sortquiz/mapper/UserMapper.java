@@ -1,7 +1,6 @@
 package com.example.sortquiz.mapper;
 
 import com.example.sortquiz.entity.User;
-import com.example.sortquiz.viewModel.UserViewModel;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -22,5 +21,5 @@ public interface UserMapper {
     void insertUser(User user);
 
     @Select("SELECT * FROM users WHERE user_id = #{userId}")
-    List<UserViewModel> getUserInformation();
+    User getUserInformation(long userId);
 }

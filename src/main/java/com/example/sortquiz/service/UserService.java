@@ -6,7 +6,6 @@ import com.example.sortquiz.exception.PasswordNotMatchException;
 import com.example.sortquiz.exception.UsernameAlreadyRegisteredException;
 import com.example.sortquiz.form.UserForm;
 import com.example.sortquiz.repository.UserRepository;
-import com.example.sortquiz.viewModel.UserViewModel;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +47,7 @@ public class UserService {
         userRepository.insertUser(user);
     }
 
-    public List<UserViewModel> getUserInformation(){
-        return userRepository.getUserInformation();
+    public User getUserInformation(long userId){
+        return userRepository.getUserInformation(userId);
     }
 }

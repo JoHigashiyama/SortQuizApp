@@ -7,11 +7,17 @@
 <body>
 <h3>クイズトップ</h3>
 
+<div>
+    <p>ユーザー名: <span th:text="${user.username}"></span></p>
+    <p>ベストスコア: <span th:text="${user.bestScore}"></span></p>
+    <p>合計スコア: <span th:text="${user.totalScore}"></span></p>
+</div>
+
 <!--ゲーム-->
 <a th:href="@{/quiz/game}">歴史を学ぶ</a>
 <!--履歴-->
 <a th:href="@{/score/history}">戦歴記録</a>
 <!--ランキング-->
-<a>ランキング</a>
+<a th:href="@{/rank/ranking}">ランキング</a>
 </body>
 </html>

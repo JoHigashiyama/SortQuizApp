@@ -2,7 +2,6 @@ package com.example.sortquiz.repository;
 
 import com.example.sortquiz.entity.User;
 import com.example.sortquiz.mapper.UserMapper;
-import com.example.sortquiz.viewModel.UserViewModel;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,12 +22,11 @@ public class UserRepository {
         return userMapper.selectUserByUsername(username);
     }
 
-    public List<UserViewModel> getUserInformation() {
-        return userMapper.getUserInformation();
-    }
-
     public void insertUser(User user) {
         userMapper.insertUser(user);
+    }
 
+    public User getUserInformation(long userId) {
+        return userMapper.getUserInformation(userId);
     }
 }
