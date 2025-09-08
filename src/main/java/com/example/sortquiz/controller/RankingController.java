@@ -20,8 +20,11 @@ public class RankingController {
 
     @GetMapping("/ranking")
     public String scores(Model model) {
-        List<UserViewModel> scores = rankingService.getTop10ByBestScore();
-        model.addAttribute("scores",scores);
+        List<UserViewModel> BestScores = rankingService.getTop10ByBestScore();
+        List<UserViewModel> TotalScores = rankingService.getTop10ByTotalScore();
+
+        model.addAttribute("BestScores",BestScores);
+        model.addAttribute("TotalScores",TotalScores);
         return "quiz/ranking";
     }
 }

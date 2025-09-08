@@ -17,4 +17,8 @@ public class RankingService {
     public List<UserViewModel> getTop10ByBestScore() {
         return rankingRepository.getTop10ByBestScore();
     }
+
+    public List<UserViewModel> getTop10ByTotalScore() {
+        return rankingRepository.getTop10ByTotalScore();
+    }
 }

@@ -18,4 +18,8 @@ public class RankingRepository {
     public List<UserViewModel> getTop10ByBestScore() {
         return rankingMapper.getTop10ByBestScore();
     }
+
+    public List<UserViewModel> getTop10ByTotalScore() {
+        return rankingMapper.getTop10ByTotalScore();
+    }
 }
