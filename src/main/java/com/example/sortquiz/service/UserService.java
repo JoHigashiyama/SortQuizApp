@@ -33,7 +33,7 @@ public class UserService {
         }
 
 //        パスワードが確認用と一致しているか
-        if (userForm.getPassword().equals(userForm.getPasswordConfirm())) {
+        if (!userForm.getPassword().equals(userForm.getPasswordConfirm())) {
             throw new PasswordNotMatchException("Password is not matched.");
         }
 
