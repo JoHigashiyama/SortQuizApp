@@ -5,6 +5,7 @@ import com.example.sortquiz.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class RegistrationController {
@@ -17,5 +18,11 @@ public class RegistrationController {
     public String showRegistrationForm(Model model) {
         model.addAttribute("userForm", new UserForm());
         return "register";
+    }
+
+    @PostMapping("/register")
+    public String registerUser(UserForm userForm) {
+        userService.createUser(userForm);
+        return "redirect:/login?register";
     }
 }
