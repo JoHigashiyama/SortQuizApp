@@ -19,5 +19,8 @@ public interface RankingMapper {
     @Select("SELECT username, best_score AS score, created_at, RANK() OVER(ORDER BY best_score DESC) AS rank FROM users ORDER BY rank LIMIT 10")
     List<UserViewModel> getTop10ByBestScore();
 
+    @Select("SELECT username, total_score AS score, created_at, RANK() OVER(ORDER BY total_score DESC) AS rank FROM users ORDER BY rank LIMIT 10")
+    List<UserViewModel> getTop10ByTotalScore();
+
 
 }

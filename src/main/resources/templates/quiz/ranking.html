@@ -5,19 +5,34 @@
   <title>Title</title>
 </head>
 <body>
-<h3>アルバム一覧</h3>
+<h3></h3>
 <table>
   <thead>
   <tr>
-    <th>ID</th>
+    <th>自己ベスト</th>
   </tr>
   </thead>
   <tbody>
-  <tr th:each="score : ${scores}" >
-    <td><span th:text="${score.rank}">album id</span></td>
-    <td><span th:text="${score.username}">album id</span></td>
-    <td><span th:text="${score.score}">album id</span></td>
-    <td><span th:text="${score.createdAt}">album id</span></td>
+  <tr th:each="bestscore : ${BestScores}" >
+    <td><span th:text="${bestscore.rank}">album id</span></td>
+    <td><span th:text="${bestscore.username}">album id</span></td>
+    <td><span th:text="${bestscore.score}">album id</span></td>
+    <td><span th:text="${bestscore.createdAt}">album id</span></td>
+  </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+  <tr>
+    <th>層スコア</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="totalscore : ${TotalScores}" >
+    <td><span th:text="${totalscore.rank}">album id</span></td>
+    <td><span th:text="${totalscore.username}">album id</span></td>
+    <td><span th:text="${totalscore.score}">album id</span></td>
+    <td><span th:text="${totalscore.createdAt}">album id</span></td>
   </tr>
   </tbody>
 </table>
