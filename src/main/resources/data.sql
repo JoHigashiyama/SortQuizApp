@@ -7,6 +7,9 @@ INSERT INTO users (username, email, password, best_score, total_score) VALUES
 
 INSERT INTO scores (user_id, score) VALUES
                                         (1, 80),
+                                        (1, 70),
+                                        (1, 70),
+                                        (1, 40),
                                         (2, 95),
                                         (3, 60),
                                         (4, 50),
