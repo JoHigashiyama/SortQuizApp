@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h3></h3>
+<table>
+  <thead>
+  <tr>
+    <th>自己ベスト</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="bestscore : ${BestScores}" >
+    <td><span th:text="${bestscore.rank}">album id</span></td>
+    <td><span th:text="${bestscore.username}">album id</span></td>
+    <td><span th:text="${bestscore.score}">album id</span></td>
+    <td><span th:text="${bestscore.createdAt}">album id</span></td>
+  </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+  <tr>
+    <th>層スコア</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="totalscore : ${TotalScores}" >
+    <td><span th:text="${totalscore.rank}">album id</span></td>
+    <td><span th:text="${totalscore.username}">album id</span></td>
+    <td><span th:text="${totalscore.score}">album id</span></td>
+    <td><span th:text="${totalscore.createdAt}">album id</span></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
