@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/quiz-game.css">
+</head>
+<body>
+<div class="game-container">
+    <div class="header">
+        <div class="progress-info">
+            <div class="progress-item">
+                <div class="progress-label">問</div>
+                <div class="progress-value"></div>
+            </div>
+        </div>
+        <p class="question-subtitle">歴史の出来事を年代順に並べ替えよう！(①が古くて④が新しいよ！)</p>
+        <div class="timer">
+            <div class="timer-circle">
+                <span id="timer-text">100</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="question-area">
+        <div class="sorting-area">
+            <div class="sort-items" id="sortItems">
+                <div class="sort-item" draggable="true" data-answer="2">
+                    <div class="sort-number">1</div>
+                    <div class="sort-content s1">関ヶ原の戦い</div>
+                    <div class="drag-handle">≡</div>
+                </div>
+                <div class="sort-item" draggable="true" data-answer="1">
+                    <div class="sort-number">2</div>
+                    <div class="sort-content s2">本能寺の変</div>
+                    <div class="drag-handle">≡</div>
+                </div>
+                <div class="sort-item" draggable="true" data-answer="4">
+                    <div class="sort-number">3</div>
+                    <div class="sort-content s3">大坂夏の陣</div>
+                    <div class="drag-handle">≡</div>
+                </div>
+                <div class="sort-item" draggable="true" data-answer="3">
+                    <div class="sort-number">4</div>
+                    <div class="sort-content s4">江戸幕府成立</div>
+                    <div class="drag-handle">≡</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn btn-secondary" id="skipBtn">クイズをやめる</button>
+        <button class="btn btn-secondary" id="prevBtn">前の問題へ</button>
+        <button class="btn btn-primary" id="submitBtn">次の問題へ</button>
+    </div>
+</div>
+
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let quizzes = /*[[${quizzes}]]*/ [];
+    /*]]>*/
+
+    //選択肢と問題番号を取得
+    let s1 = document.querySelector(".s1")
+    let s2 = document.querySelector(".s2")
+    let s3 = document.querySelector(".s3")
+    let s4 = document.querySelector(".s4")
+    let quiz_num = document.querySelector(".progress-value")
+    //今の問題番号
+    let currentQuiz = 0;
+    let submitBtn = document.querySelector("#submitBtn")
+
+    //選択肢と問題番号を表示させる
+    function showQuiz(quizIndex) {
+        let quiz = quizzes[quizIndex];
+        s1.innerText = quiz.choices[0].select;
+        s2.innerText = quiz.choices[1].select;
+        s3.innerText = quiz.choices[2].select;
+        s4.innerText = quiz.choices[3].select;
+
+        s1.parentElement.dataset.year = quiz.choices[0].year;
+        s2.parentElement.dataset.year = quiz.choices[1].year;
+        s3.parentElement.dataset.year = quiz.choices[2].year;
+        s4.parentElement.dataset.year = quiz.choices[3].year;
+
+        quiz_num.innerText = `${quiz.quizId}/10`;
+    }
+    showQuiz(currentQuiz);
+
+    //ユーザーの解答保存用の配列
+    let answers = new Array(quizzes.length)
+
+    //次の問題へボタンが押されたとき、問題を更新する
+    document.getElementById('submitBtn').addEventListener('click', () => {
+        //解答を取得
+        let items = document.querySelectorAll(".sort-item")
+        let answer = Array.from(items).map(item => item.dataset.year);
+
+        //保存
+        answers[currentQuiz] = answer;
+        console.log(answers)
+
+        if( currentQuiz >= quizzes.length -1){
+            const dataToSend = {answers:answers,timeLeft:timeLeft};
+            console.log(dataToSend)
+
+            fetch('quiz/result',{
+                method:'POST',
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify(dataToSend)
+            })
+                .then(res => res.json())
+                .then(result => {
+                    console.log(result)
+                });
+        } else {
+            currentQuiz ++;
+            showQuiz(currentQuiz);
+            updateNumbers();
+        }
+
+        // 最後の問題の前ならボタンの文言を変える
+        if(currentQuiz === quizzes.length - 1){
+            submitBtn.innerText = "答え合わせをする";
+        }
+    });
+
+    //前の問題へボタンが押されたとき
+    document.getElementById('prevBtn').addEventListener('click', () => {
+        if (currentQuiz <= 0) return; // 1問目なら戻れない
+
+        currentQuiz--;
+        showQuiz(currentQuiz);
+        updateNumbers();
+    });
+
+
+    //タイマーの時間
+    let timeLeft = 100;
+
+    //タイマー機能
+    const timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timer-text').textContent = timeLeft;
+
+        // タイマーの円形ゲージ更新
+        const percentage = (timeLeft / 100) * 360;
+        const timerCircle = document.querySelector('.timer-circle');
+        timerCircle.style.background = `conic-gradient(#d4af37 0deg, #d4af37 ${percentage}deg, rgba(212, 175, 55, 0.3) ${percentage}deg)`;
+
+        // 残り時間が少なくなったら警告色に
+        if (timeLeft <= 10) {
+            timerCircle.style.background = `conic-gradient(#dc3545 0deg, #dc3545 ${percentage}deg, rgba(220, 53, 69, 0.3) ${percentage}deg)`;
+        }
+
+        // 時間切れ処理
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            alert('ゲームオーバー')
+        }
+    }, 1000);
+
+    // ドラッグ&ドロップ機能
+    const sortItems = document.getElementById('sortItems');
+
+    sortItems.addEventListener('dragstart', (e) => {
+        draggedElement = e.target;
+        e.target.classList.add('dragging');
+    });
+
+    sortItems.addEventListener('dragend', (e) => {
+        e.target.classList.remove('dragging');
+        draggedElement = null;
+    });
+
+    sortItems.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(sortItems, e.clientY);
+        if (afterElement == null) {
+            sortItems.appendChild(draggedElement);
+        } else {
+            sortItems.insertBefore(draggedElement, afterElement);
+        }
+        updateNumbers();
+    });
+
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.sort-item:not(.dragging)')];
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    function updateNumbers() {
+        const items = document.querySelectorAll('.sort-item');
+        items.forEach((item, index) => {
+            const numberElement = item.querySelector('.sort-number');
+            numberElement.textContent = index + 1;
+        });
+    }
+    // 初期化
+    updateNumbers();
+</script>
+</body>
+</html>
