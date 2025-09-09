@@ -1,0 +1,395 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Serif JP', serif;
+    background: linear-gradient(135deg, #2c1810 0%, #1a0f08 50%, #0d0704 100%);
+    background-image:
+            radial-gradient(circle at 25% 25%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 75% 75%, rgba(160, 82, 45, 0.1) 0%, transparent 50%);
+    min-height: 100vh;
+    /* padding: 10px; */
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="%23d4af37" opacity="0.1"/><circle cx="80" cy="40" r="0.5" fill="%23daa520" opacity="0.1"/><circle cx="40" cy="80" r="1.5" fill="%23b8860b" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
+    z-index: -1;
+}
+
+.game-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: linear-gradient(145deg, #f4f1e8 0%, #e8e0d0 100%);
+    border-radius: 0;
+    box-shadow:
+            0 0 30px rgba(0, 0, 0, 0.5),
+            inset 0 0 50px rgba(212, 175, 55, 0.1);
+    overflow: hidden;
+    position: relative;
+    border: 3px solid #8b4513;
+}
+
+.game-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+            repeating-linear-gradient(
+                    0deg,
+                    transparent 0px,
+                    rgba(139, 69, 19, 0.03) 1px,
+                    transparent 2px,
+                    transparent 20px
+            );
+    pointer-events: none;
+}
+
+.header {
+    background: linear-gradient(90deg, #8b4513 0%, #a0522d 50%, #654321 100%);
+    background-image:
+            linear-gradient(45deg, rgba(212, 175, 55, 0.2) 25%, transparent 25%),
+            linear-gradient(-45deg, rgba(212, 175, 55, 0.2) 25%, transparent 25%);
+    background-size: 20px 20px;
+    padding: 8px;
+    color: #f4f1e8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #d4af37;
+    position: relative;
+}
+
+.header::after {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    opacity: 0.3;
+}
+
+.progress-info {
+    display: flex;
+    gap: 3  0px;
+    z-index: 1;
+}
+
+.progress-item {
+    text-align: center;
+    background: rgba(0, 0, 0);
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #d4af37;
+}
+
+.progress-label {
+    font-size: 15px;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.progress-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #d4af37;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.timer {
+    position: relative;
+    width: 75px;
+    height: 75px;
+    z-index: 1;
+}
+
+.timer-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(#d4af37 0deg, #d4af37 216deg, rgba(212, 175, 55, 0.3) 360deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    border: 3px solid #8b4513;
+    box-shadow:
+            0 0 20px rgba(212, 175, 55, 0.4),
+            inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+#timer-text{
+    color: black;
+}
+
+.question-area {
+    padding: 15px;
+    text-align: center;
+    background: linear-gradient(180deg, #f4f1e8 0%, #ebe6db 100%);
+}
+
+.question-title::before,
+.question-title::after {
+    content: '◆';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #d4af37;
+    font-size: 16px;
+}
+
+.question-title::before {
+    left: -30px;
+}
+
+.question-title::after {
+    right: -30px;
+}
+
+.question-subtitle {
+    color: #0d0704;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.sorting-area {
+    background: linear-gradient(145deg, #e8e0d0 0%, #d6c9b3 100%);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+    border: 2px solid #a0522d;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sort-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sort-item {
+    background: linear-gradient(145deg, #f8f5f0 0%, #f0ede6 100%);
+    border: 2px solid #8b4513;
+    border-radius: 0;
+    padding: 15px;
+    cursor: move;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sort-item::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    width: 3px;
+    background: linear-gradient(180deg, #d4af37 0%, #b8860b 100%);
+}
+
+.sort-item:hover {
+    border-color: #d4af37;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    background: linear-gradient(145deg, #faf8f5 0%, #f5f2eb 100%);
+}
+
+.sort-item.dragging {
+    opacity: 0.7;
+    transform: rotate(2deg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.sort-number {
+    background: linear-gradient(145deg, #8b4513 0%, #654321 100%);
+    color: #d4af37;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    border: 2px solid #d4af37;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sort-content {
+    flex: 1;
+    text-align: left;
+    font-size: 18px;
+    color: #2c1810;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.sort-content::before {
+    content: '「';
+    color: #8b4513;
+    font-size: 20px;
+}
+
+.sort-content::after {
+    content: '」';
+    color: #8b4513;
+    font-size: 20px;
+}
+
+.drag-handle {
+    color: #a0522d;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.controls {
+    padding: 15px 30px;
+    background: linear-gradient(90deg, #d6c9b3 0%, #c7b299 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 3px solid #8b4513;
+}
+
+.btn {
+    padding: 15px 35px;
+    border: 2px solid;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Noto Serif JP', serif;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(145deg, #8b4513 0%, #654321 100%);
+    color: #d4af37;
+    border-color: #d4af37;
+    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    background: linear-gradient(145deg, #a0522d 0%, #8b4513 100%);
+}
+
+.btn-secondary {
+    background: linear-gradient(145deg, #f0ede6 0%, #e8e0d0 100%);
+    color: #5d4037;
+    border-color: #8b4513;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(145deg, #e8e0d0 0%, #d6c9b3 100%);
+    transform: translateY(-1px);
+}
+
+.era-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #d4af37, #b8860b);
+    color: #2c1810;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid #8b4513;
+}
+
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .progress-info {
+        gap: 15px;
+    }
+
+    .question-area {
+        padding: 25px;
+    }
+
+    .question-title::before,
+    .question-title::after {
+        display: none;
+    }
+
+    .sort-item {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .sort-content {
+        font-size: 16px;
+    }
+
+    .controls {
+        padding: 10px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* 古典的な装飾要素 */
+.decorative-border {
+    background: repeating-linear-gradient(
+            90deg,
+            #d4af37 0px,
+            #d4af37 5px,
+            transparent 5px,
+            transparent 10px
+    );
+    height: 2px;
+    margin: 20px 0;
+}
