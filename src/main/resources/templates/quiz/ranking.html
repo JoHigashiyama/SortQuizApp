@@ -28,7 +28,7 @@
           <div class="header-cell">記録日</div>
         </div>
         <div>
-          <div class="ranking-row"  th:each="bestscore : ${BestScores}">
+          <div class="ranking-row" th:each="bestscore : ${BestScores}">
             <div class="cell rank-cell" th:text="${bestscore.rank}"></div>
             <div class="cell name-cell" th:text="${bestscore.username}"></div>
             <div class="cell score-cell" th:text="${bestscore.score}"></div>
@@ -36,9 +36,27 @@
           </div>
         </div>
       </div>
+    </div>
 
     <!-- 総合得点ランキング -->
-  </div>
+      <div id="total-content" class="tab-content" style="display: none;">
+        <div class="ranking-table">
+          <div class="table-header">
+            <div class="header-cell">順位</div>
+            <div class="header-cell">名前</div>
+            <div class="header-cell">得点</div>
+            <div class="header-cell">記録日</div>
+          </div>
+          <div>
+            <div class="ranking-row"  th:each="bestscore : ${BestScores}">
+              <div class="cell rank-cell" th:text="${bestscore.rank}"></div>
+              <div class="cell name-cell" th:text="${bestscore.username}"></div>
+              <div class="cell score-cell" th:text="${bestscore.score}"></div>
+              <div class="cell date-cell" th:text="${bestscore.createdAt}"></div>
+            </div>
+          </div>
+      </div>
+    </div>
   </div>
 </div>
 
