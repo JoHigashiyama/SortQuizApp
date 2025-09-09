@@ -3,15 +3,19 @@ package com.example.sortquiz.controller;
 
 import com.example.sortquiz.entity.Quiz;
 import com.example.sortquiz.entity.User;
+import com.example.sortquiz.form.QuizForm;
 import com.example.sortquiz.security.CustomUserDetails;
 import com.example.sortquiz.service.QuizService;
 import com.example.sortquiz.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +40,7 @@ public class QuizController {
     }
 
     @GetMapping("/game")
-    public String quizzes(Model model) {
+    public String quizzes(Model model, HttpSession httpSession) {
         List<Quiz> quizzes = quizService.getQuizlist();
 
         List<Map<String, Object>> quizMaps = quizzes.stream()
@@ -49,7 +53,23 @@ public class QuizController {
                 })
                 .toList();
 
+        ArrayList<Long> quizList = new ArrayList<>();
+
+        quizzes.stream().map(quiz -> {
+            quizList.add(quiz.getQuizId());
+            return quizList;
+        }).toList();
+        httpSession.setAttribute("quizList", quizList);
+
+
         model.addAttribute("quizzes", quizMaps);
         return "quiz/quiz-list";
+    }
+
+    @PostMapping("/result")
+    public String showResult(QuizForm quizForm,
+                             @AuthenticationPrincipal CustomUserDetails userDetails,
+                             Model model) {
+        return "quiz/quiz-result";
     }
 }
