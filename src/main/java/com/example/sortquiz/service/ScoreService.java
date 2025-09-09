@@ -1,5 +1,6 @@
 package com.example.sortquiz.service;
 
+import com.example.sortquiz.entity.Score;
 import com.example.sortquiz.repository.ScoreRepository;
 import com.example.sortquiz.viewmodel.ScoreHistoryViewModel;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,9 @@ public class ScoreService {
 
     public List<ScoreHistoryViewModel> selectScoresByUserId(long userId) {
         return scoreRepository.selectScoresByUserId(userId);
+    }
+
+    public void createScore(Score score) {
+        scoreRepository.createScore(score);
     }
 }
