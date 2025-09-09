@@ -6,8 +6,12 @@ import com.example.sortquiz.entity.User;
 import com.example.sortquiz.form.QuizForm;
 import com.example.sortquiz.security.CustomUserDetails;
 import com.example.sortquiz.service.QuizService;
+import com.example.sortquiz.service.ScoreService;
 import com.example.sortquiz.service.UserService;
+import com.example.sortquiz.viewmodel.AnswerViewModel;
+import com.example.sortquiz.viewmodel.QuizViewModel;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,10 +29,12 @@ import java.util.Map;
 public class QuizController {
     private final QuizService quizService;
     private final UserService userService;
+    private final ScoreService scoreService;
 
-    public QuizController(QuizService quizService, UserService userService) {
+    public QuizController(QuizService quizService, UserService userService, ScoreService scoreService) {
         this.quizService = quizService;
         this.userService = userService;
+        this.scoreService = scoreService;
     }
 
     @GetMapping
@@ -77,7 +83,22 @@ public class QuizController {
     @PostMapping("/result")
     public String showResult(QuizForm quizForm,
                              @AuthenticationPrincipal CustomUserDetails userDetails,
+                             HttpSession httpSession,
                              Model model) {
+//        セッションから並び替え前のクイズを取り出す
+        ArrayList<Long> quizList = (ArrayList<Long>) httpSession.getAttribute("quizList");
+
+        List<Boolean> results = quizService.compareQuiz(quizForm.getSortedQuizzes(), quizList);
+        long point = scoreService.calculateScore(results.stream().filter(result-> result = true).count(), quizForm.getTime());
+        long time = quizForm.getTime();
+
+//        問題の詳細を格納する
+        List<AnswerViewModel> details = quizService.getQuizDetails(quizForm.getSortedQuizzes(), quizList, results);
+
+        model.addAttribute("correctAnswers", results.stream().filter(result->result = true).count());
+        model.addAttribute("point", point);
+        model.addAttribute("time", time);
+        model.addAttribute("quizDetails", details);
         return "quiz/quiz-result";
     }
 }

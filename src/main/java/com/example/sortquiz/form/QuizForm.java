@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 public class QuizForm {
     private long time;
-    private List<QuizViewModel> sortedQuizzes;
+    private QuizViewModel[] sortedQuizzes;
 }

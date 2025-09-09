@@ -6,5 +6,44 @@
 </head>
 <body>
 <h3>結果</h3>
+<div>
+    <table>
+        <tr>
+            <th>正解数</th>
+            <th>得点</th>
+            <th>回答時間</th>
+        </tr>
+        <tr>
+            <td th:text="${correctAnswers}"></td>
+            <td th:text="${point}"></td>
+            <td th:text="${time}"></td>
+        </tr>
+    </table>
+
+    <h3>結果詳細</h3>
+    <div th:each="detail : ${quizDetails}">
+<!--        問題番号-->
+        <h4 th:text="${detail.getQuizNumber()}"></h4>
+<!--        正解不正解-->
+        <h4 th:if="${detail.getResult()}">正解</h4>
+        <h4 th:unless="${detail.getResult()}">不正解</h4>
+<!--        回答-->
+        <h4>回答</h4>
+        <div>
+            <li th:each="item : ${detail.getAnswerQuizzes()}"></li>
+        </div>
+<!--        正答-->
+        <div>
+            <li th:each="item : ${detail.getCorrectQuizzes()}"></li>
+        </div>
+<!--        解説-->
+        <div>
+            <div th:each="item : ${detail.getQuizDetails()}">
+                <h5 th:text="|${item.getSelect()}(${item.getYear()}年)|"></h5>
+                <p th:text="${item.getDescription()}"></p>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
