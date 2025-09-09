@@ -1,0 +1,144 @@
+ /* 全体レイアウト */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+
+    font-family: "Noto Serif JP", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* ログインボックス */
+.login-container {
+    width: 400px;
+    background-color: #f9f9f9;
+    border: 3px solid #8B4513;
+    border-radius: 2px;
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+/* タイトル部分 */
+.login-header {
+    background-color: #f7f2e7;
+    padding: 15px 0;
+    border-bottom: 3px solid #d4b36e;
+}
+
+.login-header h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+}
+
+/* ログイン見出し */
+.login-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0 10px;
+}
+
+/* エラーメッセージ */
+.error-message {
+    color: #d60000;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* 成功メッセージ */
+.success-message {
+    color: #007700;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* 入力フォーム全体 */
+.login-form {
+    width: 80%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* ラベル */
+.login-form label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+/* 入力フィールド */
+.login-form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    border: 1px solid #999;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
+/* ログインボタン */
+.login-button {
+    width: 40%;
+    padding: 8px;
+    margin-top: 15px;
+    background-color: #8B4513;
+    border: none;
+    border-radius: 2px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-button:hover {
+    background-color: #a0522d;
+}
+
+/* 新規登録リンク */
+.signup-link {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #8B4513;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+ /* エラーメッセージのcss */
+ .email-error,.password-error{
+     display: none;
+     color: #d60000;
+     font-size: 12px;
+     margin-top: 3px;
+ }
+
+ /* 未入力の処理 */
+ input[type="email"]:invalid:focus ~ .email-error{
+     display: none;
+ }
+ input[type="password"]:invalid:focus ~ .password-error{
+     display: none;
+ }
+
+ input[type="email"]:invalid:not(:focus) ~ .email-error {
+     display: block;
+ }
+ input[type="password"]:invalid:not(:focus) ~ .password-error {
+     display: block;
+ }
