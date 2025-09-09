@@ -3,38 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <link rel="stylesheet" href="/css/ranking.css">
 </head>
 <body>
-<h3></h3>
-<table>
-  <thead>
-  <tr>
-    <th>自己ベスト</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="bestscore : ${BestScores}" >
-    <td><span th:text="${bestscore.rank}">album id</span></td>
-    <td><span th:text="${bestscore.username}">album id</span></td>
-    <td><span th:text="${bestscore.score}">album id</span></td>
-    <td><span th:text="${bestscore.createdAt}">album id</span></td>
-  </tr>
-  </tbody>
-</table>
-<table>
-  <thead>
-  <tr>
-    <th>総スコア</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="totalscore : ${TotalScores}" >
-    <td><span th:text="${totalscore.rank}">album id</span></td>
-    <td><span th:text="${totalscore.username}">album id</span></td>
-    <td><span th:text="${totalscore.score}">album id</span></td>
-    <td><span th:text="${totalscore.createdAt}">album id</span></td>
-  </tr>
-  </tbody>
-</table>
+<div class="ranking-container">
+  <div class="header">
+    <h1 class="page-title">ランキング</h1>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="highest">最高得点</button>
+    <button class="tab" data-tab="total">総合得点</button>
+  </div>
+
+  <div class="content">
+    <!-- 最高得点ランキング -->
+    <div id="highest-content" class="tab-content">
+      <div class="ranking-table">
+        <div class="table-header">
+          <div class="header-cell">順位</div>
+          <div class="header-cell">名前</div>
+          <div class="header-cell">得点</div>
+          <div class="header-cell">記録日</div>
+        </div>
+        <div>
+          <div class="ranking-row" th:each="bestscore : ${BestScores}">
+            <div class="cell rank-cell" th:text="${bestscore.rank}"></div>
+            <div class="cell name-cell" th:text="${bestscore.username}"></div>
+            <div class="cell score-cell" th:text="${bestscore.score}"></div>
+            <div class="cell date-cell" th:text="${bestscore.createdAt}"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 総合得点ランキング -->
+      <div id="total-content" class="tab-content" style="display: none;">
+        <div class="ranking-table">
+          <div class="table-header">
+            <div class="header-cell">順位</div>
+            <div class="header-cell">名前</div>
+            <div class="header-cell">得点</div>
+            <div class="header-cell">記録日</div>
+          </div>
+          <div>
+            <div class="ranking-row"  th:each="bestscore : ${BestScores}">
+              <div class="cell rank-cell" th:text="${bestscore.rank}"></div>
+              <div class="cell name-cell" th:text="${bestscore.username}"></div>
+              <div class="cell score-cell" th:text="${bestscore.score}"></div>
+              <div class="cell date-cell" th:text="${bestscore.createdAt}"></div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // タブ切り替え
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      // アクティブタブを更新
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+
+      // コンテンツを切り替え
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.style.display = 'none';
+      });
+
+      const targetTab = this.dataset.tab;
+      document.getElementById(targetTab + '-content').style.display = 'block';
+    });
+  });
+</script>
 </body>
 </html>
