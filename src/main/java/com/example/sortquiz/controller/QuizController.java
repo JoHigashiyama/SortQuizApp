@@ -43,15 +43,23 @@ public class QuizController {
     public String quizzes(Model model, HttpSession httpSession) {
         List<Quiz> quizzes = quizService.getQuizlist();
 
-        List<Map<String, Object>> quizMaps = quizzes.stream()
-                .map(quiz -> {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("id", quiz.getQuizId());
-                    map.put("select", quiz.getContent());
-                    map.put("year", quiz.getHappenYear());
-                    return map;
-                })
-                .toList();
+        List<Map<String, Object>> quizMaps = new ArrayList<>();
+        for(int i = 0; i< quizzes.size(); i+= 4){
+            Map<String, Object> map = new HashMap<>();
+            map.put("quizId", (i/4) + 1);
+            List<Map<String,Object>> choices = new ArrayList<>();
+
+            for(int j = i; j < i + 4 && j < quizzes.size(); j++){
+                Quiz q = quizzes.get(j);
+                choices.add(Map.of(
+                        "id",q.getQuizId(),
+                        "select",q.getContent(),
+                        "year",q.getHappenYear()
+                ));
+            };
+            map.put("choices", choices);
+            quizMaps.add(map);
+        }
 
         ArrayList<Long> quizList = new ArrayList<>();
 
@@ -63,7 +71,7 @@ public class QuizController {
 
 
         model.addAttribute("quizzes", quizMaps);
-        return "quiz/quiz-list";
+        return "quiz/quiz-game";
     }
 
     @PostMapping("/result")
