@@ -40,7 +40,6 @@ public class QuizController {
                         "year",q.getHappenYear()
                 ));
             };
-
             map.put("choices", choices);
             quizMaps.add(map);
         }
