@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/quiz-top.css">
 <head>
     <meta charset="UTF-8">
     <title>トップ</title>
 </head>
 <body>
-<h3>クイズトップ</h3>
+<div class="main-container">
+    <div class="header">
+        <div class="welcome-section">
+            <div class="user-info">
+                <div class="welcome-text">ようこそ、歴史の道場へ</div>
+                <div class="user-name" id="userName">こんにちは</div>
+            </div>
+            <div class="user-stats">
+                <div class="stat-item">
+                    <span class="stat-label">総得点</span>
+                    <span class="stat-number">11000点</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">最高得点</span>
+                    <span class="stat-number">1890点</span>
+                </div>
+            </div>
+            <div>
+                <button class="logout-btn" onclick="logout()">
+                    退出
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div>
     <p>ユーザー名: <span th:text="${user.username}"></span></p>
