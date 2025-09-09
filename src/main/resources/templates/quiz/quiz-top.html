@@ -1,23 +1,71 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/quiz-top.css">
 <head>
     <meta charset="UTF-8">
     <title>トップ</title>
 </head>
 <body>
-<h3>クイズトップ</h3>
+<div class="main-container">
+    <div class="header">
+        <div class="welcome-section">
+            <div class="user-info">
+                <div class="welcome-text">ようこそ、歴史の道場へ</div>
+                <div class="user-name" id="userName"><span th:text="${user.username}"></span></div>
+            </div>
+            <div class="user-stats">
+                <div class="stat-item">
+                    <span class="stat-label">総得点</span>
+                    <span th:text="${user.totalScore}" class="stat-number"></span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">最高得点</span>
+                    <span th:text="${user.bestScore}" class="stat-number"></span>
+                </div>
+            </div>
+            <div>
+                <a th:href="@{/logout}" class="logout-btn">
+                    退出
+                </a>
+            </div>
+        </div>
+    </div>
 
-<div>
-    <p>ユーザー名: <span th:text="${user.username}"></span></p>
-    <p>ベストスコア: <span th:text="${user.bestScore}"></span></p>
-    <p>合計スコア: <span th:text="${user.totalScore}"></span></p>
+    <div class="menu-grid">
+        <div class="menu-card">
+            <a th:href="@{/rank/ranking}">
+                <div class="menu-icon">🏆</div>
+                <div class="menu-title">ランキング</div>
+                <div class="menu-description">
+                    上位10人が出るよ<br>
+                    自分の名前はあるかな？
+                </div>
+            </a>
+        </div>
+
+        <div class="menu-card primary">
+            <a th:href="@{/quiz/game}">
+                <div class="menu-icon">⚔️</div>
+                <div class="menu-title">歴史を学ぶ</div>
+                <div class="menu-description">
+                    歴史の出来事を年代順に並べよう！<br>
+                    制限時間は100秒！<br>
+                    早く解けば得点が上がるよ！
+                </div>
+            </a>
+        </div>
+
+        <div class="menu-card">
+            <a th:href="@{/score/history}">
+                <div class="menu-icon">📜</div>
+                <div class="menu-title">戦歴録</div>
+                <div class="menu-description">
+                    これまでの自分の記録が見れるよ<br>
+                    過去の栄光と敗北から学びを得よ。
+                </div>
+            </a>
+        </div>
+    </div>
 </div>
-
-<!--ゲーム-->
-<a th:href="@{/quiz/game}">歴史を学ぶ</a>
-<!--履歴-->
-<a th:href="@{/score/history}">戦歴記録</a>
-<!--ランキング-->
-<a th:href="@{/rank/ranking}">ランキング</a>
 </body>
 </html>
