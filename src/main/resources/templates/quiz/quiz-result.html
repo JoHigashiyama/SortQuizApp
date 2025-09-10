@@ -20,7 +20,8 @@
         </tr>
     </table>
 
-    <h3>結果詳細</h3>
+    <h3>詳細</h3>
+<!--    一問ずつ-->
     <div th:each="detail : ${quizDetails}">
 <!--        問題番号-->
         <h4 th:text="${detail.getQuizNumber()}"></h4>

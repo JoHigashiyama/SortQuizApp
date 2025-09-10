@@ -85,20 +85,6 @@ public class QuizController {
                              @AuthenticationPrincipal CustomUserDetails userDetails,
                              HttpSession httpSession,
                              Model model) {
-//        セッションから並び替え前のクイズを取り出す
-        ArrayList<Long> quizList = (ArrayList<Long>) httpSession.getAttribute("quizList");
-
-        List<Boolean> results = quizService.compareQuiz(quizForm.getSortedQuizzes(), quizList);
-        long point = scoreService.calculateScore(results.stream().filter(result-> result = true).count(), quizForm.getTime());
-        long time = quizForm.getTime();
-
-//        問題の詳細を格納する
-        List<AnswerViewModel> details = quizService.getQuizDetails(quizForm.getSortedQuizzes(), quizList, results);
-
-        model.addAttribute("correctAnswers", results.stream().filter(result->result = true).count());
-        model.addAttribute("point", point);
-        model.addAttribute("time", time);
-        model.addAttribute("quizDetails", details);
         return "quiz/quiz-result";
     }
 }
