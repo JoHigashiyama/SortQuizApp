@@ -1,24 +1,174 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
+  <link rel="stylesheet" href="/css/score-history-style.css">
   <meta charset="UTF-8">
   <title>スコア履歴</title>
+  <style>
+
+    /* ページネーション全体 */
+    .pagination {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    /* ページネーションボタン */
+    .pagination button {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: all 0.2s ease;
+    }
+
+    /* ページネーションボタンホバー */
+    .pagination button:hover:not(:disabled) {
+      background-color: #8b4513;
+      color: white;
+      border-color: #8b4513;
+    }
+
+    /* 現在のページ */
+    .pagination button.active {
+      background-color: #8b4513;
+      color: white;
+      border-color: #8b4513;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    /* 無効ボタン */
+    .pagination button:disabled {
+      background-color: #f0f0f0;
+      color: #aaa;
+      cursor: not-allowed;
+    }
+
+    /* ページ番号の「…」 */
+    .pagination span {
+      padding: 8px 12px;
+      color: #888;
+      font-size: 1rem;
+    }
+    .active
+  </style>
 </head>
 <body>
-<h3 th:text="'「' + ${username} + '」の戦歴'">「user」の戦歴</h3>
-<table>
-  <tr>
-    <th>順位</th>
-    <th>ユーザー名</th>
-    <th>スコア</th>
-    <th>記録日時</th>
-  </tr>
-  <tr th:each="item : ${history}">
-    <td th:text="${item.rank}">rank</td>
-    <td th:text="${item.username}">name</td>
-    <td th:text="${item.score}">score</td>
-    <td th:text="${item.createdAt}">date</td>
-  </tr>
-</table>
+<div class="ranking-container">
+  <div class="header">
+    <h1  th:text="'「' + ${username} + '」の戦歴'" class="page-title" >「user」の戦歴</h1>
+  </div>
+
+  <div class="content">
+    <div class="tab-content">
+      <div class="ranking-table">
+        <div class="table-header">
+          <div class="header-cell">順位</div>
+          <div class="header-cell">得点</div>
+          <div class="header-cell">記録日</div>
+        </div>
+        <div id="history-table-body"></div>
+      </div>
+    </div>
+  </div>
+  <!-- ページネーション -->
+  <div class="pagination" id="pagination"></div>
+</div>
+
+<!-- ThymeleafでJSにデータを埋め込む -->
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  const historyData = /*[[${history}]]*/ [];
+  /*]]>*/
+</script>
+
+<script>
+  const tableBody = document.getElementById("history-table-body");
+  const paginationDiv = document.getElementById("pagination");
+
+  const rowsPerPage = 15;
+  let currentPage = 1;
+  const totalPages = Math.ceil(historyData.length / rowsPerPage);
+  const maxviewpage = 8;
+
+  function renderTable(page) {
+    tableBody.innerHTML = "";
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const pageData = historyData.slice(start, end);
+
+    for (const item of pageData) {
+      const div = document.createElement("div");
+      div.classList.add("ranking-row");
+      div.innerHTML = `
+      <div class="cell rank-cell">${item.rank}</div>
+      <div class="cell score-cell">${item.score}</div>
+      <div class="cell date-cell">${item.createdAt}</div>
+    `;
+      tableBody.append(div);
+    }
+  }
+
+  function renderPagination() {
+    paginationDiv.innerHTML = "";
+    const prevBtn = document.createElement("button");
+    prevBtn.textContent = "前へ";
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTable(currentPage);
+        renderPagination();
+      }
+    });
+    paginationDiv.appendChild(prevBtn);
+
+    const half = Math.floor(maxviewpage / 2);
+    let startPage = currentPage;
+    let endPage = startPage + maxviewpage - 1;
+
+    if (endPage > totalPages) {
+      endPage = totalPages;
+      startPage = Math.max(1, endPage - maxviewpage + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      const btn = document.createElement("button");
+      btn.textContent = i;
+      if (i === currentPage) btn.classList.add("active");
+      btn.addEventListener("click", () => {
+        currentPage = i;
+        renderTable(currentPage);
+        renderPagination();
+      });
+      paginationDiv.appendChild(btn);
+    }
+
+    if (endPage < totalPages) {
+      const dots = document.createElement("span");
+      dots.textContent = "...";
+      paginationDiv.appendChild(dots);
+    }
+
+    const nextBtn = document.createElement("button");
+    nextBtn.textContent = "次へ";
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.addEventListener("click", () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderTable(currentPage);
+        renderPagination();
+      }
+    });
+    paginationDiv.appendChild(nextBtn);
+  }
+
+  renderTable(currentPage);
+  renderPagination();
+</script>
 </body>
 </html>
