@@ -7,6 +7,6 @@ import java.util.List;
 
 @Data
 public class QuizForm {
-    private long time;
-    private QuizViewModel[] sortedQuizzes;
+    private List<List<Long>> answers;
+    private long timeLeft;
 }

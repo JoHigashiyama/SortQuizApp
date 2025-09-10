@@ -1,5 +1,6 @@
 package com.example.sortquiz.controller;
 
+import com.example.sortquiz.form.QuizForm;
 import com.example.sortquiz.response.QuizResponse;
 import com.example.sortquiz.security.CustomUserDetails;
 import com.example.sortquiz.service.QuizService;
@@ -9,16 +10,14 @@ import com.example.sortquiz.viewmodel.AnswerViewModel;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/api/quiz")
+@RequestMapping("/quiz/api")
 public class QuizRestController {
     private final QuizService quizService;
     private final UserService userService;
@@ -30,28 +29,32 @@ public class QuizRestController {
         this.scoreService = scoreService;
     }
     @PostMapping("/finish")
-    public ResponseEntity<QuizResponse> createScore(@RequestParam("answers") List<List<Long>> answers,
-                                                    @RequestParam("timeLeft") long time,
+    public ResponseEntity<QuizResponse> createScore(@RequestBody QuizForm quizForm,
                                                     @AuthenticationPrincipal CustomUserDetails userDetails,
                                                     HttpSession httpSession) {
         QuizResponse quizResponse = new QuizResponse();
 
 //      セッションから並び替え前のクイズを取り出す
-        ArrayList<Long> quizList = (ArrayList<Long>) httpSession.getAttribute("quizList");
+        List<Long> quizList = (List<Long>) httpSession.getAttribute("quizList");
+//        並び替え前のクイズを分割して、年順に並べ替える
+        List<List<Long>> correctAnswer = quizService.getSortedCorrectQuizzes(quizList);
 //        並び替え前と後を比較して、問題の正解・不正解を取得する
-        List<Boolean> results = quizService.compareQuiz(answers, quizList);
+        List<Boolean> results = quizService.compareQuiz(quizForm.getAnswers(), correctAnswer);
+        for (boolean result : results) {
+            System.out.println(result);
+        }
 //        点数を取得する
-        long score = scoreService.calculateScore(results.stream().filter(result-> result).count(), time);
+        long score = scoreService.calculateScore(results.stream().filter(result-> result).count(), quizForm.getTimeLeft());
 //        問題ごとのデータ(回答・正答・解説)
-        List<AnswerViewModel> quizResults = quizService.getQuizDetails(answers, quizList, results);
+        List<AnswerViewModel> quizResults = quizService.getQuizDetails(quizForm.getAnswers(), correctAnswer, results);
 //        セッションにデータを保存する
         httpSession.setAttribute("correctCount", results.stream().filter(result-> result).count());
         httpSession.setAttribute("score", score);
-        httpSession.setAttribute("time", time);
+        httpSession.setAttribute("time", quizForm.getTimeLeft());
         httpSession.setAttribute("quizResults", quizResults);
 
 //        リダイレクト先のurlを格納する
-        quizResponse.setRedirectUrl("/quiz/result");
+        quizResponse.setRedirectUrl("result");
         return ResponseEntity.ok().body(quizResponse);
     }
 

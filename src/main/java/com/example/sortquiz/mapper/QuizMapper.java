@@ -13,6 +13,6 @@ public interface QuizMapper {
 //    @Select("SELECT * FROM quizzes")
     List<Quiz> getQuizlist();
 
-    @Select("SELECT quiz_id AS id, content AS select, happen_year AS year, description FROM quizzes WHERE quiz_id = #{quiz_id}")
+    @Select("SELECT quiz_id AS id, content, happen_year, description FROM quizzes WHERE quiz_id = #{quiz_id}")
     QuizDetailViewModel getDetailsByQuizId(long quizId);
 }

@@ -9,6 +9,7 @@ import com.example.sortquiz.service.QuizService;
 import com.example.sortquiz.service.ScoreService;
 import com.example.sortquiz.service.UserService;
 import com.example.sortquiz.viewmodel.AnswerViewModel;
+import com.example.sortquiz.viewmodel.QuizDetailViewModel;
 import com.example.sortquiz.viewmodel.QuizViewModel;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
@@ -80,11 +81,21 @@ public class QuizController {
         return "quiz/quiz-game";
     }
 
-    @PostMapping("/result")
-    public String showResult(QuizForm quizForm,
-                             @AuthenticationPrincipal CustomUserDetails userDetails,
+    @GetMapping("/result")
+    public String showResult(@AuthenticationPrincipal CustomUserDetails userDetails,
                              HttpSession httpSession,
                              Model model) {
+//        セッションからクイズ結果を取り出す
+        model.addAttribute("correctCount", httpSession.getAttribute("correctCount"));
+        model.addAttribute("score", httpSession.getAttribute("score"));
+        model.addAttribute("time", httpSession.getAttribute("time"));
+        List<AnswerViewModel> quizDetails = (List<AnswerViewModel>) httpSession.getAttribute("quizResults");
+        model.addAttribute("quizDetails", quizDetails);
+//        セッション破棄
+        httpSession.removeAttribute("correctCount");
+        httpSession.removeAttribute("score");
+        httpSession.removeAttribute("time");
+        httpSession.removeAttribute("quizResults");
         return "quiz/quiz-result";
     }
 }
