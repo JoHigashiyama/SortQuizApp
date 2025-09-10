@@ -47,11 +47,11 @@
             <div class="header-cell">記録日</div>
           </div>
           <div>
-            <div class="ranking-row"  th:each="bestscore : ${BestScores}">
-              <div class="cell rank-cell" th:text="${bestscore.rank}"></div>
-              <div class="cell name-cell" th:text="${bestscore.username}"></div>
-              <div class="cell score-cell" th:text="${bestscore.score}"></div>
-              <div class="cell date-cell" th:text="${bestscore.createdAt}"></div>
+            <div class="ranking-row"  th:each="totalscore : ${TotalScores}">
+              <div class="cell rank-cell" th:text="${totalscore.rank}"></div>
+              <div class="cell name-cell" th:text="${totalscore.username}"></div>
+              <div class="cell score-cell" th:text="${totalscore.score}"></div>
+              <div class="cell date-cell" th:text="${totalscore.createdAt}"></div>
             </div>
           </div>
       </div>
