@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>結果</title>
+</head>
+<body>
+<h3>結果</h3>
+<div>
+    <table>
+        <tr>
+            <th>正解数</th>
+            <th>得点</th>
+            <th>回答時間</th>
+        </tr>
+        <tr>
+            <td th:text="${correctCount}"></td>
+            <td th:text="${score}"></td>
+            <td th:text="${time}"></td>
+        </tr>
+    </table>
+
+    <h3>詳細</h3>
+<!--    一問ずつ-->
+    <div th:each="detail : ${quizDetails}">
+<!--        問題番号-->
+        <h4 th:text="${detail.quizNumber}"></h4>
+<!--        正解不正解-->
+        <h4 th:if="${detail.result}">正解</h4>
+        <h4 th:unless="${detail.result}">不正解</h4>
+<!--        回答-->
+        <h4>回答</h4>
+        <ul>
+            <li th:each="item : ${detail.answers}" th:text="${item}"></li>
+        </ul>
+<!--        正答-->
+        <h4>正答</h4>
+        <ul>
+            <li th:each="item : ${detail.corrects}" th:text="${item}"></li>
+        </ul>
+<!--        解説-->
+        <h4>解説</h4>
+        <div>
+            <div th:each="item : ${detail.quizDetails}">
+                <h5 th:text="|${item.content}(${item.happenYear}年)|"></h5>
+                <p th:text="${item.description}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

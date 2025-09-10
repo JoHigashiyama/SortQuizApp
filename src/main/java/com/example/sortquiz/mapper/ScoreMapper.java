@@ -1,7 +1,10 @@
 package com.example.sortquiz.mapper;
 
+import com.example.sortquiz.entity.Score;
 import com.example.sortquiz.viewmodel.ScoreHistoryViewModel;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -16,4 +19,8 @@ public interface ScoreMapper {
             ORDER BY scores.created_at DESC
             """)
     List<ScoreHistoryViewModel> selectScoresByUserId(long userId);
+
+    @Insert("INSERT INTO scores (user_id, score) VALUES (#{userId}, #{score})")
+    @Options(useGeneratedKeys = true, keyProperty = "scoreId")
+    void createScore(Score score);
 }

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/css/quiz-game.css">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
 </head>
 <body>
 <div class="game-container">
@@ -58,6 +60,8 @@
 
 
 <script th:inline="javascript">
+    const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute("content")
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute("content")
     /*<![CDATA[*/
     let quizzes = /*[[${quizzes}]]*/ [];
     /*]]>*/
@@ -85,6 +89,11 @@
         s3.parentElement.dataset.year = quiz.choices[2].year;
         s4.parentElement.dataset.year = quiz.choices[3].year;
 
+        s1.parentElement.dataset.quizId = quiz.choices[0].id;
+        s2.parentElement.dataset.quizId = quiz.choices[1].id;
+        s3.parentElement.dataset.quizId = quiz.choices[2].id;
+        s4.parentElement.dataset.quizId = quiz.choices[3].id;
+
         quiz_num.innerText = `${quiz.quizId}/10`;
     }
     showQuiz(currentQuiz);
@@ -93,10 +102,10 @@
     let answers = new Array(quizzes.length)
 
     //次の問題へボタンが押されたとき、問題を更新する
-    document.getElementById('submitBtn').addEventListener('click', () => {
+    document.getElementById('submitBtn').addEventListener('click', async () => {
         //解答を取得
         let items = document.querySelectorAll(".sort-item")
-        let answer = Array.from(items).map(item => item.dataset.year);
+        let answer = Array.from(items).map(item => Number(item.dataset.quizId));
 
         //保存
         answers[currentQuiz] = answer;
@@ -106,13 +115,18 @@
             const dataToSend = {answers:answers,timeLeft:timeLeft};
             console.log(dataToSend)
 
-            fetch('quiz/result',{
+            await fetch('api/finish',{
                 method:'POST',
-                headers: { 'Content-Type': 'application/json'},
+                headers: {
+                    [csrfHeader]: csrfToken,
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify(dataToSend)
             })
                 .then(res => res.json())
                 .then(result => {
+                    const redirectUrl = result.redirectUrl
+                    document.location = redirectUrl
                     console.log(result)
                 });
         } else {
