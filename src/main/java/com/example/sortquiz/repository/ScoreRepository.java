@@ -1,5 +1,6 @@
 package com.example.sortquiz.repository;
 
+import com.example.sortquiz.entity.Score;
 import com.example.sortquiz.mapper.ScoreMapper;
 import com.example.sortquiz.viewmodel.ScoreHistoryViewModel;
 import org.springframework.stereotype.Repository;
@@ -16,5 +17,9 @@ public class ScoreRepository {
 
     public List<ScoreHistoryViewModel> selectScoresByUserId(long userId) {
         return scoreMapper.selectScoresByUserId(userId);
+    }
+
+    public void createScore(Score score) {
+        scoreMapper.createScore(score);
     }
 }
