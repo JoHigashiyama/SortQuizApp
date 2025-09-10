@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class QuizDetailViewModel {
     private long id;
-    private String select;
-    private long year;
+    private String content;
+    private long happenYear;
     private String description;
 }

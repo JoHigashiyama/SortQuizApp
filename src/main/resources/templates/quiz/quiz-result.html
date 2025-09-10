@@ -34,10 +34,12 @@
             <li th:each="item : ${detail.answers}" th:text="${item}"></li>
         </ul>
 <!--        正答-->
+        <h4>正答</h4>
         <ul>
             <li th:each="item : ${detail.corrects}" th:text="${item}"></li>
         </ul>
 <!--        解説-->
+        <h4>解説</h4>
         <div>
             <div th:each="item : ${detail.quizDetails}">
                 <h5 th:text="|${item.content}(${item.happenYear}年)|"></h5>

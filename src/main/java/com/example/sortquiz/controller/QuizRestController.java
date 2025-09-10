@@ -1,5 +1,6 @@
 package com.example.sortquiz.controller;
 
+import com.example.sortquiz.entity.Score;
 import com.example.sortquiz.form.QuizForm;
 import com.example.sortquiz.response.QuizResponse;
 import com.example.sortquiz.security.CustomUserDetails;
@@ -44,12 +45,16 @@ public class QuizRestController {
             System.out.println(result);
         }
 //        点数を取得する
-        long score = scoreService.calculateScore(results.stream().filter(result-> result).count(), quizForm.getTimeLeft());
+        long scoreCalculated = scoreService.calculateScore(results.stream().filter(result-> result).count(), quizForm.getTimeLeft());
+//        スコア登録
+        Score score = new Score();
+        score.setUserId(userDetails.getUserId());
+        score.setScore(scoreCalculated);
 //        問題ごとのデータ(回答・正答・解説)
         List<AnswerViewModel> quizResults = quizService.getQuizDetails(quizForm.getAnswers(), correctAnswer, results);
 //        セッションにデータを保存する
         httpSession.setAttribute("correctCount", results.stream().filter(result-> result).count());
-        httpSession.setAttribute("score", score);
+        httpSession.setAttribute("score", scoreCalculated);
         httpSession.setAttribute("time", quizForm.getTimeLeft());
         httpSession.setAttribute("quizResults", quizResults);
 
