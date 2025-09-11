@@ -24,9 +24,14 @@
                 </div>
             </div>
             <div>
-                <a th:href="@{/logout}" class="logout-btn">
-                    退出
-                </a>
+<!--                <a th:href="@{/logout}" class="logout-btn">-->
+<!--                    退出-->
+<!--                </a>-->
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="logout-btn">
+                        退出
+                    </button>
+                </form>
             </div>
         </div>
     </div>
