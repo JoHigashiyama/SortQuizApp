@@ -103,4 +103,11 @@ public class QuizController {
     public String showGameOver() {
         return "quiz/quiz-gameover";
     }
+
+    @GetMapping("/history")
+    public String showHistory(Model model) {
+        List<Quiz> histories = quizService.getAllQuizzesSortHappenYear();
+        model.addAttribute("histories", histories);
+        return "quiz/quiz-history";
+    }
 }
