@@ -27,11 +27,12 @@ public class ScoreService {
         scoreRepository.createScore(score);
     }
 
-    public long calculateScore(long correctAnswers, long time) {
+    public long calculateScore(List<Boolean> results, long time) {
         long point = 0;
-        point += correctAnswers * correctPoint;
+        point += results.stream().filter(result->result).count() * correctPoint;
         if (time > 0) {
-            point += time * timePoint;
+            double correctRate = (double) results.stream().filter(result->result).count() / results.size();
+            point += time * timePoint * correctRate;
         }
         return point;
     }
