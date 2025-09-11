@@ -35,6 +35,9 @@ public class QuizRestController {
                                                     @AuthenticationPrincipal CustomUserDetails userDetails,
                                                     HttpSession httpSession) {
         QuizResponse quizResponse = new QuizResponse();
+//        制限時間
+        long limitTime = 100;
+        long answerTime = limitTime - quizForm.getTimeLeft();
 
 //      セッションから並び替え前のクイズを取り出す
         List<Long> quizList = (List<Long>) httpSession.getAttribute("quizList");
@@ -56,7 +59,7 @@ public class QuizRestController {
 //        セッションにデータを保存する
         httpSession.setAttribute("correctCount", results.stream().filter(result-> result).count());
         httpSession.setAttribute("score", scoreCalculated);
-        httpSession.setAttribute("time", quizForm.getTimeLeft());
+        httpSession.setAttribute("time", answerTime);
         httpSession.setAttribute("quizResults", quizResults);
 
 //        リダイレクト先のurlを格納する
