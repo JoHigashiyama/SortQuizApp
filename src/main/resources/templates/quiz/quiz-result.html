@@ -5,48 +5,65 @@
     <title>結果</title>
 </head>
 <body>
-<h3>結果</h3>
-<div>
-    <table>
-        <tr>
-            <th>正解数</th>
-            <th>得点</th>
-            <th>回答時間</th>
-        </tr>
-        <tr>
-            <td th:text="${correctCount}"></td>
-            <td th:text="${score}"></td>
-            <td th:text="${time}"></td>
-        </tr>
-    </table>
+    <section>
+        <div class="quiz-result">
 
-    <h3>詳細</h3>
-<!--    一問ずつ-->
-    <div th:each="detail : ${quizDetails}">
-<!--        問題番号-->
-        <h4 th:text="${detail.quizNumber}"></h4>
-<!--        正解不正解-->
-        <h4 th:if="${detail.result}">正解</h4>
-        <h4 th:unless="${detail.result}">不正解</h4>
-<!--        回答-->
-        <h4>回答</h4>
-        <ul>
-            <li th:each="item : ${detail.answers}" th:text="${item}"></li>
-        </ul>
-<!--        正答-->
-        <h4>正答</h4>
-        <ul>
-            <li th:each="item : ${detail.corrects}" th:text="${item}"></li>
-        </ul>
-<!--        解説-->
-        <h4>解説</h4>
-        <div>
-            <div th:each="item : ${detail.quizDetails}">
-                <h5 th:text="|${item.content}(${item.happenYear}年)|"></h5>
-                <p th:text="${item.description}"></p>
+            <p class="title">結果</p>
+
+            <div class="result-details">
+                <div class="answer-count">
+                    <p class="sub-title">正答数</p>
+                    <p class="ans-result" th:text="${correctCount}/10"></p>
+                </div>
+                <div class="score">
+                    <p class="sub-title">得点</p>
+                    <p class="score-result" th:text="${score}点">1600点</p>
+                </div>
+                <div class="time">
+                    <p class="sub-title">解答時間</p>
+                    <p class="time-result" th:text="${time}秒">50秒</p>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+    <section>
+        <div class="quiz-details">
+            <p class="title">正誤・解説</p>
+            <div class="quiz" th:each="detail : ${quizDetails}">
+                <details>
+                    <summary>
+                        <span class="question" th:text="第${detail.quizNumber}問">第1問</span>
+                        <span class="correct" th:if="${detail.result}">正解</span>
+                        <span class="wrong" th:unless="${detail.result}">不正解</span>
+                    </summary>
+                    <div class="content">
+                        <div class="correct-or-wrong">
+                            <div class="your-answer">
+                                <p class="ans-title">あなたの解答</p>
+                                <ul>
+                                    <li th:each="item : ${detail.answers}" th:text="${item}"></li>
+                                </ul>
+                            </div>
+                            <div class="true-answer">
+                                <p class="ans-title">正答</p>
+                                <ul>
+                                    <li th:each="item : ${detail.corrects}" th:text="${item}"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <p class="exp-title">解説</p>
+
+                        <div class="explanation">
+                            <div class="exp-detail" th:each="item : ${detail.quizDetails}">
+                                <h3 th:text="|${item.content}(${item.happenYear}年)|"></h3>
+                                <p th:text="${item.description}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
