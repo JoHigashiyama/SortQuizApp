@@ -3,6 +3,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #f9f9f9;
     height: 100vh;
     margin: 0;
 
@@ -21,6 +22,7 @@ body {
     box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.25);
     text-align: center;
     padding-bottom: 20px;
+    margin: 0 auto;
 }
 
 /* タイトル部分 */

@@ -1,50 +1,178 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link th:href="@{/css/login-style.css}" rel="stylesheet">
-  <meta charset="UTF-8">
-  <title>ログイン</title>
+    <meta charset="UTF-8">
+    <title>ログイン</title>
+    <link th:href="@{/css/login-style.css}" rel="stylesheet">
+    <link th:href="@{/css/quiz-game.css}" rel="stylesheet">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+JP:wght@200..900&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
+    <style>
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            justify-content: center;
+            align-items: center;
+        }
 
+        /* デモゲームエリア */
+        .question-area {
+            flex: 1;
+            max-width: 45%;
+            padding: 20px;
+            border: 3px solid #d4b36e;
+        }
+
+        .red { color: red;}
+        .blue { color: blue;}
+        .hint{ font-size: 2rem; margin-top: 20px;}
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+JP:wght@200..900&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="login-container">
-  <!-- タイトル -->
-  <div class="login-header">
-    <h1>歴史の道場</h1>
-  </div>
 
-  <!-- ログイン見出し -->
-  <div class="login-title">ログイン</div>
+<div class="container">
 
-  <!-- エラー表示 -->
-  <div th:if="${param.error}" class="error-message">
-    メールアドレスかパスワードが間違っています
-  </div>
+    <!-- 左のデモゲームエリア -->
+    <div class="question-area">
+        <div>
+            <p>制限時間内に、歴史上の出来事を正しい順に並べ替えましょう！</p>
+            <p>制限時間内にすべての問題を解けないとゲームオーバー！</p>
+            <p>↓ドラッグアンドドロップで操作できます。</p>
+        </div>
+        <!-- ★ 判定結果だけを更新するエリア -->
+        <p class="hint" id="judge"><span class="blue">正しくない歴史</span></p>
 
-  <!-- 成功メッセージ -->
-  <div th:if="${param.register}" class="success-message">
-    ユーザー登録が完了しました
-  </div>
+        <div class="sorting-area">
+            <div class="sort-items" id="sort-items">
+                <div class="sort-item" draggable="true" data-answer="2">
+                    <div class="sort-number">1</div>
+                    <div class="sort-content">関ヶ原の戦い <span class="red">(1600年)</span></div>
+                    <div class="drag-handle">≡</div>
+                </div>
+                <div class="sort-item" draggable="true" data-answer="1">
+                    <div class="sort-number">2</div>
+                    <div class="sort-content">本能寺の変 <span class="red">(1582年)</span></div>
+                    <div class="drag-handle">≡</div>
+                </div>
+                <div class="sort-item" draggable="true" data-answer="4">
+                    <div class="sort-number">3</div>
+                    <div class="sort-content">大坂夏の陣 <span class="red">(1615年)</span></div>
+                    <div class="drag-handle">≡</div>
+                </div>
+                <div class="sort-item" draggable="true" data-answer="3">
+                    <div class="sort-number">4</div>
+                    <div class="sort-content">江戸幕府成立 <span class="red">(1603年)</span></div>
+                    <div class="drag-handle">≡</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <!-- ログインフォーム -->
-  <form class="login-form" method="post" th:action="@{/login}">
-    <label for="email">メールアドレス</label>
-    <input type="email" name="email" id="email" required>
-    <span class="email-error">メールアドレスが入力されていません</span>
+    <!-- ログインコンテナ -->
+    <div class="login-container">
+        <div class="login-header">
+            <h1>歴史の道場</h1>
+        </div>
+        <div class="login-title">ログイン</div>
 
-    <label for="password">パスワード</label>
-    <input type="password" name="password" id="password" required>
-    <span class="password-error">パスワードが入力されていません</span>
+        <div th:if="${param.error}" class="error-message">
+            メールアドレスかパスワードが間違っています
+        </div>
 
-    <button type="submit" class="login-button">ログイン</button>
-  </form>
+        <div th:if="${param.register}" class="success-message">
+            ユーザー登録が完了しました
+        </div>
 
-  <!-- 新規登録リンク -->
-  <a th:href="@{/register}" class="signup-link">新規登録はこちら</a>
+        <form class="login-form" method="post" th:action="@{/login}">
+            <label for="email">メールアドレス</label>
+            <input type="email" name="email" id="email" required>
+            <span class="email-error">メールアドレスが入力されていません</span>
+
+            <label for="password">パスワード</label>
+            <input type="password" name="password" id="password" required>
+            <span class="password-error">パスワードが入力されていません</span>
+
+            <button type="submit" class="login-button">ログイン</button>
+        </form>
+
+        <a th:href="@{/register}" class="signup-link">新規登録はこちら</a>
+    </div>
 </div>
+
+<script>
+    const sortItems = document.getElementById("sort-items");
+    const judgeArea = document.getElementById("judge"); // ★判定用だけ
+
+    let dragSrcEl = null;
+
+    // ドラッグ開始
+    sortItems.addEventListener("dragstart", (e) => {
+        if (e.target.classList.contains("sort-item")) {
+            dragSrcEl = e.target;
+            e.dataTransfer.effectAllowed = "move";
+            e.dataTransfer.setData("text/html", e.target.outerHTML);
+            e.target.classList.add("dragging");
+        }
+    });
+
+    // ドラッグ終了
+    sortItems.addEventListener("dragend", (e) => {
+        e.target.classList.remove("dragging");
+    });
+
+    // ドラッグオーバー
+    sortItems.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        const target = e.target.closest(".sort-item");
+        if (target && target !== dragSrcEl) {
+            target.classList.add("drag-over");
+        }
+    });
+
+    // ドラッグ離脱
+    sortItems.addEventListener("dragleave", (e) => {
+        const target = e.target.closest(".sort-item");
+        if (target) {
+            target.classList.remove("drag-over");
+        }
+    });
+
+    // ドロップ
+    sortItems.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const target = e.target.closest(".sort-item");
+        if (target && dragSrcEl !== target) {
+            target.classList.remove("drag-over");
+
+            const rect = target.getBoundingClientRect();
+            const offset = e.clientY - rect.top; // ドロップ位置のY座標
+            const half = rect.height / 2;
+
+            if (offset > half) {
+                sortItems.insertBefore(dragSrcEl, target.nextSibling);
+            } else {
+                sortItems.insertBefore(dragSrcEl, target);
+            }
+
+            checkOrder();
+        }
+    });
+
+    function checkOrder() {
+        const items = sortItems.querySelectorAll(".sort-item");
+        const answers = Array.from(items).map(item => parseInt(item.dataset.answer));
+        const isCorrect = answers.every((val, i) => val === i + 1);
+
+        if (isCorrect) {
+            judgeArea.innerHTML = '<span class="red">正しい歴史</span>';
+        } else {
+            judgeArea.innerHTML = '<span class="blue">正しくない歴史</span>';
+        }
+    }
+</script>
 </body>
 </html>
