@@ -2,6 +2,7 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/quiz-result.css">
     <title>結果</title>
 </head>
 <body>
@@ -13,15 +14,15 @@
             <div class="result-details">
                 <div class="answer-count">
                     <p class="sub-title">正答数</p>
-                    <p class="ans-result" th:text="${correctCount}/10"></p>
+                    <p class="ans-result" th:text="${correctCount} + '/10'"></p>
                 </div>
                 <div class="score">
                     <p class="sub-title">得点</p>
-                    <p class="score-result" th:text="${score}点">1600点</p>
+                    <p class="score-result" th:text="${score} + '点'">1600点</p>
                 </div>
                 <div class="time">
                     <p class="sub-title">解答時間</p>
-                    <p class="time-result" th:text="${time}秒">50秒</p>
+                    <p class="time-result" th:text="${time} + '秒'">50秒</p>
                 </div>
             </div>
         </div>
@@ -32,7 +33,7 @@
             <div class="quiz" th:each="detail : ${quizDetails}">
                 <details>
                     <summary>
-                        <span class="question" th:text="第${detail.quizNumber}問">第1問</span>
+                        <span class="question" th:text="'第' + ${detail.quizNumber} + '問'">第1問</span>
                         <span class="correct" th:if="${detail.result}">正解</span>
                         <span class="wrong" th:unless="${detail.result}">不正解</span>
                     </summary>
