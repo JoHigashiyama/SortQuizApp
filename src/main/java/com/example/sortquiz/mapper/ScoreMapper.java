@@ -23,4 +23,10 @@ public interface ScoreMapper {
     @Insert("INSERT INTO scores (user_id, score) VALUES (#{userId}, #{score})")
     @Options(useGeneratedKeys = true, keyProperty = "scoreId")
     void createScore(Score score);
+
+    @Select("SELECT MAX(score) FROM scores WHERE user_id = #{userId} LIMIT 1")
+    long selectBestScoreByUserId(long userId);
+
+    @Select("SELECT SUM(score) FROM scores WHERE user_id = #{userId}")
+    long selectTotalScoreByUserId(long userId);
 }
