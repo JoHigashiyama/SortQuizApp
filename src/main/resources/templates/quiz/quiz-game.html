@@ -83,7 +83,7 @@
         s2.innerText = quiz.choices[1].select;
         s3.innerText = quiz.choices[2].select;
         s4.innerText = quiz.choices[3].select;
-s
+
         s1.parentElement.dataset.year = quiz.choices[0].year;
         s2.parentElement.dataset.year = quiz.choices[1].year;
         s3.parentElement.dataset.year = quiz.choices[2].year;
@@ -176,6 +176,7 @@ s
             fetch('api/gameOver', {
                 method: 'GET',
                 headers: {
+                    [csrfHeader]: csrfToken,
                     'Content-Type': 'application/json',
                 },
             })
@@ -183,6 +184,9 @@ s
                 .then(result => {
                     const redirectUrl = result.redirectUrl
                     document.location = redirectUrl
+                })
+                .catch(e => {
+                    console.log("error", e)
                 })
 
         }
