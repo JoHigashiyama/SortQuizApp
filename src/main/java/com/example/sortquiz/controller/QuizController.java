@@ -98,4 +98,9 @@ public class QuizController {
         httpSession.removeAttribute("quizResults");
         return "quiz/quiz-result";
     }
+
+    @GetMapping("/failed")
+    public String showGameOver() {
+        return "quiz/quiz-gameover";
+    }
 }

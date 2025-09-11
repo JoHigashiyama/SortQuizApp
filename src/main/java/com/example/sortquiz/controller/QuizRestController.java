@@ -2,6 +2,7 @@ package com.example.sortquiz.controller;
 
 import com.example.sortquiz.entity.Score;
 import com.example.sortquiz.form.QuizForm;
+import com.example.sortquiz.response.GameOverResponse;
 import com.example.sortquiz.response.QuizResponse;
 import com.example.sortquiz.security.CustomUserDetails;
 import com.example.sortquiz.service.QuizService;
@@ -41,9 +42,6 @@ public class QuizRestController {
         List<List<Long>> correctAnswer = quizService.getSortedCorrectQuizzes(quizList);
 //        並び替え前と後を比較して、問題の正解・不正解を取得する
         List<Boolean> results = quizService.compareQuiz(quizForm.getAnswers(), correctAnswer);
-        for (boolean result : results) {
-            System.out.println(result);
-        }
 //        点数を取得する
         long scoreCalculated = scoreService.calculateScore(results.stream().filter(result-> result).count(), quizForm.getTimeLeft());
 //        スコア登録
@@ -63,5 +61,11 @@ public class QuizRestController {
         return ResponseEntity.ok().body(quizResponse);
     }
 
+    @GetMapping("/gameOver")
+    public ResponseEntity<GameOverResponse> gameOver() {
+        GameOverResponse gameOverResponse = new GameOverResponse();
 
+        gameOverResponse.setRedirectUrl("failed");
+        return ResponseEntity.ok().body(gameOverResponse);
+    }
 }

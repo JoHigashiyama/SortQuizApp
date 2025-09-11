@@ -83,7 +83,7 @@
         s2.innerText = quiz.choices[1].select;
         s3.innerText = quiz.choices[2].select;
         s4.innerText = quiz.choices[3].select;
-
+s
         s1.parentElement.dataset.year = quiz.choices[0].year;
         s2.parentElement.dataset.year = quiz.choices[1].year;
         s3.parentElement.dataset.year = quiz.choices[2].year;
@@ -172,7 +172,19 @@
         // 時間切れ処理
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
-            alert('ゲームオーバー')
+            // alert('ゲームオーバー')
+            fetch('api/gameOver', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(res => res.json())
+                .then(result => {
+                    const redirectUrl = result.redirectUrl
+                    document.location = redirectUrl
+                })
+
         }
     }, 1000);
 
