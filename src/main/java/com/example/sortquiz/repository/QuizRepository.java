@@ -22,4 +22,8 @@ public class QuizRepository {
     public QuizDetailViewModel getDetailsByQuizId(long quizId) {
         return quizMapper.getDetailsByQuizId(quizId);
     }
+
+    public List<Quiz> getAllQuizzesSortHappenYear() {
+        return quizMapper.getAllQuizzesSortHappenYear();
+    }
 }
