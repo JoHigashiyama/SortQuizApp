@@ -79,6 +79,11 @@
   <div class="pagination" id="pagination"></div>
 </div>
 
+<div class="buttons">
+  <button id="back-to-top">↑</button>
+  <a th:href="@{/quiz}" id="back-top">トップに戻る</a>
+</div>
+
 <!-- ThymeleafでJSにデータを埋め込む -->
 <script th:inline="javascript">
   /*<![CDATA[*/
@@ -87,6 +92,15 @@
 </script>
 
 <script>
+
+  //↑が押されたとき
+  document.getElementById("back-to-top").addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth" // 滑らかにスクロール
+    });
+  });
+
   const tableBody = document.getElementById("history-table-body");
   const paginationDiv = document.getElementById("pagination");
 
