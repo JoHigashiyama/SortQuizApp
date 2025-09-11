@@ -30,3 +30,21 @@ CREATE TABLE quizzes (
                          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- 称号テーブル
+CREATE TABLE titles (
+                        title_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+                        title VARCHAR(100) NOT NULL,        -- 称号名
+                        description VARCHAR(255),           -- 称号の説明
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ユーザー称号テーブル
+CREATE TABLE user_titles (
+                             id INTEGER AUTO_INCREMENT PRIMARY KEY,
+                             user_id INTEGER NOT NULL,
+                             title_id INTEGER NOT NULL,
+                             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                             CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(user_id),
+                             CONSTRAINT fk_title FOREIGN KEY (title_id) REFERENCES titles(title_id)
+);

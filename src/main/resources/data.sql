@@ -92,3 +92,21 @@ INSERT INTO quizzes (content, happen_year, description) VALUES
                                                     ('太平洋戦争開戦', 1941, '真珠湾攻撃で米国との戦争が始まる'),
                                                     ('広島に原爆投下', 1945, '8月6日に広島へ原爆投下'),
                                                     ('日本国憲法施行', 1947, '民主的な憲法が施行された');
+
+-- 称号テーブル
+INSERT INTO titles (title, description) VALUES
+                                                           ('初プレイ', '初めてプレイした'),
+                                                           ('千点突破', '総合得点が1000点以上'),
+                                                           ('常連', '5回以上プレイする');
+
+-- 取得称号テーブル（id は AUTO_INCREMENT なので指定しない）
+INSERT INTO user_titles (user_id, title_id) VALUES
+                                                (1, 1),
+                                                (1, 2),
+                                                (2, 1),
+                                                (3, 1),
+                                                (3, 3),
+                                                (4, 1),
+                                                (5, 1),
+                                                (5, 2),
+                                                (5, 3);
