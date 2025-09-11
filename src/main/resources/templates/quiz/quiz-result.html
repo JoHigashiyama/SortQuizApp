@@ -34,8 +34,8 @@
                 <details>
                     <summary>
                         <span class="question" th:text="'第' + ${detail.quizNumber} + '問'">第1問</span>
-                        <span class="correct" th:if="${detail.result}">正解</span>
-                        <span class="wrong" th:unless="${detail.result}">不正解</span>
+                        <span class="correct" th:if="${detail.result}">✓正解</span>
+                        <span class="wrong" th:unless="${detail.result}">×不正解</span>
                     </summary>
                     <div class="content">
                         <div class="correct-or-wrong">
@@ -74,5 +74,15 @@
         <button id="back-to-top">↑</button>
         <a th:href="@{/quiz}" id="back-top">トップに戻る</a>
     </div>
+
+    <script>
+        //↑が押されたとき
+        document.getElementById("back-to-top").addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth" // 滑らかにスクロール
+            });
+        });
+    </script>
 </body>
 </html>
