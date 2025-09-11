@@ -74,5 +74,15 @@
         <button id="back-to-top">↑</button>
         <a th:href="@{/quiz}" id="back-top">トップに戻る</a>
     </div>
+
+    <script>
+        //↑が押されたとき
+        document.getElementById("back-to-top").addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth" // 滑らかにスクロール
+            });
+        });
+    </script>
 </body>
 </html>
