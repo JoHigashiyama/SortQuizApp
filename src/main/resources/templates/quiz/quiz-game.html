@@ -172,7 +172,9 @@
         // 時間切れ処理
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
-            alert('ゲームオーバー')
+            // alert('ゲームオーバー')
+            document.location = 'failed'
+
         }
     }, 1000);
 
