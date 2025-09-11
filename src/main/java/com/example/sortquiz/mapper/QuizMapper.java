@@ -15,4 +15,7 @@ public interface QuizMapper {
 
     @Select("SELECT quiz_id AS id, content, happen_year, description FROM quizzes WHERE quiz_id = #{quiz_id}")
     QuizDetailViewModel getDetailsByQuizId(long quizId);
+
+    @Select("SELECT * FROM quizzes ORDER BY happen_year")
+    List<Quiz> getAllQuizzesSortHappenYear();
 }

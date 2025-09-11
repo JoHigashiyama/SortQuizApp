@@ -127,4 +127,8 @@ public class QuizService {
         }
         return answers;
     }
+
+    public List<Quiz> getAllQuizzesSortHappenYear() {
+        return quizRepository.getAllQuizzesSortHappenYear();
+    }
 }
