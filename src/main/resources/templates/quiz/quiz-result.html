@@ -41,17 +41,20 @@
                         <div class="correct-or-wrong">
                             <div class="your-answer">
                                 <p class="ans-title">あなたの解答</p>
-                                <ul>
-                                    <li th:each="item : ${detail.answers}" th:text="${item}"></li>
-                                </ul>
+                                <span class="answer" th:each="item,stat : ${detail.answers}">
+                                    <span th:text="${item}"></span>
+                                    <span th:if="${!stat.last}">→</span>
+                                </span>
                             </div>
                             <div class="true-answer">
                                 <p class="ans-title">正答</p>
-                                <ul>
-                                    <li th:each="item : ${detail.corrects}" th:text="${item}"></li>
-                                </ul>
+                                <span class="answer" th:each="item,stat : ${detail.corrects}">
+                                    <span th:text="${item}"></span>
+                                    <span th:if="${!stat.last}">→</span>
+                                </span>
                             </div>
                         </div>
+
 
                         <p class="exp-title">解説</p>
 
