@@ -22,4 +22,12 @@ public class ScoreRepository {
     public void createScore(Score score) {
         scoreMapper.createScore(score);
     }
+
+    public long selectBestScoreByUserId(long userId) {
+        return scoreMapper.selectBestScoreByUserId(userId);
+    }
+
+    public long selectTotalScoreByUserId(long userId) {
+        return scoreMapper.selectTotalScoreByUserId(userId);
+    }
 }

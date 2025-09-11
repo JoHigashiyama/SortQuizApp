@@ -5,19 +5,20 @@ import com.example.sortquiz.exception.EmailAlreadyRegisteredException;
 import com.example.sortquiz.exception.PasswordNotMatchException;
 import com.example.sortquiz.exception.UsernameAlreadyRegisteredException;
 import com.example.sortquiz.form.UserForm;
+import com.example.sortquiz.repository.ScoreRepository;
 import com.example.sortquiz.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final ScoreRepository scoreRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, ScoreRepository scoreRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.scoreRepository = scoreRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -49,5 +50,12 @@ public class UserService {
 
     public User getUserInformation(long userId){
         return userRepository.getUserInformation(userId);
+    }
+
+    public void updateUserScoreByUserId(long userId) {
+//        ユーザーidからベストスコア、総スコアを取得する
+        long bestScore = scoreRepository.selectBestScoreByUserId(userId);
+        long totalScore = scoreRepository.selectTotalScoreByUserId(userId);
+        userRepository.updateUserScoreByUserId(bestScore, totalScore, userId);
     }
 }

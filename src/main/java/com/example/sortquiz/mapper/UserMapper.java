@@ -1,10 +1,7 @@
 package com.example.sortquiz.mapper;
 
 import com.example.sortquiz.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -22,4 +19,7 @@ public interface UserMapper {
 
     @Select("SELECT * FROM users WHERE user_id = #{userId}")
     User getUserInformation(long userId);
+
+    @Update("UPDATE users SET best_score = #{bestScore}, total_score = #{totalScore} WHERE user_id = #{userId}")
+    void updateUserScoreByUserId(long bestScore, long totalScore, long userId);
 }

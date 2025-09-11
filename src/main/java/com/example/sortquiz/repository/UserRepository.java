@@ -29,4 +29,8 @@ public class UserRepository {
     public User getUserInformation(long userId) {
         return userMapper.getUserInformation(userId);
     }
+
+    public void updateUserScoreByUserId(long bestScore, long totalScore, long userId) {
+        userMapper.updateUserScoreByUserId(bestScore, totalScore, userId);
+    }
 }
