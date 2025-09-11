@@ -178,25 +178,6 @@ details[open] {
     transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 
-
-
-
-#back-to-top {
-    position: fixed;
-    bottom: 60px;
-    right: 30px;
-    padding: 10px 15px;
-    background-color: #8B4513;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: background-color 0.3s ease;
-}
-
-
 #back-top {
     position: fixed;
     bottom: 10px;
