@@ -57,11 +57,6 @@ body {
 
 .header {
     background-color: #F1EEE3;
-    /* background: linear-gradient(90deg, #8b4513 0%, #a0522d 50%, #654321 100%); */
-    /* background-image:
-        linear-gradient(45deg, rgba(212, 175, 55, 0.2) 25%, transparent 25%),
-        linear-gradient(-45deg, rgba(212, 175, 55, 0.2) 25%, transparent 25%);
-    background-size: 20px 20px; */
     padding: 30px;
     text-align: center;
     border-bottom: 3px solid #d4af37;
@@ -81,7 +76,6 @@ body {
 
 .page-title::before,
 .page-title::after {
-    content: '⚔';
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -252,35 +246,51 @@ body {
     font-weight: 700;
 }
 
-.back-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: linear-gradient(145deg, #8b4513 0%, #654321 100%);
-    color: #d4af37;
-    border: 2px solid #d4af37;
-    border-radius: 50px;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.back-btn:hover {
-    transform: translateY(-3px) scale(1.1);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-}
-
 .no-data {
     text-align: center;
     padding: 50px 20px;
     color: #8b4513;
     font-size: 18px;
+}
+
+/**************戻るボタン**************/
+#back-to-top {
+    position: fixed;
+    bottom: 60px;
+    right: 30px;
+    padding: 10px 15px;
+    background-color: #8B4513;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+}
+
+#back-to-top:hover {
+    background-color: #D4AF37;
+}
+
+#back-top {
+    position: fixed;
+    bottom: 10px;
+    right: 30px;
+    padding: 10px 15px;
+    background-color: #8B4513;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+}
+
+#back-top:hover {
+    background-color: #D4AF37;
 }
 
 @media (max-width: 768px) {
