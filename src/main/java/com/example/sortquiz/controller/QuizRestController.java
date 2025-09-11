@@ -46,7 +46,7 @@ public class QuizRestController {
 //        並び替え前と後を比較して、問題の正解・不正解を取得する
         List<Boolean> results = quizService.compareQuiz(quizForm.getAnswers(), correctAnswer);
 //        点数を取得する
-        long scoreCalculated = scoreService.calculateScore(results.stream().filter(result-> result).count(), quizForm.getTimeLeft());
+        long scoreCalculated = scoreService.calculateScore(results, quizForm.getTimeLeft());
 //        スコア登録
         Score score = new Score();
         score.setUserId(userDetails.getUserId());
