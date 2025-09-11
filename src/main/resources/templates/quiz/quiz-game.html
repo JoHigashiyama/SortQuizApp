@@ -173,21 +173,7 @@
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
             // alert('ゲームオーバー')
-            fetch('api/gameOver', {
-                method: 'GET',
-                headers: {
-                    [csrfHeader]: csrfToken,
-                    'Content-Type': 'application/json',
-                },
-            })
-                .then(res => res.json())
-                .then(result => {
-                    const redirectUrl = result.redirectUrl
-                    document.location = redirectUrl
-                })
-                .catch(e => {
-                    console.log("error", e)
-                })
+            document.location = 'failed'
 
         }
     }, 1000);

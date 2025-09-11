@@ -60,12 +60,4 @@ public class QuizRestController {
         quizResponse.setRedirectUrl("result");
         return ResponseEntity.ok().body(quizResponse);
     }
-
-    @GetMapping("/gameOver")
-    public ResponseEntity<GameOverResponse> gameOver() {
-        GameOverResponse gameOverResponse = new GameOverResponse();
-
-        gameOverResponse.setRedirectUrl("failed");
-        return ResponseEntity.ok().body(gameOverResponse);
-    }
 }
