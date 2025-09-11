@@ -65,6 +65,14 @@
 </div>
 
 <script>
+  //↑が押されたとき
+  document.getElementById("back-to-top").addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth" // 滑らかにスクロール
+    });
+  });
+
   // タブ切り替え
   document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', function() {
