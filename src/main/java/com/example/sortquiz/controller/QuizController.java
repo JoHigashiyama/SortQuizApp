@@ -124,4 +124,10 @@ public class QuizController {
         model.addAttribute("histories", histories);
         return "quiz/quiz-history";
     }
+
+    @GetMapping("/giveUp")
+    public String giveUp(HttpSession httpSession) {
+        httpSession.removeAttribute("quizList");
+        return "redirect:/quiz";
+    }
 }
