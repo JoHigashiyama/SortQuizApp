@@ -24,9 +24,6 @@
                 </div>
             </div>
             <div>
-<!--                <a th:href="@{/logout}" class="logout-btn">-->
-<!--                    退出-->
-<!--                </a>-->
                 <form th:action="@{/logout}" method="post">
                     <button type="submit" class="logout-btn">
                         退出
@@ -37,16 +34,6 @@
     </div>
 
     <div class="menu-grid">
-        <div class="menu-card">
-            <a th:href="@{/rank/ranking}">
-                <div class="menu-icon">🏆</div>
-                <div class="menu-title">ランキング</div>
-                <div class="menu-description">
-                    上位10人が出るよ<br>
-                    自分の名前はあるかな？
-                </div>
-            </a>
-        </div>
 
         <div class="menu-card primary">
             <a th:href="@{/quiz/game}">
@@ -61,17 +48,39 @@
         </div>
 
         <div class="menu-card">
+            <a th:href="@{/rank/ranking}">
+                <div class="menu-icon">🏆</div>
+                <div class="menu-title">ランキング</div>
+                <div class="menu-description">
+                    上位10人が出るよ<br>
+                    自分の名前はあるかな？
+                </div>
+            </a>
+        </div>
+
+        <div class="menu-card">
+            <a th:href="@{/quiz/history}">
+                <div class="menu-icon">📜</div>
+                <div class="menu-title">出来事一覧</div>
+                <div class="menu-description">
+                    クイズの問題の一覧が見れるよ<br>
+                    忘れた出来事を復習しよう！
+                </div>
+            </a>
+        </div>
+
+        <div class="menu-card">
             <a th:href="@{/score/history}">
                 <div class="menu-icon">📜</div>
                 <div class="menu-title">戦歴録</div>
                 <div class="menu-description">
                     これまでの自分の記録が見れるよ<br>
-                    過去の栄光と敗北から学びを得よ。
+                    過去の自分を振り返ろう！
                 </div>
             </a>
         </div>
+
     </div>
 </div>
-<a th:href="@{/quiz/history}">歴史</a>
 </body>
 </html>
