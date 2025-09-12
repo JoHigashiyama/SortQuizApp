@@ -131,4 +131,8 @@ public class QuizService {
     public List<Quiz> getAllQuizzesSortHappenYear() {
         return quizRepository.getAllQuizzesSortHappenYear();
     }
+
+    public List<Quiz> getQuizzesByKeywordAndYear(String keyword, long yearMin, long yearMax) {
+        return quizRepository.getQuizzesByKeywordAndYear(keyword, yearMin, yearMax);
+    }
 }

@@ -18,4 +18,12 @@ public interface QuizMapper {
 
     @Select("SELECT * FROM quizzes ORDER BY happen_year")
     List<Quiz> getAllQuizzesSortHappenYear();
+
+    @Select("""
+            SELECT * FROM quizzes 
+            WHERE content LIKE CONCAT('%', #{keyword}, '%')
+            AND happen_year BETWEEN #{yearMin} AND #{yearMax}
+            ORDER BY happen_year
+            """)
+    List<Quiz> getQuizzesByKeywordAndYear(String keyword, long yearMin, long yearMax);
 }

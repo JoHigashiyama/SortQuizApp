@@ -26,4 +26,8 @@ public class QuizRepository {
     public List<Quiz> getAllQuizzesSortHappenYear() {
         return quizMapper.getAllQuizzesSortHappenYear();
     }
+
+    public List<Quiz> getQuizzesByKeywordAndYear(String keyword, long yearMin, long yearMax) {
+        return quizMapper.getQuizzesByKeywordAndYear(keyword, yearMin, yearMax);
+    }
 }
