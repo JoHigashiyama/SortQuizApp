@@ -5,43 +5,23 @@
     <title>ログイン</title>
     <link th:href="@{/css/login-style.css}" rel="stylesheet">
     <link th:href="@{/css/quiz-game.css}" rel="stylesheet">
-
-    <style>
-        .container {
-            display: flex;
-            width: 90%;
-            max-width: 1200px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* デモゲームエリア */
-        .question-area {
-            flex: 1;
-            max-width: 45%;
-            padding: 20px;
-            border: 3px solid #d4b36e;
-        }
-
-        .red { color: red;}
-        .blue { color: blue;}
-        .hint{ font-size: 2rem; margin-top: 20px;}
-    </style>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+JP:wght@200..900&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
 </head>
 <body>
 
+<h1>歴史の道場</h1>
+
+
 <div class="container">
 
     <!-- 左のデモゲームエリア -->
     <div class="question-area">
         <div>
-            <p>制限時間内に、歴史上の出来事を正しい順に並べ替えましょう！</p>
-            <p>制限時間内にすべての問題を解けないとゲームオーバー！</p>
-            <p>↓ドラッグアンドドロップで操作できます。</p>
+            <p class="description">制限時間内に、歴史上の出来事を正しい順に並べ替えましょう！</p>
+            <p class="description">制限時間内にすべての問題を解けないとゲームオーバー！</p>
+            <p class="description">↓ドラッグアンドドロップで操作できます。</p>
         </div>
         <!-- ★ 判定結果だけを更新するエリア -->
         <p class="hint" id="judge"><span class="blue">正しくない歴史</span></p>
@@ -74,10 +54,7 @@
 
     <!-- ログインコンテナ -->
     <div class="login-container">
-        <div class="login-header">
-            <h1>歴史の道場</h1>
-        </div>
-        <div class="login-title">ログイン</div>
+        <h2 class="login-title">ログイン</h2>
 
         <div th:if="${param.error}" class="error-message">
             メールアドレスかパスワードが間違っています
