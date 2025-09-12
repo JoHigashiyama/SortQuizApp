@@ -2,11 +2,11 @@ package com.example.sortquiz.controller;
 
 import com.example.sortquiz.entity.Score;
 import com.example.sortquiz.form.QuizForm;
-import com.example.sortquiz.response.GameOverResponse;
 import com.example.sortquiz.response.QuizResponse;
 import com.example.sortquiz.security.CustomUserDetails;
 import com.example.sortquiz.service.QuizService;
 import com.example.sortquiz.service.ScoreService;
+import com.example.sortquiz.service.TitleService;
 import com.example.sortquiz.service.UserService;
 import com.example.sortquiz.viewmodel.AnswerViewModel;
 import jakarta.servlet.http.HttpSession;
@@ -14,9 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/quiz/api")
@@ -24,11 +22,13 @@ public class QuizRestController {
     private final QuizService quizService;
     private final UserService userService;
     private final ScoreService scoreService;
+    private final TitleService titleService;
 
-    public QuizRestController(QuizService quizService, UserService userService, ScoreService scoreService) {
+    public QuizRestController(QuizService quizService, UserService userService, ScoreService scoreService, TitleService titleService) {
         this.quizService = quizService;
         this.userService = userService;
         this.scoreService = scoreService;
+        this.titleService = titleService;
     }
     @PostMapping("/finish")
     public ResponseEntity<QuizResponse> createScore(@RequestBody QuizForm quizForm,
@@ -56,7 +56,7 @@ public class QuizRestController {
 //        ベストスコア、総スコアの更新
         userService.updateUserScoreByUserId(userDetails.getUserId());
 //        アチーブメント更新処理
-
+        titleService.updateAchievedTitle(userDetails.getUserId());
 
 //        問題ごとのデータ(回答・正答・解説)
         List<AnswerViewModel> quizResults = quizService.getQuizDetails(quizForm.getAnswers(), correctAnswer, results);
