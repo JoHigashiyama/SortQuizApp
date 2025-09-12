@@ -36,12 +36,12 @@
     <div class="menu-grid">
 
         <div class="menu-card primary">
-            <a th:href="@{/quiz/game}">
+            <a onclick="startQuiz()">
                 <div class="menu-icon">⚔️</div>
                 <div class="menu-title">歴史を学ぶ</div>
                 <div class="menu-description">
                     歴史の出来事を年代順に並べよう！<br>
-                    制限時間は100秒！<br>
+                    制限時間は100秒！
                     早く解けば得点が上がるよ！
                 </div>
             </a>
@@ -79,8 +79,54 @@
                 </div>
             </a>
         </div>
-
     </div>
 </div>
+
+<script>
+    // クイズ開始
+    function startQuiz() {
+        showTransition('いざ、出陣！！', () => {
+            window.location.href = '/quiz/game';
+        });
+    }
+
+    // 画面遷移エフェクト
+    function showTransition(message, callback) {
+        // 簡単な遷移エフェクト
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(45deg, rgba(139, 69, 19, 0.9), rgba(44, 24, 16, 0.9));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+                opacity: 0;
+                transition: opacity 0.5s ease;
+                color: #fff;
+                font-size: 24px;
+                font-weight: 700;
+                letter-spacing: 2px;
+            `;
+        overlay.textContent = message;
+
+        document.body.appendChild(overlay);
+
+        // フェードイン
+        setTimeout(() => {
+            overlay.style.opacity = '1';
+        }, 10);
+
+        // 1.5秒後にコールバック実行とオーバーレイ削除
+        setTimeout(() => {
+            callback();
+            document.body.removeChild(overlay);
+        }, 1500);
+    }
+</script>
 </body>
 </html>
