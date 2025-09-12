@@ -22,7 +22,7 @@ public interface TitleMapper {
             """)
     List<AchievedTitleViewModel> selectAchievedTitlesByUserId(long userId);
 
-    @Insert("INSERT INTO user_titles (title_id, user_id) VALUES (#{title_id}, #{user_id})")
+    @Insert("INSERT INTO user_titles (user_id, title_id) VALUES (#{userId}, #{titleId})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void createUserTitle(UserTitle userTitle);
 }
