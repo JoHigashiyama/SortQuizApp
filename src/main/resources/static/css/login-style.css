@@ -1,28 +1,60 @@
- /* 全体レイアウト */
-body {
-    display: flex;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
+/* 全体レイアウト */
+ *{
+     margin: 0;
+     padding: 0;
+ }
+
+ body {
     justify-content: center;
     align-items: center;
     background-color: #f9f9f9;
-    height: 100vh;
-    margin: 0;
-
     font-family: "Noto Serif JP", serif;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
 }
 
+ h1 {
+     font-size: 4rem;
+     margin: 20px;
+     text-align: center;
+ }
+ .container {
+     display: flex;
+     justify-content: center; /* 横方向の中央揃え */
+     margin: 0 auto;
+     width: 90%;
+ }
+
+ /* デモゲームエリア */
+ .question-area {
+     flex: 1;
+     max-width: 45%;
+     margin: 20px;
+     padding: 15px;
+     border: 5px solid #d4b36e;
+     box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.25);
+ }
+
+ .description{
+     font-size: 18px;
+ }
+
+ .red { color: red;}
+ .blue { color: blue;}
+ .hint{ font-size: 2rem; margin-top: 20px;}
+
 /* ログインボックス */
 .login-container {
-    width: 400px;
+    flex: 1 ;
     background-color: #f9f9f9;
     border: 5px solid #8B4513;
     border-radius: 2px;
     box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.25);
     text-align: center;
-    padding-bottom: 20px;
-    margin: 0 auto;
+    max-width: 45%;
+    margin: 20px;
 }
 
 /* タイトル部分 */
@@ -41,35 +73,36 @@ body {
 
 /* ログイン見出し */
 .login-title {
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: bold;
-    margin: 20px 0 10px;
+    margin: 20px 0;
 }
 
 /* エラーメッセージ */
 .error-message {
-    color: #d60000;
-    font-size: 14px;
-    margin-bottom: 10px;
+    color: #FF0000;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
 }
 
 /* 成功メッセージ */
 .success-message {
     color: #007700;
-    font-size: 14px;
-    margin-bottom: 10px;
+    font-size: 18px;
+    margin: 10px;
 }
 
 /* 入力フォーム全体 */
 .login-form {
     width: 80%;
-    margin: 0 auto;
-    text-align: left;
+    margin: 20px auto;
 }
 
 /* ラベル */
 .login-form label {
-    font-size: 14px;
+    text-align: left;
+    font-size: 20px;
     font-weight: bold;
     margin-top: 10px;
     display: block;
@@ -78,9 +111,7 @@ body {
 /* 入力フィールド */
 .login-form input {
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    padding: 10px;
     font-size: 14px;
     border: 1px solid #999;
     border-radius: 2px;
@@ -90,19 +121,17 @@ body {
 /* ログインボタン */
 .login-button {
     width: 40%;
-    padding: 8px;
-    margin-top: 15px;
+    padding: 10px;
+    margin: 20px auto;
     background-color: #8B4513;
     border: none;
     border-radius: 2px;
-    font-size: 16px;
+    font-size: 20px;
     color: white;
     cursor: pointer;
     box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
     transition: background-color 0.3s ease;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .login-button:hover {
@@ -112,8 +141,9 @@ body {
 /* 新規登録リンク */
 .signup-link {
     display: block;
-    margin-top: 15px;
-    font-size: 14px;
+    margin: 20px;
+    font-size: 20px;
+    font-weight: bold;
     color: #8B4513;
     text-decoration: none;
 }
@@ -124,9 +154,10 @@ body {
 
  /* エラーメッセージのcss */
  .email-error,.password-error{
+     text-align: left;
      display: none;
      color: #d60000;
-     font-size: 12px;
+     font-size: 16px;
      margin-top: 3px;
  }
 
