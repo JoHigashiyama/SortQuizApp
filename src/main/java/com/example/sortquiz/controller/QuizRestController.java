@@ -45,13 +45,15 @@ public class QuizRestController {
         List<List<Long>> correctAnswer = quizService.getSortedCorrectQuizzes(quizList);
 //        並び替え前と後を比較して、問題の正解・不正解を取得する
         List<Boolean> results = quizService.compareQuiz(quizForm.getAnswers(), correctAnswer);
+//        正解数
+        long correctCount = results.stream().filter(result->result).count();
 //        点数を取得する
         long scoreCalculated = scoreService.calculateScore(results, quizForm.getTimeLeft());
 //        スコア登録
         Score score = new Score();
         score.setUserId(userDetails.getUserId());
         score.setScore(scoreCalculated);
-        score.setCorrectCount(results.stream().filter(result->result).count());
+        score.setCorrectCount(correctCount);
         scoreService.createScore(score);
 //        ベストスコア、総スコアの更新
         userService.updateUserScoreByUserId(userDetails.getUserId());
@@ -61,7 +63,7 @@ public class QuizRestController {
 //        問題ごとのデータ(回答・正答・解説)
         List<AnswerViewModel> quizResults = quizService.getQuizDetails(quizForm.getAnswers(), correctAnswer, results);
 //        セッションにデータを保存する
-        httpSession.setAttribute("correctCount", results.stream().filter(result-> result).count());
+        httpSession.setAttribute("correctCount", correctCount);
         httpSession.setAttribute("score", scoreCalculated);
         httpSession.setAttribute("time", answerTime);
         httpSession.setAttribute("quizResults", quizResults);
