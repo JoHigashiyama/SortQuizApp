@@ -1,6 +1,7 @@
 package com.example.sortquiz.mapper;
 
 import com.example.sortquiz.entity.Quiz;
+import com.example.sortquiz.form.QuizSearchForm;
 import com.example.sortquiz.viewmodel.QuizDetailViewModel;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -25,5 +26,5 @@ public interface QuizMapper {
             AND happen_year BETWEEN #{yearMin} AND #{yearMax}
             ORDER BY happen_year
             """)
-    List<Quiz> getQuizzesByKeywordAndYear(String keyword, long yearMin, long yearMax);
+    List<Quiz> getQuizzesByKeywordAndYear(QuizSearchForm form);
 }
