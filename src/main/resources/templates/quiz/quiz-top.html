@@ -37,16 +37,6 @@
     </div>
 
     <div class="menu-grid">
-        <div class="menu-card">
-            <a th:href="@{/rank/ranking}">
-                <div class="menu-icon">🏆</div>
-                <div class="menu-title">ランキング</div>
-                <div class="menu-description">
-                    上位10人が出るよ<br>
-                    自分の名前はあるかな？
-                </div>
-            </a>
-        </div>
 
         <div class="menu-card primary">
             <a th:href="@{/quiz/game}">
@@ -61,12 +51,12 @@
         </div>
 
         <div class="menu-card">
-            <a th:href="@{/score/history}">
-                <div class="menu-icon">📜</div>
-                <div class="menu-title">戦歴録</div>
+            <a th:href="@{/rank/ranking}">
+                <div class="menu-icon">🏆</div>
+                <div class="menu-title">ランキング</div>
                 <div class="menu-description">
-                    これまでの自分の記録が見れるよ<br>
-                    過去の栄光と敗北から学びを得よ。
+                    上位10人が出るよ<br>
+                    自分の名前はあるかな？
                 </div>
             </a>
         </div>
@@ -76,11 +66,23 @@
                 <div class="menu-icon">📜</div>
                 <div class="menu-title">出来事一覧</div>
                 <div class="menu-description">
-                    クイズに出てくる問題の一覧が出るよ<br>
-                    忘れた問題を復習しよう！
+                    クイズの問題の一覧が見れるよ<br>
+                    忘れた出来事を復習しよう！
                 </div>
             </a>
         </div>
+
+        <div class="menu-card">
+            <a th:href="@{/score/history}">
+                <div class="menu-icon">📜</div>
+                <div class="menu-title">戦歴録</div>
+                <div class="menu-description">
+                    これまでの自分の記録が見れるよ<br>
+                    過去の自分を振り返ろう！
+                </div>
+            </a>
+        </div>
+
     </div>
 </div>
 </body>
