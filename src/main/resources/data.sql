@@ -3,7 +3,9 @@ INSERT INTO users (username, email, password, best_score, total_score) VALUES
                                                                            ('hanako', 'hanako@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 95, 400),
                                                                            ('jiro', 'jiro@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 70, 150),
                                                                            ('yuki', 'yuki@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 60, 120),
-                                                                           ('satoshi', 'satoshi@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 100, 500);
+                                                                           ('satoshi', 'satoshi@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 100, 500),
+                                                                           ('shida', 'shida@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 0, 0);
+
 
 INSERT INTO scores (user_id, score, correct_count) VALUES
                                         (1, 800, 8),
