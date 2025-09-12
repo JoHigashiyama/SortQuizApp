@@ -52,5 +52,11 @@ public class TitleService {
         }
 
 //        3: 5回以上プレイする
+        if (!achievedTitles.get(2).isAchieved()) {
+            if (scores.size() >= 5) {
+                userTitle.setTitleId(2);
+                titleRepository.createUserTitle(userTitle);
+            }
+        }
     }
 }
