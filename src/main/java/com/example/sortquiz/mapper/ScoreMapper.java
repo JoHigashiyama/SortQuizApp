@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface ScoreMapper {
     @Select("""
-            SELECT users.username, scores.score, scores.created_at, RANK() OVER(ORDER BY scores.score DESC) AS rank
+            SELECT users.username, scores.score, score.correct_count, scores.created_at, RANK() OVER(ORDER BY scores.score DESC) AS rank
             FROM scores
             INNER JOIN users ON scores.user_id = users.user_id
             WHERE scores.user_id = #{userId}

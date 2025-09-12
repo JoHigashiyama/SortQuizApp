@@ -23,6 +23,8 @@ public class TitleService {
     public void updateAchievedTitle(long userId) {
 //        取得状況も含めた称号一覧を取得する
         List<AchievedTitleViewModel> achievedTitles = titleRepository.selectAchievedTitleByUserId(userId);
+//        プレイ履歴(スコア履歴)を取得する
+        List<ScoreHistoryViewModel> scores = scoreRepository.selectScoresByUserId(userId);
 
 //        ここから確認と更新
         UserTitle userTitle = new UserTitle();
@@ -30,7 +32,6 @@ public class TitleService {
 //        更新の際にtitleIdを変更して、insertする
 //        1: 初めてプレイする
         if (!achievedTitles.get(0).isAchieved()) {
-            List<ScoreHistoryViewModel> scores = scoreRepository.selectScoresByUserId(userId);
             if (scores != null) {
                 userTitle.setTitleId(0);
                 titleRepository.createUserTitle(userTitle);
@@ -39,6 +40,16 @@ public class TitleService {
         }
 
 //        2: 初めて全問正解する
+        if (!achievedTitles.get(1).isAchieved()) {
+            for (ScoreHistoryViewModel score : scores) {
+                if (score.getCorrectCount() == 10) {
+                    userTitle.setTitleId(1);
+                    titleRepository.createUserTitle(userTitle);
+                    System.out.print("達成："+achievedTitles.get(1).getTitle());
+                    break;
+                }
+            }
+        }
 
 //        3: 5回以上プレイする
     }
