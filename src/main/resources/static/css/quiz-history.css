@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Serif JP', serif;
+    background-image:
+            radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+            url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="pattern" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="%23d4af37" opacity="0.08"/><circle cx="75" cy="50" r="1.5" fill="%23daa520" opacity="0.06"/><circle cx="50" cy="75" r="2.5" fill="%23b8860b" opacity="0.04"/></pattern></defs><rect width="100" height="100" fill="url(%23pattern)"/></svg>');
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.header {
+    background-color: #F1EEE3;
+    border: 3px solid #8B4513;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.history-list{
+    background-color: #F1EEE3;
+    border: 3px solid #8B4513;
+    margin: 10px;
+    padding: 10px;
+}
+
+.contents{
+    border-bottom: 2px solid #D4AF37;
+    margin: 5px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size:1.8rem;
+    margin: 3px;
+    padding: 1px 6px;
+}
+.history-name{
+    font-weight: bold;
+}
+.year{
+    background: #8B4513;
+    border: 2px solid #D4AF37;
+    border-radius: 6px;
+    color: #F9D768;
+    /*font-weight: bold;*/
+    margin-right: 5px;
+    padding: 4px 10px;
+}
+.description{
+    font-size: 1.3rem;
+    margin: 3px;
+    padding: 2px 10px;
+}
+
+/**************戻るボタン**************/
+#back-to-top {
+    position: fixed;
+    bottom: 60px;
+    right: 30px;
+    padding: 10px 15px;
+    background-color: #8B4513;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+}
+
+#back-to-top:hover {
+    background-color: #D4AF37;
+}
+
+#back-top {
+    position: fixed;
+    bottom: 10px;
+    right: 30px;
+    padding: 10px 15px;
+    background-color: #8B4513;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+}
+
+#back-top:hover {
+    background-color: #D4AF37;
+}
