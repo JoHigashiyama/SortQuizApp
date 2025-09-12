@@ -1,9 +1,10 @@
 package com.example.sortquiz.service;
 
-import com.example.sortquiz.entity.Score;
+import com.example.sortquiz.entity.User;
 import com.example.sortquiz.entity.UserTitle;
 import com.example.sortquiz.repository.ScoreRepository;
 import com.example.sortquiz.repository.TitleRepository;
+import com.example.sortquiz.repository.UserRepository;
 import com.example.sortquiz.viewmodel.AchievedTitleViewModel;
 import com.example.sortquiz.viewmodel.ScoreHistoryViewModel;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,12 @@ import java.util.List;
 public class TitleService {
     private final TitleRepository titleRepository;
     private final ScoreRepository scoreRepository;
+    private final UserRepository userRepository;
 
-    public TitleService(TitleRepository titleRepository, ScoreRepository scoreRepository) {
+    public TitleService(TitleRepository titleRepository, ScoreRepository scoreRepository, UserRepository userRepository) {
         this.titleRepository = titleRepository;
         this.scoreRepository = scoreRepository;
+        this.userRepository = userRepository;
     }
 
     public void updateAchievedTitle(long userId) {
@@ -25,7 +28,8 @@ public class TitleService {
         List<AchievedTitleViewModel> achievedTitles = titleRepository.selectAchievedTitleByUserId(userId);
 //        プレイ履歴(スコア履歴)を取得する
         List<ScoreHistoryViewModel> scores = scoreRepository.selectScoresByUserId(userId);
-
+//        ユーザー情報を取得する
+        User user = userRepository.getUserInformation(userId);
 //        ここから確認と更新
         UserTitle userTitle = new UserTitle();
         userTitle.setUserId(userId);
@@ -39,15 +43,12 @@ public class TitleService {
             }
         }
 
-//        2: 初めて全問正解する
+//        2: 総合得点が1000点を突破
         if (!achievedTitles.get(1).isAchieved()) {
-            for (ScoreHistoryViewModel score : scores) {
-                if (score.getCorrectCount() == 10) {
-                    userTitle.setTitleId(2);
-                    titleRepository.createUserTitle(userTitle);
-                    System.out.print("達成："+achievedTitles.get(1).getTitle());
-                    break;
-                }
+            if (user.getTotalScore() >= 1000) {
+                userTitle.setTitleId(2);
+                titleRepository.createUserTitle(userTitle);
+                System.out.println("達成："+achievedTitles.get(1).getTitle());
             }
         }
 
@@ -56,6 +57,19 @@ public class TitleService {
             if (scores.size() >= 5) {
                 userTitle.setTitleId(3);
                 titleRepository.createUserTitle(userTitle);
+                System.out.print("達成："+achievedTitles.get(2).getTitle());
+            }
+        }
+
+//        4: 初めて全問正解する
+        if (!achievedTitles.get(3).isAchieved()) {
+            for (ScoreHistoryViewModel score : scores) {
+                if (score.getCorrectCount() == 10) {
+                    userTitle.setTitleId(4);
+                    titleRepository.createUserTitle(userTitle);
+                    System.out.print("達成："+achievedTitles.get(3).getTitle());
+                    break;
+                }
             }
         }
     }

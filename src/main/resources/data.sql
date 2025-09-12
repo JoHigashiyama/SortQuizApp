@@ -99,7 +99,8 @@ INSERT INTO quizzes (content, happen_year, description) VALUES
 INSERT INTO titles (title, description) VALUES
                                                            ('初プレイ', '初めてプレイした'),
                                                            ('千点突破', '総合得点が1000点以上'),
-                                                           ('常連', '5回以上プレイする');
+                                                           ('常連', '5回以上プレイする'),
+                                                           ('歴史専門家', '初めて全問正解する');
 
 -- 取得称号テーブル（id は AUTO_INCREMENT なので指定しない）
 INSERT INTO user_titles (user_id, title_id) VALUES
