@@ -48,24 +48,38 @@ public class QuizController {
 
     @GetMapping("/game")
     public String quizzes(Model model, HttpSession httpSession) {
-        List<Quiz> quizzes = quizService.getQuizlist();
-
         List<Map<String, Object>> quizMaps = new ArrayList<>();
-        for(int i = 0; i< quizzes.size(); i+= 4){
-            Map<String, Object> map = new HashMap<>();
-            map.put("quizId", (i/4) + 1);
-            List<Map<String,Object>> choices = new ArrayList<>();
+        List<Quiz> quizzes;
+//        同一問題内に年代が重複した場合は分け直す
+        while (true) {
+            quizzes = quizService.getQuizlist();
+//            年代の重複フラグ
+            boolean isDuplicated = false;
+            for(int i = 0; i< quizzes.size(); i+= 4){
+                Map<String, Object> map = new HashMap<>();
+                map.put("quizId", (i/4) + 1);
+                List<Map<String,Object>> choices = new ArrayList<>();
 
-            for(int j = i; j < i + 4 && j < quizzes.size(); j++){
-                Quiz q = quizzes.get(j);
-                choices.add(Map.of(
-                        "id",q.getQuizId(),
-                        "select",q.getContent(),
-                        "year",q.getHappenYear()
-                ));
-            };
-            map.put("choices", choices);
-            quizMaps.add(map);
+                for(int j = i; j < i + 4 && j < quizzes.size(); j++){
+                    Quiz q = quizzes.get(j);
+                    choices.add(Map.of(
+                            "id",q.getQuizId(),
+                            "select",q.getContent(),
+                            "year",q.getHappenYear()
+                    ));
+                    if (j != i) {
+//                        年代が重複した場合
+                        if (q.getHappenYear() == quizzes.get(j-1).getHappenYear()) {
+                            isDuplicated = true;
+                            break;
+                        }
+                    }
+                };
+                if (isDuplicated) break;
+                map.put("choices", choices);
+                quizMaps.add(map);
+            }
+            if (!isDuplicated) break;
         }
 
         ArrayList<Long> quizList = new ArrayList<>();
@@ -109,5 +123,11 @@ public class QuizController {
         List<Quiz> histories = quizService.getAllQuizzesSortHappenYear();
         model.addAttribute("histories", histories);
         return "quiz/quiz-history";
+    }
+
+    @GetMapping("/giveUp")
+    public String giveUp(HttpSession httpSession) {
+        httpSession.removeAttribute("quizList");
+        return "redirect:/quiz";
     }
 }

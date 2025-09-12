@@ -68,6 +68,9 @@ public class QuizRestController {
         httpSession.setAttribute("time", answerTime);
         httpSession.setAttribute("quizResults", quizResults);
 
+//        並び替え前のクイズのセッションを破棄
+        httpSession.removeAttribute("quizList");
+
 //        リダイレクト先のurlを格納する
         quizResponse.setRedirectUrl("result");
         return ResponseEntity.ok().body(quizResponse);
