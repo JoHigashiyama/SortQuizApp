@@ -5,11 +5,9 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class Score {
-    private long scoreId;
+public class UserTitle {
+    private long id;
     private long userId;
-    private long score;
-    private long correctCount;
+    private long titleId;
     private LocalDate createdAt;
-    private LocalDate updatedAt;
 }

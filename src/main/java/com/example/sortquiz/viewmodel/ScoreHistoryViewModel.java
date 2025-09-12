@@ -8,6 +8,7 @@ import java.time.LocalDate;
 public class ScoreHistoryViewModel {
     private String username;
     private long score;
+    private long correctCount;
     private LocalDate createdAt;
     private long rank;
 }
