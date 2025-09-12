@@ -6,14 +6,15 @@
     box-sizing: border-box;
 }
 
+html{
+    height: 100%;
+}
+
 body {
     font-family: 'Noto Serif JP', serif;
-    background: linear-gradient(135deg, #2c1810 0%, #1a0f08 50%, #0d0704 100%);
     background-image:
             radial-gradient(circle at 25% 25%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
             radial-gradient(circle at 75% 75%, rgba(160, 82, 45, 0.1) 0%, transparent 50%);
-    min-height: 100vh;
-    /* padding: 10px; */
     position: relative;
 }
 
@@ -30,8 +31,8 @@ body::before {
 }
 
 .game-container {
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 80%;
+    margin: 50px auto;
     background: linear-gradient(145deg, #f4f1e8 0%, #e8e0d0 100%);
     border-radius: 0;
     box-shadow:
@@ -139,7 +140,7 @@ body::before {
 }
 
 .question-area {
-    padding: 15px;
+    padding: 10px;
     text-align: center;
     background: linear-gradient(180deg, #f4f1e8 0%, #ebe6db 100%);
 }
@@ -269,7 +270,7 @@ body::before {
 }
 
 .controls {
-    padding: 15px 30px;
+    padding: 13px 26px;
     background: linear-gradient(90deg, #d6c9b3 0%, #c7b299 100%);
     display: flex;
     justify-content: space-between;
@@ -330,21 +331,6 @@ body::before {
     transform: translateY(-1px);
 }
 
-.era-badge {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: linear-gradient(45deg, #d4af37, #b8860b);
-    color: #2c1810;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border: 1px solid #8b4513;
-}
-
 @media (max-width: 600px) {
     .header {
         flex-direction: column;
@@ -386,15 +372,3 @@ body::before {
     }
 }
 
-/* 古典的な装飾要素 */
-.decorative-border {
-    background: repeating-linear-gradient(
-            90deg,
-            #d4af37 0px,
-            #d4af37 5px,
-            transparent 5px,
-            transparent 10px
-    );
-    height: 2px;
-    margin: 20px 0;
-}
