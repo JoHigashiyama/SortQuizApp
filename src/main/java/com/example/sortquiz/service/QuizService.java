@@ -117,7 +117,7 @@ public class QuizService {
                 QuizDetailViewModel detail = quizRepository.getDetailsByQuizId(correctAnswer.get(j));
                 correctAns.add(detail.getContent());
                 details.add(detail);
-                System.out.print("select: "+detail.getContent()+", year: "+detail.getHappenYear());
+//                System.out.print("select: "+detail.getContent()+", year: "+detail.getHappenYear());
             }
             result.setAnswers(userAns);
             result.setCorrects(correctAns);
