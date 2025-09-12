@@ -3,20 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/quiz-history.css">
 </head>
 <body>
-<h3>歴史</h3>
-<table>
-    <tr>
-        <th>年代</th>
-        <th>出来事</th>
-        <th>解説</th>
-    </tr>
-    <tr th:each="history : ${histories}">
-        <td th:text="${history.happenYear}"></td>
-        <td th:text="${history.content}"></td>
-        <td th:text="${history.description}"></td>
-    </tr>
-</table>
+<div class="header">
+    <h1 class="page-title">歴史絵巻</h1>
+    <p>出題される歴史の出来事が見れるよ</p>
+</div>
+
+<div class="history-list">
+    <div class="contents" th:each="history : ${histories}">
+        <div class="content">
+            <span class="history-name" th:text="${history.content}"></span>
+            <span class="year" th:text="${history.happenYear} + '年'"></span>
+        </div>
+        <div class="description">
+            <p th:text="${history.description}"></p>
+        </div>
+    </div>
+</div>
+
+<div class="buttons">
+    <button id="back-to-top">↑</button>
+    <a th:href="@{/quiz}" id="back-top">トップに戻る</a>
+</div>
+
+<script>
+    //↑が押されたとき
+    document.getElementById("back-to-top").addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth" // 滑らかにスクロール
+        });
+    });
+</script>
+
 </body>
 </html>
