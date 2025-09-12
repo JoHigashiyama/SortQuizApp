@@ -54,6 +54,9 @@ public class QuizRestController {
         scoreService.createScore(score);
 //        ベストスコア、総スコアの更新
         userService.updateUserScoreByUserId(userDetails.getUserId());
+//        アチーブメント更新処理
+
+
 //        問題ごとのデータ(回答・正答・解説)
         List<AnswerViewModel> quizResults = quizService.getQuizDetails(quizForm.getAnswers(), correctAnswer, results);
 //        セッションにデータを保存する
