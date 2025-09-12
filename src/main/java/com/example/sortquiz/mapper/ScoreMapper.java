@@ -20,7 +20,7 @@ public interface ScoreMapper {
             """)
     List<ScoreHistoryViewModel> selectScoresByUserId(long userId);
 
-    @Insert("INSERT INTO scores (user_id, score) VALUES (#{userId}, #{score})")
+    @Insert("INSERT INTO scores (user_id, score, correct_count) VALUES (#{userId}, #{score}, #{correctCount})")
     @Options(useGeneratedKeys = true, keyProperty = "scoreId")
     void createScore(Score score);
 

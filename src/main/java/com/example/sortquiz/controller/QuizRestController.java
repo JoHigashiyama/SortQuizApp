@@ -51,6 +51,7 @@ public class QuizRestController {
         Score score = new Score();
         score.setUserId(userDetails.getUserId());
         score.setScore(scoreCalculated);
+        score.setCorrectCount(results.stream().filter(result->result).count());
         scoreService.createScore(score);
 //        ベストスコア、総スコアの更新
         userService.updateUserScoreByUserId(userDetails.getUserId());
