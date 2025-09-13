@@ -64,8 +64,13 @@
         if (yearMax == null) yearMax.value = 2025
         const params = new URLSearchParams()
         params.append('keyword', keyword.value)
-        params.append('yearMin', yearMin.value)
-        params.append('yearMax', yearMax.value)
+        if (yearMin !== undefined && yearMin !== null && yearMin !== "") {
+            params.append('yearMin', yearMin.value)
+        }
+        if (yearMax !== undefined && yearMax !== null && yearMax !== "") {
+            params.append('yearMax', yearMax.value)
+        }
+        historyList.innerHTML = ''
 
         await fetch(`api/search?${params.toString()}`, {
             method: 'GET',

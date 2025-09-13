@@ -81,13 +81,14 @@ public class QuizRestController {
     @GetMapping("/search")
     public List<Quiz> searchHistory(
             @RequestParam String keyword,
-            @RequestParam long yearMin,
-            @RequestParam long yearMax
+            @RequestParam (required = false) Long yearMin,
+            @RequestParam (required = false) Long yearMax
     ) {
+
         QuizSearchForm form = new QuizSearchForm();
         form.setKeyword(keyword);
-        form.setYearMin(yearMin);
-        form.setYearMax(yearMax);
+        form.setYearMin(yearMin == null ? 0 : yearMin);
+        form.setYearMax(yearMax == null ? 0 : 2025);
         return quizApiService.getQuizzesByKeywordAndYear(form);
     }
 

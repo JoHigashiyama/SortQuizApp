@@ -22,7 +22,7 @@ public class QuizApiService {
 
     public List<Quiz> getQuizzesByKeywordAndYear(QuizSearchForm form) {
 //        最大値が設定されていない場合
-        if (form.getYearMax() == 0) form.setYearMax(2100);
+//        if (form.getYearMax() == 0) form.setYearMax(2100);
 //        検索
         List<Quiz> quizzes = quizRepository.getQuizzesByKeywordAndYear(form);
 
