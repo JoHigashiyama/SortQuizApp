@@ -19,11 +19,11 @@
     <label>年代</label>
     <input type="number" name="year-min" id="year-min" value="0">~
     <input type="number" name="year-max" id="year-max" value="2025">
-    <button type="reset" id="リセット">リセット</button>
+    <button type="button" id="reset-btn">リセット</button>
     <button type="button" id="search-btn">検索</button>
 </form>
 
-<div class="history-list">
+<div class="history-list" id="history-list">
     <div class="contents" th:each="history : ${histories}">
         <div class="content">
             <span class="history-name" th:text="${history.content}"></span>
@@ -54,14 +54,14 @@
 //     検索機能
     const searchForm = document.querySelector('#search-history')
     const searchBtn = document.querySelector('#search-btn')
+    const resetBtn = document.querySelector('#reset-btn')
+    const historyList = document.querySelector('#history-list')
 
     // 検索
     async function search() {
         const keyword = searchForm.querySelector('#keyword')
         const yearMin = document.querySelector('#year-min')
         const yearMax = document.querySelector('#year-max')
-        if (yearMin == null) yearMin.value = 0
-        if (yearMax == null) yearMax.value = 2025
         const params = new URLSearchParams()
         params.append('keyword', keyword.value)
         if (yearMin !== undefined && yearMin !== null && yearMin !== "") {
@@ -82,6 +82,25 @@
             .then(res => res.json())
             .then(result => {
                 console.log(result)
+                if (result.length >= 1) {
+                    historyList.style.display = 'block'
+                    result.forEach(item => {
+                        const content = document.createElement('div')
+                        content.classList.add('contents')
+                        content.innerHTML = `
+                        <div class="content">
+                            <span class="history-name">${item.content}</span>
+                            <span class="year">${item.happenYear}年</span>
+                        </div>
+                        <div class="description">
+                            <p>${item.description}</p>
+                        </div>
+                        `
+                        historyList.appendChild(content)
+                    })
+                } else {
+                    historyList.style.display = 'none'
+                }
             })
             .catch(e => {
                 console.log('error: ', e)
@@ -89,8 +108,16 @@
     }
 
 //     検索ボタンが押されたとき
-    searchBtn.addEventListener('click', async () => {
-        await search()
+    searchBtn.addEventListener('click', search)
+//     リセットが押されたとき
+    resetBtn.addEventListener('click', () => {
+        const keyword = searchForm.querySelector('#keyword')
+        const yearMin = document.querySelector('#year-min')
+        const yearMax = document.querySelector('#year-max')
+        keyword.value = null
+        yearMin.value = 0
+        yearMax.value = 2025
+        search()
     })
 </script>
 
