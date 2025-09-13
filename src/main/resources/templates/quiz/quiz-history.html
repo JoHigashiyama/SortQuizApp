@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/css/quiz-history.css">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
 </head>
 <body>
 <div class="header">
@@ -13,12 +15,12 @@
 
 <form id="search-history">
     <label>出来事(キーワード)</label>
-    <input type="text" name="keyword">
+    <input type="text" name="keyword" id="keyword">
     <label>年代</label>
-    <input type="number" name="year-min">~
-    <input type="number" name="year-max">
+    <input type="number" name="year-min" id="year-min" value="0">~
+    <input type="number" name="year-max" id="year-max" value="2025">
     <button type="reset" id="リセット">リセット</button>
-    <button id="search-btn">検索</button>
+    <button type="button" id="search-btn">検索</button>
 </form>
 
 <div class="history-list">
@@ -39,6 +41,8 @@
 </div>
 
 <script>
+    const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute("content")
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute("content")
     //↑が押されたとき
     document.getElementById("back-to-top").addEventListener("click", () => {
         window.scrollTo({
@@ -48,6 +52,41 @@
     });
 
 //     検索機能
+    const searchForm = document.querySelector('#search-history')
+    const searchBtn = document.querySelector('#search-btn')
+
+    // 検索
+    async function search() {
+        const keyword = searchForm.querySelector('#keyword')
+        const yearMin = document.querySelector('#year-min')
+        const yearMax = document.querySelector('#year-max')
+        if (yearMin == null) yearMin.value = 0
+        if (yearMax == null) yearMax.value = 2025
+        const params = new URLSearchParams()
+        params.append('keyword', keyword.value)
+        params.append('yearMin', yearMin.value)
+        params.append('yearMax', yearMax.value)
+
+        await fetch(`api/search?${params.toString()}`, {
+            method: 'GET',
+            headers: {
+                [csrfHeader]: csrfToken,
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result)
+            })
+            .catch(e => {
+                console.log('error: ', e)
+            })
+    }
+
+//     検索ボタンが押されたとき
+    searchBtn.addEventListener('click', async () => {
+        await search()
+    })
 </script>
 
 </body>
