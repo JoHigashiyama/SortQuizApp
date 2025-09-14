@@ -22,7 +22,68 @@ body {
     margin: 10px;
     padding: 20px;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
+
+
+/* タイトル */
+.header .page-title {
+    font-size: 2.5rem;
+    color: #8B4513;
+    margin-bottom: 10px;
+}
+
+/* 説明文 */
+.header p {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* 検索フォーム全体 */
+#search-history {
+    display: flex;
+    flex-wrap: wrap;          /* 小さい画面でも折り返せる */
+    justify-content: center;  /* 中央寄せ */
+    gap: 10px 15px;           /* 項目間の余白 */
+    font-size: 1rem;
+}
+
+/* 入力欄 */
+#search-history input[type="text"],
+#search-history input[type="number"] {
+    padding: 6px 10px;
+    border: 1px solid #8B4513;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 160px;
+}
+
+/* ラベル */
+#search-history label {
+    font-size: 17px;
+    padding-top: 4px;
+    font-weight: bold;
+    color: #444;
+}
+
+/* ボタン */
+#search-history button {
+    padding: 6px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #8B4513;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+#search-history button:hover {
+    background-color: #a0522d;
+}
+
+
 
 .history-list{
     background-color: #F1EEE3;
@@ -49,7 +110,7 @@ body {
 }
 .year{
     background: #8B4513;
-    border: 2px solid #D4AF37;
+    border  : 2px solid #D4AF37;
     border-radius: 6px;
     color: #F9D768;
     /*font-weight: bold;*/
