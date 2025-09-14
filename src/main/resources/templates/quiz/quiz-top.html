@@ -24,6 +24,13 @@
                 </div>
             </div>
             <div>
+<!--                <a th:href="@{/logout}" class="logout-btn">-->
+<!--                    退出-->
+<!--                </a>-->
+                <a th:href="@{/title}">
+                    称号一覧(仮)
+                </a>
+
                 <form th:action="@{/logout}" method="post">
                     <button type="submit" class="logout-btn">
                         退出

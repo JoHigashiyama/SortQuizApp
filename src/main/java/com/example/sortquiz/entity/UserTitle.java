@@ -2,6 +2,7 @@ package com.example.sortquiz.entity;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.time.LocalDate;
 
 @Data
