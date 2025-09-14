@@ -9,6 +9,7 @@ public class Score {
     private long scoreId;
     private long userId;
     private long score;
+    private long correctCount;
     private LocalDate createdAt;
     private LocalDate updatedAt;
 }

@@ -16,6 +16,7 @@ CREATE TABLE scores (
                         score_id INTEGER AUTO_INCREMENT PRIMARY KEY,
                         user_id INTEGER NOT NULL,
                         score INTEGER NOT NULL,
+                        correct_count INTEGER NOT NULL,
                         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                         CONSTRAINT fk_scores_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE

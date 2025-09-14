@@ -153,6 +153,11 @@
         updateNumbers();
     });
 
+    // クイズをやめるボタンが押されたとき
+    document.getElementById('skipBtn').addEventListener('click', () => {
+        document.location = 'giveUp'
+    })
+
 
     //タイマーの時間
     let timeLeft = 100;
@@ -229,6 +234,7 @@
     }
     // 初期化
     updateNumbers();
+
 </script>
 </body>
 </html>

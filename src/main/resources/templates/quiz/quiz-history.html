@@ -3,20 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/quiz-history.css">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
 </head>
 <body>
-<h3>歴史</h3>
-<table>
-    <tr>
-        <th>年代</th>
-        <th>出来事</th>
-        <th>解説</th>
-    </tr>
-    <tr th:each="history : ${histories}">
-        <td th:text="${history.happenYear}"></td>
-        <td th:text="${history.content}"></td>
-        <td th:text="${history.description}"></td>
-    </tr>
-</table>
+<div class="header">
+    <h1 class="page-title">歴史絵巻</h1>
+    <p>出題される歴史の出来事が見れるよ</p>
+</div>
+
+<form id="search-history">
+    <label>出来事(キーワード)</label>
+    <input type="text" name="keyword" id="keyword">
+    <label>年代</label>
+    <input type="number" name="year-min" id="year-min" value="0">~
+    <input type="number" name="year-max" id="year-max" value="2025">
+    <button type="button" id="reset-btn">リセット</button>
+    <button type="button" id="search-btn">検索</button>
+</form>
+
+<div class="history-list" id="history-list">
+    <div class="contents" th:each="history : ${histories}">
+        <div class="content">
+            <span class="history-name" th:text="${history.content}"></span>
+            <span class="year" th:text="${history.happenYear} + '年'"></span>
+        </div>
+        <div class="description">
+            <p th:text="${history.description}"></p>
+        </div>
+    </div>
+</div>
+
+<div class="buttons">
+    <button id="back-to-top">↑</button>
+    <a th:href="@{/quiz}" id="back-top">トップに戻る</a>
+</div>
+
+<script>
+    const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute("content")
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute("content")
+    //↑が押されたとき
+    document.getElementById("back-to-top").addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth" // 滑らかにスクロール
+        });
+    });
+
+//     検索機能
+    const searchForm = document.querySelector('#search-history')
+    const searchBtn = document.querySelector('#search-btn')
+    const resetBtn = document.querySelector('#reset-btn')
+    const historyList = document.querySelector('#history-list')
+
+    // 検索
+    async function search() {
+        const keyword = searchForm.querySelector('#keyword')
+        const yearMin = document.querySelector('#year-min')
+        const yearMax = document.querySelector('#year-max')
+        const params = new URLSearchParams()
+        params.append('keyword', keyword.value)
+        if (yearMin !== undefined && yearMin !== null && yearMin !== "") {
+            params.append('yearMin', yearMin.value)
+        }
+        if (yearMax !== undefined && yearMax !== null && yearMax !== "") {
+            params.append('yearMax', yearMax.value)
+        }
+        historyList.innerHTML = ''
+
+        await fetch(`api/search?${params.toString()}`, {
+            method: 'GET',
+            headers: {
+                [csrfHeader]: csrfToken,
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result)
+                if (result.length >= 1) {
+                    historyList.style.display = 'block'
+                    result.forEach(item => {
+                        const content = document.createElement('div')
+                        content.classList.add('contents')
+                        content.innerHTML = `
+                        <div class="content">
+                            <span class="history-name">${item.content}</span>
+                            <span class="year">${item.happenYear}年</span>
+                        </div>
+                        <div class="description">
+                            <p>${item.description}</p>
+                        </div>
+                        `
+                        historyList.appendChild(content)
+                    })
+                } else {
+                    historyList.style.display = 'none'
+                }
+            })
+            .catch(e => {
+                console.log('error: ', e)
+            })
+    }
+
+//     検索ボタンが押されたとき
+    searchBtn.addEventListener('click', search)
+//     リセットが押されたとき
+    resetBtn.addEventListener('click', () => {
+        const keyword = searchForm.querySelector('#keyword')
+        const yearMin = document.querySelector('#year-min')
+        const yearMax = document.querySelector('#year-max')
+        keyword.value = null
+        yearMin.value = 0
+        yearMax.value = 2025
+        search()
+    })
+</script>
+
 </body>
 </html>
