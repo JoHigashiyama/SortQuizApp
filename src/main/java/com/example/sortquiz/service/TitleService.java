@@ -1,9 +1,10 @@
 package com.example.sortquiz.service;
 
-import com.example.sortquiz.entity.User;
+import com.example.sortquiz.entity.Title;
 import com.example.sortquiz.entity.UserTitle;
-import com.example.sortquiz.repository.ScoreRepository;
 import com.example.sortquiz.repository.TitleRepository;
+import com.example.sortquiz.entity.User;
+import com.example.sortquiz.repository.ScoreRepository;
 import com.example.sortquiz.repository.UserRepository;
 import com.example.sortquiz.viewmodel.AchievedTitleViewModel;
 import com.example.sortquiz.viewmodel.ScoreHistoryViewModel;
@@ -21,6 +22,14 @@ public class TitleService {
         this.titleRepository = titleRepository;
         this.scoreRepository = scoreRepository;
         this.userRepository = userRepository;
+    }
+
+    public List<Title> getTitles(){
+        return titleRepository.getTitles();
+    }
+
+    public List<UserTitle> getUserTitles(long userId) {
+        return titleRepository.getUserTitles(userId);
     }
 
     public void updateAchievedTitle(long userId) {

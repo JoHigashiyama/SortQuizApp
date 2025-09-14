@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ランキングページ</title>
+    <link rel="stylesheet" href="/css/titles.css">
+    <link rel="stylesheet" href="/css/score-history-style.css">
+</head>
+<body>
+<div class="ranking-container">
+    <div class="header">
+        <h1  th:text="'「' + ${username} + '」の称号'" class="page-title" >「user」の称号</h1>
+    </div>
+    <div class="content">
+        <!-- 称号リスト (全て) -->
+        <div th:each="title : ${titles}"
+             class="card"
+             th:attr="data-titleid=${title.titleId}">
+            <div class="card-header">
+                <div class="title-id" th:text="${title.titleId}">1</div>
+                <div class="title-name" th:text="${title.title}">初プレイ</div>
+            </div>
+            <div class="card-body" th:text="${title.description}">
+                初めてプレイした
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- 取得済み称号IDを JS に渡す用 -->
+<script th:inline="javascript">
+    const obtainedIds = /*[[${userTitles}]]*/ [];
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const ids = obtainedIds.map(t => t.titleId);
+
+        document.querySelectorAll(".card").forEach(card => {
+            const id = parseInt(card.dataset.titleid, 10);
+            if (!ids.includes(id)) {
+                card.querySelector(".title-name").textContent = "???";
+                card.querySelector(".card-body").textContent = "???";
+                card.classList.add("hidden-info");
+            }
+        });
+    });
+</script>
+</body>
+</html>
+
