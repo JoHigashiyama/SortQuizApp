@@ -1,17 +1,17 @@
 package com.example.sortquiz.controller;
 
+import com.example.sortquiz.entity.Quiz;
 import com.example.sortquiz.entity.Score;
 import com.example.sortquiz.form.QuizForm;
+import com.example.sortquiz.form.QuizSearchForm;
 import com.example.sortquiz.response.QuizResponse;
 import com.example.sortquiz.security.CustomUserDetails;
-import com.example.sortquiz.service.QuizService;
-import com.example.sortquiz.service.ScoreService;
-import com.example.sortquiz.service.TitleService;
-import com.example.sortquiz.service.UserService;
+import com.example.sortquiz.service.*;
 import com.example.sortquiz.viewmodel.AnswerViewModel;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,12 +23,14 @@ public class QuizRestController {
     private final UserService userService;
     private final ScoreService scoreService;
     private final TitleService titleService;
+    private final QuizApiService quizApiService;
 
-    public QuizRestController(QuizService quizService, UserService userService, ScoreService scoreService, TitleService titleService) {
+    public QuizRestController(QuizService quizService, UserService userService, ScoreService scoreService, TitleService titleService, QuizApiService quizApiService) {
         this.quizService = quizService;
         this.userService = userService;
         this.scoreService = scoreService;
         this.titleService = titleService;
+        this.quizApiService = quizApiService;
     }
     @PostMapping("/finish")
     public ResponseEntity<QuizResponse> createScore(@RequestBody QuizForm quizForm,
@@ -75,4 +77,20 @@ public class QuizRestController {
         quizResponse.setRedirectUrl("result");
         return ResponseEntity.ok().body(quizResponse);
     }
+
+    @GetMapping("/search")
+    public List<Quiz> searchHistory(
+            @RequestParam String keyword,
+            @RequestParam (required = false) Long yearMin,
+            @RequestParam (required = false) Long yearMax
+    ) {
+
+        QuizSearchForm form = new QuizSearchForm();
+        form.setKeyword(keyword);
+        form.setYearMin(yearMin == null ? 0 : yearMin);
+        form.setYearMax(yearMax == null ? 0 : 2025);
+        return quizApiService.getQuizzesByKeywordAndYear(form);
+    }
+
+
 }

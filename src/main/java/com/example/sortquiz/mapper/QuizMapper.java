@@ -1,6 +1,7 @@
 package com.example.sortquiz.mapper;
 
 import com.example.sortquiz.entity.Quiz;
+import com.example.sortquiz.form.QuizSearchForm;
 import com.example.sortquiz.viewmodel.QuizDetailViewModel;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -18,4 +19,12 @@ public interface QuizMapper {
 
     @Select("SELECT * FROM quizzes ORDER BY happen_year")
     List<Quiz> getAllQuizzesSortHappenYear();
+
+    @Select("""
+            SELECT * FROM quizzes 
+            WHERE content LIKE CONCAT('%', #{keyword}, '%')
+            AND happen_year BETWEEN #{yearMin} AND #{yearMax}
+            ORDER BY happen_year
+            """)
+    List<Quiz> getQuizzesByKeywordAndYear(QuizSearchForm form);
 }
