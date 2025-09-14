@@ -28,6 +28,7 @@ public class TitleController {
         List<Title> titles = titleService.getTitles();
         List<UserTitle> userTitles = titleService.getUserTitles(userDetails.getUserId());
 
+        model.addAttribute("username",userDetails.getUsername());
         model.addAttribute("titles",titles);
         model.addAttribute("userTitles",userTitles);
         return "title/titles";

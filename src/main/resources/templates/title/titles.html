@@ -3,75 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>ランキングページ</title>
-    <style>
-        body {
-            font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", sans-serif;
-            background: #f9f9fb;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #444;
-        }
-
-        .ranking-section {
-            margin: 40px auto;
-            max-width: 900px;
-        }
-
-        .card {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-        }
-
-        .title-id {
-            font-size: 14px;
-            color: #888;
-            margin-bottom: 6px;
-        }
-
-        .title-name {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #222;
-        }
-
-        .title-desc {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #555;
-        }
-
-        .hidden-info {
-            color: #aaa;
-            font-style: italic;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/titles.css">
+    <link rel="stylesheet" href="/css/score-history-style.css">
 </head>
 <body>
-<h1>取得した称号</h1>
-
-<div class="ranking-section">
-    <!-- 称号リスト (全て) -->
-    <div th:each="title : ${titles}"
-         class="card"
-         th:attr="data-titleid=${title.titleId}">
-        <div class="title-id" th:text="${title.titleId}">称号Id</div>
-        <div class="title-name" th:text="${title.title}">称号名</div>
-        <div class="title-desc" th:text="${title.description}">説明文</div>
+<div class="ranking-container">
+    <div class="header">
+        <h1  th:text="'「' + ${username} + '」の称号'" class="page-title" >「user」の称号</h1>
+    </div>
+    <div class="content">
+        <!-- 称号リスト (全て) -->
+        <div th:each="title : ${titles}"
+             class="card"
+             th:attr="data-titleid=${title.titleId}">
+            <div class="card-header">
+                <div class="title-id" th:text="${title.titleId}">1</div>
+                <div class="title-name" th:text="${title.title}">初プレイ</div>
+            </div>
+            <div class="card-body" th:text="${title.description}">
+                初めてプレイした
+            </div>
+        </div>
+    </div>
     </div>
 </div>
 
@@ -82,21 +35,18 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        // 取得済み titleId の配列を取り出す
         const ids = obtainedIds.map(t => t.titleId);
 
-        // 全称号カードをチェック
         document.querySelectorAll(".card").forEach(card => {
             const id = parseInt(card.dataset.titleid, 10);
             if (!ids.includes(id)) {
-                // 未取得の場合は ??? 表示に差し替え
                 card.querySelector(".title-name").textContent = "???";
-                card.querySelector(".title-desc").textContent = "???";
+                card.querySelector(".card-body").textContent = "???";
                 card.classList.add("hidden-info");
             }
         });
     });
 </script>
-
 </body>
 </html>
+
