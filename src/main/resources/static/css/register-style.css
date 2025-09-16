@@ -1,4 +1,5 @@
 body {
+    background-color: #f9f9f9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,16 +14,18 @@ body {
 
 /* ログインボックス */
 .login-container {
-    width: 400px;
+    flex: 1 ;
     background-color: #f9f9f9;
-    border: 3px solid #8B4513;
+    border: 5px solid #8B4513;
     border-radius: 2px;
     box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.25);
     text-align: center;
+    max-width: 45%;
+    margin: 20px;
     padding-bottom: 20px;
 }
 
-.login-header h1 {
+.login-header h2 {
     font-size: 28px;
     font-weight: bold;
     color: #000;
