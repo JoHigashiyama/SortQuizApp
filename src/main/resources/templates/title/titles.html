@@ -36,17 +36,19 @@
 <!-- 取得済み称号IDを JS に渡す用 -->
 <script th:inline="javascript">
     const obtainedIds = /*[[${userTitles}]]*/ [];
+    const titles = /*[[${titles}]]*/ [];
 </script>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const ids = obtainedIds.map(t => t.titleId);
+        const descriptions = titles.map(t => t.description);
 
         document.querySelectorAll(".card").forEach(card => {
             const id = parseInt(card.dataset.titleid, 10);
             if (!ids.includes(id)) {
                 card.querySelector(".title-name").textContent = "???";
-                card.querySelector(".card-body").textContent = "???";
+                card.querySelector(".card-body").textContent = `${descriptions[id-1]}`;
                 card.classList.add("hidden-info");
             }
         });
