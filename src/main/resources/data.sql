@@ -1,9 +1,9 @@
 INSERT INTO users (username, email, password, best_score, total_score) VALUES
-                                                                           ('taro', 'taro@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 80, 200),
-                                                                           ('hanako', 'hanako@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 95, 400),
-                                                                           ('jiro', 'jiro@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 70, 150),
-                                                                           ('yuki', 'yuki@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 60, 120),
-                                                                           ('satoshi', 'satoshi@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 100, 500),
+                                                                           ('taro', 'taro@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 800, 26000),
+                                                                           ('hanako', 'hanako@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 950, 950),
+                                                                           ('jiro', 'jiro@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 600, 600),
+                                                                           ('yuki', 'yuki@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 500, 500),
+                                                                           ('satoshi', 'satoshi@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 1000, 1000),
                                                                            ('shida', 'shida@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 0, 0);
 
 
