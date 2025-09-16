@@ -84,11 +84,10 @@ public class QuizRestController {
             @RequestParam (required = false) Long yearMin,
             @RequestParam (required = false) Long yearMax
     ) {
-
         QuizSearchForm form = new QuizSearchForm();
         form.setKeyword(keyword);
         form.setYearMin(yearMin == null ? 0 : yearMin);
-        form.setYearMax(yearMax == null ? 0 : 2025);
+        form.setYearMax(yearMax == null ? 2025 : yearMax);
         return quizApiService.getQuizzesByKeywordAndYear(form);
     }
 
