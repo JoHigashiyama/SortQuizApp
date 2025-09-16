@@ -8,7 +8,6 @@
 
 body {
     font-family: 'Noto Serif JP', serif;
-    background: linear-gradient(135deg, #1a0f08 0%, #2c1810 30%, #3d2817 100%);
     background-image:
             radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
             radial-gradient(circle at 75% 75%, rgba(139, 69, 19, 0.08) 0%, transparent 50%),
@@ -274,19 +273,39 @@ a {
     color: #5d4037;
 }
 
+.titles{
+    background: linear-gradient(145deg, rgba(212, 175, 55, 0.8) 0%, rgba(139, 69, 19, 0.8) 100%);
+    border: 2px solid #8B4513;
+    border-radius: 10px;
+    padding: 14px 28px;
+    margin: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.titles:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+}
+
+.title{
+    font-family: 'Arial';
+    color: white;
+}
+
 .logout-btn {
-    top: 30px;
-    right: 30px;
     background: linear-gradient(145deg, rgba(220, 53, 69, 0.8) 0%, rgba(139, 69, 19, 0.8) 100%);
     color: #f4f1e8;
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     padding: 14px 28px;
+    margin: 5px;
     font-size: 18px;
     font-weight: bold;
-    cursor: pointer;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+
+    width: 92%;
 }
 
 .logout-btn:hover {
