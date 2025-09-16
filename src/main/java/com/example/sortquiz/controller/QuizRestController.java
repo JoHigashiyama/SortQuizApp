@@ -60,7 +60,7 @@ public class QuizRestController {
 //        ベストスコア、総スコアの更新
         userService.updateUserScoreByUserId(userDetails.getUserId());
 //        アチーブメント更新処理
-        titleService.updateAchievedTitle(userDetails.getUserId());
+        List<Long> achieveTitles = titleService.updateAchievedTitle(userDetails.getUserId());
 
 //        問題ごとのデータ(回答・正答・解説)
         List<AnswerViewModel> quizResults = quizService.getQuizDetails(quizForm.getAnswers(), correctAnswer, results);
@@ -69,6 +69,7 @@ public class QuizRestController {
         httpSession.setAttribute("score", scoreCalculated);
         httpSession.setAttribute("time", answerTime);
         httpSession.setAttribute("quizResults", quizResults);
+        httpSession.setAttribute("achievedTitles", achieveTitles);
 
 //        並び替え前のクイズのセッションを破棄
         httpSession.removeAttribute("quizList");

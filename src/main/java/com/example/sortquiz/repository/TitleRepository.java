@@ -34,5 +34,9 @@ public class TitleRepository {
     public void createUserTitle(UserTitle userTitle) {
         titleMapper.createUserTitle(userTitle);
     }
+
+    public Title selectTitleByTitleId(long titleId) {
+        return titleMapper.selectTitleByTitleId(titleId);
+    }
 }
 
