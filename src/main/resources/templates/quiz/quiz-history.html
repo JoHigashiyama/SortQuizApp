@@ -62,14 +62,17 @@
         const keyword = searchForm.querySelector('#keyword')
         const yearMin = document.querySelector('#year-min')
         const yearMax = document.querySelector('#year-max')
+        historyList.style.display = 'none'
         const params = new URLSearchParams()
         params.append('keyword', keyword.value)
-        if (yearMin !== undefined && yearMin !== null && yearMin !== "") {
-            params.append('yearMin', yearMin.value)
+        if (yearMin.value === undefined || yearMin.value === null || yearMin.value === "") {
+            yearMin.value = 0
         }
-        if (yearMax !== undefined && yearMax !== null && yearMax !== "") {
-            params.append('yearMax', yearMax.value)
+        params.append('yearMin', yearMin.value)
+        if (yearMax.value === undefined || yearMax.value === null || yearMax.value === "") {
+            yearMax.value = 2025
         }
+        params.append('yearMax', yearMax.value)
         historyList.innerHTML = ''
 
         await fetch(`api/search?${params.toString()}`, {
