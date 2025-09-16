@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <title>スコア履歴</title>
   <style>
-
     /* ページネーション全体 */
     .pagination {
       margin: 20px 0;
@@ -54,7 +53,21 @@
       color: #888;
       font-size: 1rem;
     }
-    .active
+
+    .cell {
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #2c1810;
+    }
+
+    .noscore-cell{
+      width: 100%;
+      display: block;
+      align-items: center;
+    }
   </style>
 </head>
 <body>
@@ -116,13 +129,21 @@
     const pageData = historyData.slice(start, end);
 
     for (const item of pageData) {
-      const div = document.createElement("div");
-      div.classList.add("ranking-row");
-      div.innerHTML = `
+        const div = document.createElement("div");
+        div.classList.add("ranking-row");
+        div.innerHTML = `
       <div class="cell rank-cell">${item.rank}</div>
       <div class="cell score-cell">${item.score}</div>
-      <div class="cell date-cell">${item.createdAt}</div>
-    `;
+      <div class="cell date-cell">${item.createdAt}</div>`;
+      tableBody.append(div);
+    }
+    if (historyData && historyData.length === 0){
+      const div = document.createElement("div");
+      div.classList.add("ranking-row");
+
+      div.innerHTML = `
+　　　 <div class="cell score-cell">戦歴がありません</div>
+      `;
       tableBody.append(div);
     }
   }
