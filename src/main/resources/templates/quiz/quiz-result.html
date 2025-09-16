@@ -92,6 +92,11 @@
 
     //     称号獲得
         const toastTitle = document.querySelector("#toast_title")
+        function removeToast(item) {
+            setTimeout(() => {
+                item.remove()
+            }, 3000)
+        }
         async function getAchieveTitles() {
             await fetch("api/achieveTitle", {
                 method: 'GET',
@@ -103,17 +108,21 @@
                 .then(res => res.json())
                 .then(result => {
                     if (result.achievedTitles.length >= 1) {
-                        result.achievedTitles.forEach(item => {
-                            console.log('toast')
-                            const toast = document.createElement('div')
-                            toast.className = 'toast show'
-                            toast.innerHTML = `
-                            <div>${item.title}:${item.description}</div>
-                            `
-                            toastTitle.appendChild(toast)
+                        result.achievedTitles.forEach((item, index) => {
                             setTimeout(() => {
-                                toast.remove()
-                            }, 3000)
+                                console.log('toast')
+                                const toast = document.createElement('div')
+                                toast.className = 'toast show'
+                                toast.innerHTML = `
+                                <div class="toast-title">称号獲得</div>
+                                <div>${item.title}:${item.description}</div>
+                                `
+                                toastTitle.appendChild(toast)
+                                removeToast(toast)
+                                // setTimeout(() => {
+                                //     toast.remove()
+                                // }, 3000)
+                            }, index * 3500)
                         })
                     }
                 })

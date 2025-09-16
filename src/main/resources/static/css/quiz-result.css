@@ -232,17 +232,29 @@ details[open] {
     visibility: hidden;
     min-width: 250px;
     margin-left: -125px;
-    background-color: #333;
-    color: #fff;
+    background: linear-gradient(135deg, #5b4636, #3c2f25); /* 古風な革や紙の色合い */
+    color: #f5f1e6; /* parchment 風の文字色 */
     text-align: center;
-    border-radius: 5px;
-    padding: 16px;
+    border-radius: 8px;
+    padding: 14px 18px;
     position: fixed;
     z-index: 10;
     left: 50%;
     bottom: 30px;
     font-size: 17px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4),
+    inset 0 0 8px rgba(255, 255, 255, 0.1);
+    border: 2px solid #d4af37;
+    letter-spacing: 1px;
+    display: flex;
+    flex-direction: column;
 }
+
+.toast-title {
+    color: #D4AF37;
+    margin-bottom: 12px;
+}
+
 .toast.show {
     visibility: visible;
     animation: fadein 0.5s forwards, fadeout 0.5s 2.5s forwards;

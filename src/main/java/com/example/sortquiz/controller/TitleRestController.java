@@ -28,6 +28,7 @@ public class TitleRestController {
         List<Long> achievedTitleId = (List<Long>) httpSession.getAttribute("achievedTitles");
 //        titleIdから称号のデータを受け取る
         List<Title> titleList = titleService.getTitlesByTitleId(achievedTitleId);
+//        List<Title> titleList = titleService.getTitles();
         TitleResponse response = new TitleResponse();
         response.setAchievedTitles(titleList);
         return ResponseEntity.ok().body(response);
