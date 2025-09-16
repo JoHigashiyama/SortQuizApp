@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/quiz-result.css">
     <title>結果</title>
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
 </head>
 <body>
     <section>
@@ -75,7 +77,11 @@
         <a th:href="@{/quiz}" id="back-top">トップに戻る</a>
     </div>
 
+    <div id="toast_title" class="toast">操作が完了しました</div>
+
     <script>
+        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute("content")
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute("content")
         //↑が押されたとき
         document.getElementById("back-to-top").addEventListener("click", () => {
             window.scrollTo({
@@ -83,6 +89,45 @@
                 behavior: "smooth" // 滑らかにスクロール
             });
         });
+
+    //     称号獲得
+        const toastTitle = document.querySelector("#toast_title")
+        function removeToast(item) {
+            setTimeout(() => {
+                item.remove()
+            }, 3000)
+        }
+        async function getAchieveTitles() {
+            await fetch("api/achieveTitle", {
+                method: 'GET',
+                headers: {
+                    [csrfHeader]: csrfToken,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(res => res.json())
+                .then(result => {
+                    if (result.achievedTitles.length >= 1) {
+                        result.achievedTitles.forEach((item, index) => {
+                            setTimeout(() => {
+                                console.log('toast')
+                                const toast = document.createElement('div')
+                                toast.className = 'toast show'
+                                toast.innerHTML = `
+                                <div class="toast-title">称号獲得</div>
+                                <div>${item.title}:${item.description}</div>
+                                `
+                                toastTitle.appendChild(toast)
+                                removeToast(toast)
+                                // setTimeout(() => {
+                                //     toast.remove()
+                                // }, 3000)
+                            }, index * 3500)
+                        })
+                    }
+                })
+        }
+        getAchieveTitles()
     </script>
 </body>
 </html>

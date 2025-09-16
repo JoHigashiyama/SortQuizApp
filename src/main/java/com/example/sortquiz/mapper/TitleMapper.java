@@ -32,4 +32,7 @@ public interface TitleMapper {
     @Insert("INSERT INTO user_titles (user_id, title_id) VALUES (#{userId}, #{titleId})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void createUserTitle(UserTitle userTitle);
+
+    @Select("SELECT * FROM titles WHERE title_id = #{titleId}")
+    Title selectTitleByTitleId(long titleId);
 }
