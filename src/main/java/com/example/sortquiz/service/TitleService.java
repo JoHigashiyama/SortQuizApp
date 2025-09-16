@@ -10,6 +10,7 @@ import com.example.sortquiz.viewmodel.AchievedTitleViewModel;
 import com.example.sortquiz.viewmodel.ScoreHistoryViewModel;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,7 +33,8 @@ public class TitleService {
         return titleRepository.getUserTitles(userId);
     }
 
-    public void updateAchievedTitle(long userId) {
+    public List<Long> updateAchievedTitle(long userId) {
+        List<Long> achieveTitles = new ArrayList<>();
 //        取得状況も含めた称号一覧を取得する
         List<AchievedTitleViewModel> achievedTitles = titleRepository.selectAchievedTitleByUserId(userId);
 //        プレイ履歴(スコア履歴)を取得する
@@ -49,6 +51,7 @@ public class TitleService {
                 userTitle.setTitleId(1);
                 titleRepository.createUserTitle(userTitle);
                 System.out.println("達成："+achievedTitles.get(0).getTitle());
+                achieveTitles.add(1L);
             }
         }
 
@@ -58,6 +61,7 @@ public class TitleService {
                 userTitle.setTitleId(2);
                 titleRepository.createUserTitle(userTitle);
                 System.out.println("達成："+achievedTitles.get(1).getTitle());
+                achieveTitles.add(2L);
             }
         }
 
@@ -67,6 +71,7 @@ public class TitleService {
                 userTitle.setTitleId(3);
                 titleRepository.createUserTitle(userTitle);
                 System.out.print("達成："+achievedTitles.get(2).getTitle());
+                achieveTitles.add(3L);
             }
         }
 
@@ -77,9 +82,11 @@ public class TitleService {
                     userTitle.setTitleId(4);
                     titleRepository.createUserTitle(userTitle);
                     System.out.print("達成："+achievedTitles.get(3).getTitle());
+                    achieveTitles.add(4L);
                     break;
                 }
             }
         }
+        return achieveTitles;
     }
 }
