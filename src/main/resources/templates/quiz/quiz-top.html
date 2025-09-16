@@ -23,19 +23,19 @@
                     <span th:text="${user.bestScore}" class="stat-number"></span>
                 </div>
             </div>
-            <div>
-<!--                <a th:href="@{/logout}" class="logout-btn">-->
-<!--                    退出-->
-<!--                </a>-->
-                <a th:href="@{/title}">
-                    称号一覧(仮)
-                </a>
-
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit" class="logout-btn">
-                        退出
-                    </button>
-                </form>
+            <div class="buttons">
+                <div class="logout">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="logout-btn">
+                            退出
+                        </button>
+                    </form>
+                </div>
+                <div class="titles">
+                    <a th:href="@{/title}" class="title">
+                        称号一覧
+                    </a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>歴史絵巻クイズ - 討死</title>
+  <link rel="stylesheet" href="/css/gameover.css">
 </head>
 <body>
-<h3>ゲームオーバー</h3>
+<div class="rain" id="rainContainer"></div>
+<div class="falling-leaves" id="leavesContainer"></div>
 
+<div class="game-over-container">
+  <div class="defeat-banner">
+    <div class="defeat-title">ゲームオーバー！</div>
+    <div class="defeat-reason" id="defeatReason">時間切れにより敗北</div>
+  </div>
+
+  <div class="action-buttons">
+    <a class="btn btn-study" th:href="@{/quiz/game}">
+      歴史を学ぶ
+    </a>
+    <a class="btn btn-home" th:href="@{/quiz}">
+      トップに戻る
+    </a>
+  </div>
+</div>
 </body>
 </html>
