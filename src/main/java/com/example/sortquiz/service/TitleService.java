@@ -89,4 +89,12 @@ public class TitleService {
         }
         return achieveTitles;
     }
+
+    public List<Title> getTitlesByTitleId(List<Long> titles) {
+        List<Title> titleList = new ArrayList<>();
+        for (long titleId : titles) {
+            titleList.add(titleRepository.selectTitleByTitleId(titleId));
+        }
+        return titleList;
+    }
 }
