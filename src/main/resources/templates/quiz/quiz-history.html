@@ -11,17 +11,17 @@
 <div class="header">
     <h1 class="page-title">歴史絵巻</h1>
     <p>出題される歴史の出来事が見れるよ</p>
-</div>
 
-<form id="search-history">
-    <label>出来事(キーワード)</label>
-    <input type="text" name="keyword" id="keyword">
-    <label>年代</label>
-    <input type="number" name="year-min" id="year-min" value="0">~
-    <input type="number" name="year-max" id="year-max" value="2025">
-    <button type="button" id="reset-btn">リセット</button>
-    <button type="button" id="search-btn">検索</button>
-</form>
+    <form id="search-history">
+        <label>出来事(キーワード)：</label>
+        <input type="text" name="keyword" id="keyword">
+        <label>年代：</label>
+        <input type="number" name="year-min" id="year-min" value="0"><label>~</label>
+        <input type="number" name="year-max" id="year-max" value="2025">
+        <button type="button" id="reset-btn">リセット</button>
+        <button type="button" id="search-btn">検索</button>
+    </form>
+</div>
 
 <div class="history-list" id="history-list">
     <div class="contents" th:each="history : ${histories}">
