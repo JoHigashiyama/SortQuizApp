@@ -62,6 +62,7 @@
         const keyword = searchForm.querySelector('#keyword')
         const yearMin = document.querySelector('#year-min')
         const yearMax = document.querySelector('#year-max')
+        historyList.style.display = 'none'
         const params = new URLSearchParams()
         params.append('keyword', keyword.value)
         if (yearMin.value === undefined || yearMin.value === null || yearMin.value === "") {
