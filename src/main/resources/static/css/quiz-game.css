@@ -62,7 +62,6 @@ body::before {
 }
 
 .header {
-    background: linear-gradient(90deg, #8b4513 0%, #a0522d 50%, #654321 100%);
     background-image:
             linear-gradient(45deg, rgba(212, 175, 55, 0.2) 25%, transparent 25%),
             linear-gradient(-45deg, rgba(212, 175, 55, 0.2) 25%, transparent 25%);
