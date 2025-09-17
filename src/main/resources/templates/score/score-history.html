@@ -8,14 +8,16 @@
 <body>
 <div class="ranking-container">
   <div class="header">
-    <h1  th:text="'「' + ${username} + '」の戦歴'" class="page-title" >「user」の戦歴</h1>
+    <h1  th:text="${username} + 'の戦歴'" class="page-title" >「user」の戦歴</h1>
   </div>
 
   <div class="content">
-    <select id="sortSelect">
-      <option value="created_at">日付順</option>
-      <option value="score">得点順</option>
-    </select>
+    <div class="select">
+      <select id="sortSelect">
+        <option value="created_at">日付順</option>
+        <option value="score">得点順</option>
+      </select>
+    </div>
     <div class="tab-content">
       <div class="ranking-table">
         <div class="table-header">
