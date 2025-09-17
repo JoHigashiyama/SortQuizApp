@@ -107,8 +107,8 @@
     //ユーザーの解答保存用の配列
     let answers = new Array(quizzes.length)
 
-    //次の問題へボタンが押されたとき、問題を更新する
-    document.getElementById('submitBtn').addEventListener('click', async () => {
+    // 問題の更新、またはフォームの送信
+    async function updateQuizAndSendForm() {
         //解答を取得
         let items = document.querySelectorAll(".sort-item")
         let answer = Array.from(items).map(item => Number(item.dataset.quizId));
@@ -145,7 +145,42 @@
         if(currentQuiz === quizzes.length - 1){
             submitBtn.innerText = "答え合わせをする";
         }
-    });
+
+    //     次に進むためのイベントを削除し、1秒後再び追加
+        removeEventListenerOfSubmitAndSpace()
+        setTimeout(addEventListenerOfSubmitAndSpace, 1000)
+
+    }
+
+    // スペースキーの処理
+    const spaceKeyHandler = function(event) {
+        const key = event.keyCode
+        if (key === 32) {
+            updateQuizAndSendForm()
+        }
+    }
+
+    // 次に進むイベントの追加
+    function addEventListenerOfSubmitAndSpace() {
+        //次の問題へボタンが押されたとき、またはスペースが押されたとき問題を更新する
+        submitBtn.addEventListener('click', updateQuizAndSendForm)
+        document.addEventListener('keydown', spaceKeyHandler)
+        submitBtn.style.filter = 'brightness(1)'
+        submitBtn.style.pointerEvents = 'auto'
+    }
+
+    // 次に進むイベントの削除
+    function removeEventListenerOfSubmitAndSpace() {
+    //     submitBtnとspaceのイベントリスナーの削除
+        submitBtn.removeEventListener('click', updateQuizAndSendForm)
+        document.removeEventListener('keydown', spaceKeyHandler)
+        submitBtn.style.filter = 'brightness(75%)'
+        submitBtn.style.pointerEvents = 'none'
+    }
+
+    submitBtn.style.filter = 'brightness(75%)'
+    submitBtn.style.pointerEvents = 'none'
+    setTimeout(addEventListenerOfSubmitAndSpace, 1000)
 
     //前の問題へボタンが押されたとき
     document.getElementById('prevBtn').addEventListener('click', () => {
@@ -173,7 +208,6 @@
             }
         });
     })
-
 
     //タイマーの時間
     let timeLeft = 100;
@@ -250,6 +284,7 @@
     }
     // 初期化
     updateNumbers();
+
 
 </script>
 </body>
