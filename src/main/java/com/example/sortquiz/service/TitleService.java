@@ -159,6 +159,56 @@ public class TitleService {
             }
         }
 
+//        12: ベストスコアが500点以上
+        if (!achievedTitles.get(11).isAchieved()) {
+            if (user.getBestScore() >= 500) {
+                userTitle.setTitleId(12);
+                titleRepository.createUserTitle(userTitle);
+                System.out.println("達成："+achievedTitles.get(11).getTitle());
+                achieveTitles.add(12L);
+            }
+        }
+
+//        13: ベストスコアが750点以上
+        if (!achievedTitles.get(12).isAchieved()) {
+            if (user.getBestScore() >= 750) {
+                userTitle.setTitleId(13);
+                titleRepository.createUserTitle(userTitle);
+                System.out.println("達成："+achievedTitles.get(12).getTitle());
+                achieveTitles.add(13L);
+            }
+        }
+
+//        14: ベストスコアが1000点以上
+        if (!achievedTitles.get(13).isAchieved()) {
+            if (user.getBestScore() >= 1000) {
+                userTitle.setTitleId(14);
+                titleRepository.createUserTitle(userTitle);
+                System.out.println("達成："+achievedTitles.get(13).getTitle());
+                achieveTitles.add(14L);
+            }
+        }
+
+//       15: ベストスコアが1250点以上
+        if (!achievedTitles.get(14).isAchieved()) {
+            if (user.getBestScore() >= 1250) {
+                userTitle.setTitleId(15);
+                titleRepository.createUserTitle(userTitle);
+                System.out.println("達成："+achievedTitles.get(14).getTitle());
+                achieveTitles.add(15L);
+            }
+        }
+
+//      16: ベストスコアが1500点以上
+        if (!achievedTitles.get(15).isAchieved()) {
+            if (user.getBestScore() >= 1500) {
+                userTitle.setTitleId(16);
+                titleRepository.createUserTitle(userTitle);
+                System.out.println("達成："+achievedTitles.get(15).getTitle());
+                achieveTitles.add(16L);
+            }
+        }
+
         return achieveTitles;
     }
 
