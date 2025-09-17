@@ -38,11 +38,11 @@ h2 {
 .login-form {
     width: 80%;
     margin: 0 auto;
-    text-align: left;
 }
 
 /* ラベル */
 .login-form label {
+    text-align: left;
     font-size: 1.1rem;
     font-weight: bold;
     margin-top: 10px;
@@ -61,8 +61,8 @@ h2 {
     box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* ログインボタン */
-.login-button {
+/* 登録ボタン */
+.register-button {
     width: 40%;
     padding: 8px;
     margin: 15px auto;
@@ -77,11 +77,26 @@ h2 {
     display: block;
 }
 
-.login-button:hover {
+.register-button:hover {
     background-color: #a0522d;
 }
 
+/***ログイン画面に戻るボタン******/
+.back-to-login {
+    margin: 10px auto;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #8B4513;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.back-to-login:hover {
+    color: #a0522d;
+}
+
 .username-error,.email-error,.password-error{
+    text-align: left;
     display: none;
     color: #d60000;
     font-size: 1rem;
