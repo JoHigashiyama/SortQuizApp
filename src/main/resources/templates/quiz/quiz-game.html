@@ -107,8 +107,8 @@
     //ユーザーの解答保存用の配列
     let answers = new Array(quizzes.length)
 
-    //次の問題へボタンが押されたとき、問題を更新する
-    document.getElementById('submitBtn').addEventListener('click', async () => {
+    // 問題の更新、またはフォームの送信
+    async function updateQuizAndSendForm() {
         //解答を取得
         let items = document.querySelectorAll(".sort-item")
         let answer = Array.from(items).map(item => Number(item.dataset.quizId));
@@ -145,6 +145,11 @@
         if(currentQuiz === quizzes.length - 1){
             submitBtn.innerText = "答え合わせをする";
         }
+    }
+
+    //次の問題へボタンが押されたとき、問題を更新する
+    document.getElementById('submitBtn').addEventListener('click', () => {
+        updateQuizAndSendForm()
     });
 
     //前の問題へボタンが押されたとき
@@ -172,6 +177,15 @@
                 window.location.href = '/quiz'; // Spring Boot 側のURL
             }
         });
+    })
+
+    // スペースキーが押されたとき
+    document.addEventListener('keydown', (e) => {
+        const key = e.keyCode
+        if (key === 32) {
+            console.log('space')
+            updateQuizAndSendForm()
+        }
     })
 
 
@@ -250,6 +264,7 @@
     }
     // 初期化
     updateNumbers();
+
 
 </script>
 </body>
