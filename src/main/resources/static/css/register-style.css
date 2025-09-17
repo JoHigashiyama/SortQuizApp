@@ -1,35 +1,30 @@
-body {
+    body {
     background-color: #f9f9f9;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-
     font-family: "Noto Serif JP", serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: normal;
 }
 
 /* ログインボックス */
 .login-container {
     flex: 1 ;
     background-color: #f9f9f9;
-    border: 5px solid #8B4513;
+    border: 6px solid #8B4513;
     border-radius: 2px;
     box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.25);
     text-align: center;
-    max-width: 45%;
-    margin: 20px;
-    padding-bottom: 20px;
+    max-width: 50%;
+    padding-bottom: 30px;
 }
 
-.login-header h2 {
-    font-size: 28px;
+h2 {
+    font-size: 2rem;
     font-weight: bold;
     color: #000;
-    margin: 0;
+    margin: 20px;
 }
 
 /* エラーメッセージ */
@@ -43,12 +38,12 @@ body {
 .login-form {
     width: 80%;
     margin: 0 auto;
-    text-align: left;
 }
 
 /* ラベル */
 .login-form label {
-    font-size: 14px;
+    text-align: left;
+    font-size: 1.1rem;
     font-weight: bold;
     margin-top: 10px;
     display: block;
@@ -57,41 +52,54 @@ body {
 /* 入力フィールド */
 .login-form input {
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-size: 14px;
-    border: 1px solid #999;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 1rem;
+    border: 2px solid #999;
     border-radius: 2px;
     box-sizing: border-box;
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* ログインボタン */
-.login-button {
+/* 登録ボタン */
+.register-button {
     width: 40%;
     padding: 8px;
-    margin-top: 15px;
+    margin: 15px auto;
     background-color: #8B4513;
     border: none;
     border-radius: 2px;
-    font-size: 16px;
+    font-size: 1.2rem;
     color: white;
     cursor: pointer;
     box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
     transition: background-color 0.3s ease;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.login-button:hover {
+.register-button:hover {
     background-color: #a0522d;
 }
 
+/***ログイン画面に戻るボタン******/
+.back-to-login {
+    margin: 10px auto;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #8B4513;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.back-to-login:hover {
+    color: #a0522d;
+}
+
 .username-error,.email-error,.password-error{
+    text-align: left;
     display: none;
     color: #d60000;
-    font-size: 12px;
+    font-size: 1rem;
     margin-top: 3px;
 }
 
