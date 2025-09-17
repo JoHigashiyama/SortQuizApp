@@ -41,6 +41,10 @@ public class TitleService {
         List<ScoreHistoryViewModel> scores = scoreRepository.selectScoresByUserId(userId);
 //        ユーザー情報を取得する
         User user = userRepository.getUserInformation(userId);
+//        10問正解数
+        long perfectCount = scoreRepository.selectPerfectCountByUserId(userId);
+//        累計性回数
+        long totalCorrectCount = scoreRepository.selectTotalCorrectCountByUserId(userId);
 //        ここから確認と更新
         UserTitle userTitle = new UserTitle();
         userTitle.setUserId(userId);
@@ -55,19 +59,19 @@ public class TitleService {
             }
         }
 
-//        2: 総合得点が1000点を突破
+//        2: 5回以上プレイする
         if (!achievedTitles.get(1).isAchieved()) {
-            if (user.getTotalScore() >= 1000) {
+            if (scores.size() >= 5) {
                 userTitle.setTitleId(2);
                 titleRepository.createUserTitle(userTitle);
-                System.out.println("達成："+achievedTitles.get(1).getTitle());
+                System.out.print("達成："+achievedTitles.get(1).getTitle());
                 achieveTitles.add(2L);
             }
         }
 
-//        3: 5回以上プレイする
+//        3: 10回以上プレイする
         if (!achievedTitles.get(2).isAchieved()) {
-            if (scores.size() >= 5) {
+            if (scores.size() >= 10) {
                 userTitle.setTitleId(3);
                 titleRepository.createUserTitle(userTitle);
                 System.out.print("達成："+achievedTitles.get(2).getTitle());
@@ -77,16 +81,134 @@ public class TitleService {
 
 //        4: 初めて全問正解する
         if (!achievedTitles.get(3).isAchieved()) {
-            for (ScoreHistoryViewModel score : scores) {
-                if (score.getCorrectCount() == 10) {
-                    userTitle.setTitleId(4);
-                    titleRepository.createUserTitle(userTitle);
-                    System.out.print("達成："+achievedTitles.get(3).getTitle());
-                    achieveTitles.add(4L);
-                    break;
-                }
+            if (perfectCount >= 1) {
+                userTitle.setTitleId(4);
+                titleRepository.createUserTitle(userTitle);
+                System.out.print("達成："+achievedTitles.get(3).getTitle());
+                achieveTitles.add(4L);
             }
         }
+
+//        5: 5回以上10問正解する
+        if (!achievedTitles.get(4).isAchieved()) {
+            if (perfectCount >= 10) {
+                userTitle.setTitleId(5);
+                titleRepository.createUserTitle(userTitle);
+                System.out.print("達成："+achievedTitles.get(4).getTitle());
+                achieveTitles.add(5L);
+            }
+        }
+
+//        6: 累計で10問正解する
+        if (!achievedTitles.get(5).isAchieved()) {
+            if (totalCorrectCount >= 10) {
+                userTitle.setTitleId(6);
+                titleRepository.createUserTitle(userTitle);
+                System.out.print("達成："+achievedTitles.get(5).getTitle());
+                achieveTitles.add(6L);
+            }
+        }
+
+//        7: 累計で50問正解する
+        if (!achievedTitles.get(6).isAchieved()) {
+            if (totalCorrectCount >= 50) {
+                userTitle.setTitleId(7);
+                titleRepository.createUserTitle(userTitle);
+                System.out.print("達成："+achievedTitles.get(6).getTitle());
+                achieveTitles.add(7L);
+            }
+        }
+
+//        8: 累計100問正解する
+        if (!achievedTitles.get(7).isAchieved()) {
+            if (totalCorrectCount >= 100) {
+                userTitle.setTitleId(8);
+                titleRepository.createUserTitle(userTitle);
+                System.out.print("達成："+achievedTitles.get(7).getTitle());
+                achieveTitles.add(8L);
+            }
+        }
+
+//        9: 総合得点が1000点を突破
+        if (!achievedTitles.get(8).isAchieved()) {
+            if (user.getTotalScore() >= 1000) {
+                userTitle.setTitleId(9);
+                titleRepository.createUserTitle(userTitle);
+                System.out.println("達成："+achievedTitles.get(8).getTitle());
+                achieveTitles.add(9L);
+            }
+        }
+
+//        10: 総合得点が5000点を突破
+        if (!achievedTitles.get(9).isAchieved()) {
+            if (user.getTotalScore() >= 5000) {
+                userTitle.setTitleId(10);
+                titleRepository.createUserTitle(userTitle);
+                System.out.println("達成："+achievedTitles.get(8).getTitle());
+                achieveTitles.add(10L);
+            }
+        }
+
+//        11: 総合得点が20000点を突破
+        if (!achievedTitles.get(10).isAchieved()) {
+            if (user.getTotalScore() >= 20000) {
+                userTitle.setTitleId(11);
+                titleRepository.createUserTitle(userTitle);
+                System.out.println("達成："+achievedTitles.get(10).getTitle());
+                achieveTitles.add(11L);
+            }
+        }
+
+//        12: ベストスコアが500点以上
+        if (!achievedTitles.get(11).isAchieved()) {
+            if (user.getBestScore() >= 500) {
+                userTitle.setTitleId(12);
+                titleRepository.createUserTitle(userTitle);
+                System.out.println("達成："+achievedTitles.get(11).getTitle());
+                achieveTitles.add(12L);
+            }
+        }
+
+//        13: ベストスコアが750点以上
+        if (!achievedTitles.get(12).isAchieved()) {
+            if (user.getBestScore() >= 750) {
+                userTitle.setTitleId(13);
+                titleRepository.createUserTitle(userTitle);
+                System.out.println("達成："+achievedTitles.get(12).getTitle());
+                achieveTitles.add(13L);
+            }
+        }
+
+//        14: ベストスコアが1000点以上
+        if (!achievedTitles.get(13).isAchieved()) {
+            if (user.getBestScore() >= 1000) {
+                userTitle.setTitleId(14);
+                titleRepository.createUserTitle(userTitle);
+                System.out.println("達成："+achievedTitles.get(13).getTitle());
+                achieveTitles.add(14L);
+            }
+        }
+
+//       15: ベストスコアが1250点以上
+        if (!achievedTitles.get(14).isAchieved()) {
+            if (user.getBestScore() >= 1250) {
+                userTitle.setTitleId(15);
+                titleRepository.createUserTitle(userTitle);
+                System.out.println("達成："+achievedTitles.get(14).getTitle());
+                achieveTitles.add(15L);
+            }
+        }
+
+//      16: ベストスコアが1500点以上
+        if (!achievedTitles.get(15).isAchieved()) {
+            if (user.getBestScore() >= 1500) {
+                userTitle.setTitleId(16);
+                titleRepository.createUserTitle(userTitle);
+                System.out.println("達成："+achievedTitles.get(15).getTitle());
+                achieveTitles.add(16L);
+            }
+        }
+
         return achieveTitles;
     }
 
