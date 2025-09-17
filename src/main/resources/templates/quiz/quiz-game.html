@@ -145,12 +145,42 @@
         if(currentQuiz === quizzes.length - 1){
             submitBtn.innerText = "答え合わせをする";
         }
+
+    //     次に進むためのイベントを削除し、1秒後再び追加
+        removeEventListenerOfSubmitAndSpace()
+        setTimeout(addEventListenerOfSubmitAndSpace, 1000)
+
     }
 
-    //次の問題へボタンが押されたとき、問題を更新する
-    document.getElementById('submitBtn').addEventListener('click', () => {
-        updateQuizAndSendForm()
-    });
+    // スペースキーの処理
+    const spaceKeyHandler = function(event) {
+        const key = event.keyCode
+        if (key === 32) {
+            updateQuizAndSendForm()
+        }
+    }
+
+    // 次に進むイベントの追加
+    function addEventListenerOfSubmitAndSpace() {
+        //次の問題へボタンが押されたとき、またはスペースが押されたとき問題を更新する
+        submitBtn.addEventListener('click', updateQuizAndSendForm)
+        document.addEventListener('keydown', spaceKeyHandler)
+        submitBtn.style.filter = 'brightness(1)'
+        submitBtn.style.pointerEvents = 'auto'
+    }
+
+    // 次に進むイベントの削除
+    function removeEventListenerOfSubmitAndSpace() {
+    //     submitBtnとspaceのイベントリスナーの削除
+        submitBtn.removeEventListener('click', updateQuizAndSendForm)
+        document.removeEventListener('keydown', spaceKeyHandler)
+        submitBtn.style.filter = 'brightness(75%)'
+        submitBtn.style.pointerEvents = 'none'
+    }
+
+    submitBtn.style.filter = 'brightness(75%)'
+    submitBtn.style.pointerEvents = 'none'
+    setTimeout(addEventListenerOfSubmitAndSpace, 1000)
 
     //前の問題へボタンが押されたとき
     document.getElementById('prevBtn').addEventListener('click', () => {
@@ -178,16 +208,6 @@
             }
         });
     })
-
-    // スペースキーが押されたとき
-    document.addEventListener('keydown', (e) => {
-        const key = e.keyCode
-        if (key === 32) {
-            console.log('space')
-            updateQuizAndSendForm()
-        }
-    })
-
 
     //タイマーの時間
     let timeLeft = 100;
