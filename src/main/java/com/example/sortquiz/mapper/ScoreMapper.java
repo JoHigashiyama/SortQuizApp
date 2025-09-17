@@ -29,4 +29,7 @@ public interface ScoreMapper {
 
     @Select("SELECT SUM(score) FROM scores WHERE user_id = #{userId}")
     long selectTotalScoreByUserId(long userId);
+
+    @Select("SELECT COUNT(score_id) FROM scores WHERE user_id = #{userId} AND correct_count = 10")
+    long selectPerfectCountByUserId(long userId);
 }

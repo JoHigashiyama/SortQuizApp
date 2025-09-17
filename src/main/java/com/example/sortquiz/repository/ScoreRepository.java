@@ -30,4 +30,8 @@ public class ScoreRepository {
     public long selectTotalScoreByUserId(long userId) {
         return scoreMapper.selectTotalScoreByUserId(userId);
     }
+
+    public long selectPerfectCountByUserId(long userId) {
+        return scoreMapper.selectPerfectCountByUserId(userId);
+    }
 }
