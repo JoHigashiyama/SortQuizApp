@@ -34,4 +34,8 @@ public class ScoreRepository {
     public long selectPerfectCountByUserId(long userId) {
         return scoreMapper.selectPerfectCountByUserId(userId);
     }
+
+    public long selectTotalCorrectCountByUserId(long userId) {
+        return scoreMapper.selectTotalCorrectCountByUserId(userId);
+    }
 }
