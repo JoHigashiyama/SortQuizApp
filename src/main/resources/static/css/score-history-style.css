@@ -8,17 +8,15 @@
 
 body {
     font-family: 'Noto Serif JP', serif;
-    background: linear-gradient(135deg, #1a0f08 0%, #2c1810 30%, #3d2817 100%);
     background-image:
             radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
             radial-gradient(circle at 80% 20%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
             url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="pattern" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="%23d4af37" opacity="0.08"/><circle cx="75" cy="50" r="1.5" fill="%23daa520" opacity="0.06"/><circle cx="50" cy="75" r="2.5" fill="%23b8860b" opacity="0.04"/></pattern></defs><rect width="100" height="100" fill="url(%23pattern)"/></svg>');
-    min-height: 100vh;
-    padding: 20px;
+    padding: 30px;
 }
 
 .ranking-container {
-    max-width: 1000px;
+    max-width: 90%;
     margin: 0 auto;
     background: linear-gradient(145deg, #f4f1e8 0%, #e8e0d0 100%);
     border: 4px solid #8b4513;
@@ -28,31 +26,6 @@ body {
             inset 0 0 30px rgba(212, 175, 55, 0.1);
     overflow: hidden;
     position: relative;
-}
-
-.ranking-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-            repeating-linear-gradient(
-                    90deg,
-                    transparent 0px,
-                    rgba(139, 69, 19, 0.02) 1px,
-                    transparent 2px,
-                    transparent 60px
-            ),
-            repeating-linear-gradient(
-                    0deg,
-                    transparent 0px,
-                    rgba(139, 69, 19, 0.02) 1px,
-                    transparent 2px,
-                    transparent 60px
-            );
-    pointer-events: none;
 }
 
 .header {
@@ -66,78 +39,33 @@ body {
 .page-title {
     text-align: center;
     font-size: 32px;
-    font-weight: 700;
+    font-weight: bold;
     color: #d4af37;
     text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-    /* margin-bottom: 10px; */
     letter-spacing: 3px;
     position: relative;
 }
 
-.page-title::before,
-.page-title::after {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 24px;
-    opacity: 0.7;
-}
-
-.page-title::before {
-    left: -50px;
-}
-
-.page-title::after {
-    right: -50px;
-}
-
-.tabs {
-    display: flex;
-    background: linear-gradient(90deg, #d6c9b3 0%, #c7b299 100%);
-    border-bottom: 2px solid #8b4513;
-}
-
-.tab {
-    flex: 1;
-    padding: 20px;
-    background: transparent;
-    border: none;
-    font-family: 'Noto Serif JP', serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: #5d4037;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-right: 1px solid #a0522d;
-    letter-spacing: 1px;
-    position: relative;
-}
-
-.tab:last-child {
-    border-right: none;
-}
-
-.tab.active {
-    background: linear-gradient(145deg, #8b4513 0%, #654321 100%);
-    color: #d4af37;
-}
-
-.tab:not(.active):hover {
-    background: rgba(139, 69, 19, 0.1);
-}
-
 .content {
-    padding: 30px;
+    padding: 20px;
     background: linear-gradient(180deg, #f4f1e8 0%, #ebe6db 100%);
     min-height: 500px;
 }
-.crown {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 30px;
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+
+/****select*******/
+.select{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+#sortSelect {
+    font-family: "Noto Serif JP", serif;
+    width: 30%;
+    padding: 10px;
+    border: 4px solid #7c4320;
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
 }
 
 .ranking-table {
@@ -291,6 +219,70 @@ body {
 
 #back-top:hover {
     background-color: #D4AF37;
+}
+
+/* ページネーション全体 */
+ .pagination {
+     margin: 20px 0;
+     display: flex;
+     justify-content: center;
+     gap: 8px;
+ }
+
+/* ページネーションボタン */
+.pagination button {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+/* ページネーションボタンホバー */
+.pagination button:hover:not(:disabled) {
+    background-color: #8b4513;
+    color: white;
+    border-color: #8b4513;
+}
+
+/* 現在のページ */
+.pagination button.active {
+    background-color: #8b4513;
+    color: white;
+    border-color: #8b4513;
+    font-weight: bold;
+    cursor: default;
+}
+
+/* 無効ボタン */
+.pagination button:disabled {
+    background-color: #f0f0f0;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+/* ページ番号の「…」 */
+.pagination span {
+    padding: 8px 12px;
+    color: #888;
+    font-size: 1rem;
+}
+
+.cell {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #2c1810;
+}
+
+.noscore-cell{
+    width: 100%;
+    display: block;
+    align-items: center;
 }
 
 @media (max-width: 768px) {
