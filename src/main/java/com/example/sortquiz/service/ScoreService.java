@@ -23,6 +23,10 @@ public class ScoreService {
         return scoreRepository.selectScoresByUserId(userId);
     }
 
+    public List<ScoreHistoryViewModel> selectScoresScoreByUserId(long userId){
+        return scoreRepository.selectScoresScoreByUserId(userId);
+    }
+
     public void createScore(Score score) {
         scoreRepository.createScore(score);
     }

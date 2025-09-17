@@ -19,6 +19,10 @@ public class ScoreRepository {
         return scoreMapper.selectScoresByUserId(userId);
     }
 
+    public List<ScoreHistoryViewModel> selectScoresScoreByUserId(long userId){
+        return scoreMapper.selectScoresScoreByUserId(userId);
+    }
+
     public void createScore(Score score) {
         scoreMapper.createScore(score);
     }

@@ -77,6 +77,10 @@
   </div>
 
   <div class="content">
+    <select id="sortSelect">
+      <option value="created_at">日付順</option>
+      <option value="score">得点順</option>
+    </select>
     <div class="tab-content">
       <div class="ranking-table">
         <div class="table-header">
@@ -106,6 +110,27 @@
 
 <script>
 
+  //検索
+  document.getElementById("sortSelect").addEventListener("change", function () {
+    const sort = this.value;
+
+    fetch(`/score/history/sort?sort=${sort}`)
+            .then(response => response.json())  // ← JSONで受け取る
+            .then(newHistoryData => {
+              historyData.length = 0;
+              historyData.push(...newHistoryData);
+
+              currentPage = 1;
+              renderTable(currentPage);
+              renderPagination();
+            })
+            .catch(error => console.error("Error:", error));
+  });
+
+
+
+
+
   //↑が押されたとき
   document.getElementById("back-to-top").addEventListener("click", () => {
     window.scrollTo({
@@ -113,6 +138,10 @@
       behavior: "smooth" // 滑らかにスクロール
     });
   });
+
+
+
+  //ページネーション
 
   const tableBody = document.getElementById("history-table-body");
   const paginationDiv = document.getElementById("pagination");
