@@ -43,7 +43,7 @@
         <label for="passwordConfirm">パスワード確認</label>
         <input type="password" id="passwordConfirm" name="passwordConfirm" th:field="*{passwordConfirm}" required>
         <div th:if="${passwordConfirmError}" class="error-message" th:text="${passwordConfirmError}"></div>
-        <span class="password-error">パスワード(確認)が入力されていません</span>
+
         <span id="passwordConfirm-error" class="password-error">パスワードが一致しません</span>
 
         <!-- 登録ボタン -->
