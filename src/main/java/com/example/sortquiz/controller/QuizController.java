@@ -53,6 +53,7 @@ public class QuizController {
 //        同一問題内に年代が重複した場合は分け直す
         while (true) {
             quizzes = quizService.getQuizlist();
+            quizMaps.clear();
 //            年代の重複フラグ
             boolean isDuplicated = false;
             for(int i = 0; i< quizzes.size(); i+= 4){
@@ -69,9 +70,11 @@ public class QuizController {
                     ));
                     if (j != i) {
 //                        年代が重複した場合
-                        if (q.getHappenYear() == quizzes.get(j-1).getHappenYear()) {
-                            isDuplicated = true;
-                            break;
+                        for (int k = j - 1; k >= i; k--) {
+                            if (q.getHappenYear() == quizzes.get(k).getHappenYear()) {
+                                isDuplicated = true;
+                                break;
+                            }
                         }
                     }
                 };
