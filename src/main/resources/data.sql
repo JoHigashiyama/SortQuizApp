@@ -1,14 +1,14 @@
 INSERT INTO users (username, email, password, best_score, total_score) VALUES
-                                                                           ('taro_yamada', 'taro@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 912, 4933),
-                                                                           ('hanako88', 'hanako@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 765, 4201),
-                                                                           ('kenji_1990', 'kenji@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 1352, 8074),
-                                                                           ('sakura_san', 'sakura@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 678, 3110),
-                                                                           ('ryohei', 'ryohei@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 1002, 5823),
-                                                                           ('mika_24', 'mika@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 845, 3575),
+                                                                           ('太郎', 'taro@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 912, 4933),
+                                                                           ('花子88', 'hanako@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 765, 4201),
+                                                                           ('歴史好きの健次郎', 'kenji@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 1352, 8074),
+                                                                           ('さくらんぼ大好き', 'sakura@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 678, 3110),
+                                                                           ('りょうへい_99', 'ryohei@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 1002, 5823),
+                                                                           ('みかの毎日冒険記', 'mika@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 845, 3575),
                                                                            ('takashi77', 'takashi@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 1108, 7440),
-                                                                           ('yui_chan', 'yui@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 654, 2680),
-                                                                           ('sho123', 'sho@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 1420, 10632),
-                                                                           ('haruka', 'haruka@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 732, 3444);
+                                                                           ('ゆいちゃんねる', 'yui@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 654, 2680),
+                                                                           ('sho_歴史王者', 'sho@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 1420, 10632),
+                                                                           ('はるかの冒険記録帳', 'haruka@example.com', '$2a$08$cxr77cUnJnQqR3UzbaMsc.ODUwFs/9ySggNBsoK6U/jNqfuH5Wr/.', 732, 3444);
 
 INSERT INTO scores (user_id, score, correct_count) VALUES
                                                        (1, 512, 6),
