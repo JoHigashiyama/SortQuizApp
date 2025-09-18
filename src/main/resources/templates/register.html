@@ -7,6 +7,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .disabled {
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
 <div class="login-container">
@@ -23,26 +28,66 @@
 
         <!-- メールアドレス -->
         <label for="email">メールアドレス</label>
-        <input type="email" id="email" name="email" th:field="*{email}" required>
+        <input type="email" id="email" name="email" th:field="*{email}" placeholder="例：abc@def"  required>
         <div th:if="${emailError}" class="error-message" th:text="${emailError}"></div>
         <span class="email-error">メールアドレスが入力されていません</span>
 
         <!-- パスワード -->
-        <label for="password">パスワード</label>
-        <input type="password" id="password" name="password" th:field="*{password}" required>
+        <label for="password">パスワード（英数字6文字以上）</label>
+        <input type="password" id="password" name="password" th:field="*{password}" placeholder="例：abcdef" required>
         <div th:if="${passwordError}" class="error-message" th:text="${passwordError}"></div>
         <span class="password-error">パスワードが入力されていません</span>
+        <span id="password-error" class="password-error">英数字6文字以上で書いてください</span>
 
         <!-- パスワード確認 -->
         <label for="passwordConfirm">パスワード確認</label>
         <input type="password" id="passwordConfirm" name="passwordConfirm" th:field="*{passwordConfirm}" required>
         <div th:if="${passwordConfirmError}" class="error-message" th:text="${passwordConfirmError}"></div>
         <span class="password-error">パスワード(確認)が入力されていません</span>
+        <span id="passwordConfirm-error" class="password-error">パスワードが一致しません</span>
 
         <!-- 登録ボタン -->
-        <button type="submit" class="register-button">登録</button>
+        <button type="submit" class="register-button disabled" id="registerBtn" disabled>登録</button>
         <a th:href="@{/login}" class="back-to-login">ログイン画面に戻る</a>
     </form>
 </div>
+
+<script>
+    const passwordInput = document.getElementById("password");
+    const passwordConfirmInput = document.getElementById("passwordConfirm");
+    const passwordError = document.getElementById("password-error");
+    const passwordConfirmError = document.getElementById("passwordConfirm-error");
+    const registerBtn = document.getElementById("registerBtn");
+
+    function validateForm() {
+        const password = passwordInput.value;
+        const confirm = passwordConfirmInput.value;
+        let valid = true;
+
+        // 英数字6文字以上
+        const regex = /^[A-Za-z0-9]{6,}$/;
+        if (!regex.test(password)) {
+            passwordError.style.display = "block";
+            valid = false;
+        } else {
+            passwordError.style.display = "none";
+        }
+
+        // パスワード確認
+        if (confirm !== password || confirm === "") {
+            passwordConfirmError.style.display = "block";
+            valid = false;
+        } else {
+            passwordConfirmError.style.display = "none";
+        }
+
+        // ボタン制御
+        registerBtn.disabled = !valid;
+    }
+
+    passwordInput.addEventListener("input", validateForm);
+    passwordConfirmInput.addEventListener("input", validateForm);
+</script>
+
 </body>
 </html>
