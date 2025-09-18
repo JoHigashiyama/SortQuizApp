@@ -43,7 +43,7 @@
         <label for="passwordConfirm">パスワード確認</label>
         <input type="password" id="passwordConfirm" name="passwordConfirm" th:field="*{passwordConfirm}" required>
         <div th:if="${passwordConfirmError}" class="error-message" th:text="${passwordConfirmError}"></div>
-        <span class="password-error">パスワード(確認)が入力されていません</span>
+
         <span id="passwordConfirm-error" class="password-error">パスワードが一致しません</span>
 
         <!-- 登録ボタン -->
@@ -66,7 +66,12 @@
 
         // 英数字6文字以上
         const regex = /^[A-Za-z0-9]{6,}$/;
-        if (!regex.test(password)) {
+        if (password === "") {
+            passwordError.textContent = "パスワードが入力されていません";
+            passwordError.style.display = "block";
+            valid = false;
+        } else if (!regex.test(password)) {
+            passwordError.textContent = "英数字6文字以上で書いてください";
             passwordError.style.display = "block";
             valid = false;
         } else {
@@ -74,7 +79,12 @@
         }
 
         // パスワード確認
-        if (confirm !== password || confirm === "") {
+        if (confirm === "") {
+            passwordConfirmError.textContent = "パスワード(確認)が入力されていません";
+            passwordConfirmError.style.display = "block";
+            valid = false;
+        } else if (confirm !== password) {
+            passwordConfirmError.textContent = "パスワードが一致しません";
             passwordConfirmError.style.display = "block";
             valid = false;
         } else {
@@ -82,12 +92,19 @@
         }
 
         // ボタン制御
-        registerBtn.disabled = !valid;
+        if (valid) {
+            registerBtn.disabled = false;
+            registerBtn.classList.remove("disabled");
+        } else {
+            registerBtn.disabled = true;
+            registerBtn.classList.add("disabled");
+        }
     }
 
     passwordInput.addEventListener("input", validateForm);
     passwordConfirmInput.addEventListener("input", validateForm);
 </script>
+
 
 </body>
 </html>
